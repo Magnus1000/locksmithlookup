@@ -1,39 +1,35 @@
 const twilio = require('twilio');
+const cors = require('cors');
 
-exports.handler = async function (event, context) {
-    console.log('Event:', event); // Log the event
-    console.log('Context:', context); // Log the context
+const corsHandler = cors({ origin: '*' });
 
-    const { userLocation, number, locksmith } = JSON.parse(event.body);
-    console.log('User Location:', userLocation); // Log the user location
-    console.log('Number:', number); // Log the number
-    console.log('Locksmith:', locksmith); // Log the locksmith
+module.exports = async function (req, res) {
+    // Handle CORS
+    corsHandler(req, res, async () => {
+        console.log('Event:', req); // Log the event
 
-    const { DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER } = process.env;
-    console.log('Environment Variables:', DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER); // Log the environment variables
+        const { userLocation, number, locksmith } = JSON.parse(req.body);
+        console.log('User Location:', userLocation); // Log the user location
+        console.log('Number:', number); // Log the number
+        console.log('Locksmith:', locksmith); // Log the locksmith
 
-    const client = twilio(DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN);
+        const { DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER } = process.env;
+        console.log('Environment Variables:', DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER); // Log the environment variables
 
-    try {
-        const response = new twilio.twiml.VoiceResponse();
-        response.say(`Connecting you to ${locksmith}. Please hold.`);
-        const dial = response.dial({ record: 'true' });
-        dial.number(number);
+        const client = twilio(DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN);
 
-        console.log('TwiML Response:', response.toString()); // Log the TwiML response
+        try {
+            const response = new twilio.twiml.VoiceResponse();
+            response.say(`Connecting you to ${locksmith}. Please hold.`);
+            const dial = response.dial({ record: 'true' });
+            dial.number(number);
 
-        return {
-            statusCode: 200,
-            headers: {
-                'Content-Type': 'application/xml',
-            },
-            body: response.toString(),
-        };
-    } catch (error) {
-        console.error('Error generating TwiML:', error); // Log the error
-        return {
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to generate TwiML' }),
-        };
-    }
+            console.log('TwiML Response:', response.toString()); // Log the TwiML response
+
+            return res.status(200).send(response.toString());
+        } catch (error) {
+            console.error('Error generating TwiML:', error); // Log the error
+            return res.status(500).send({ error: 'Failed to generate TwiML' });
+        }
+    });
 };
