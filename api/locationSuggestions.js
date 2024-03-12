@@ -45,6 +45,9 @@ module.exports = async (req, res) => {
         };
       });
 
+      // Log the suggestions
+      console.log('Suggestions:', suggestions);
+
       // Return the suggestions as JSON
       return res.json({ suggestions });
     } catch (error) {

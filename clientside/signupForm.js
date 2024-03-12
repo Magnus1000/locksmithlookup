@@ -21,10 +21,35 @@ const FormComponent = () => {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Submitted value:', inputValue);
-    // Perform any desired actions with the submitted value
+  
+    if (userLocation && inputValue) {
+      const data = {
+        location: inputValue,
+        userLocation: userLocation,
+      };
+  
+      try {
+        const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/twilioCall.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+  
+        if (response.ok) {
+          const result = await response.json();
+          console.log('Twilio call initiated:', result);
+        } else {
+          console.error('Error initiating Twilio call:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error initiating Twilio call:', error);
+      }
+    }
   };
 
   const handleSuggestionClick = (suggestion) => {
@@ -64,7 +89,7 @@ const FormComponent = () => {
         <button type="button" onClick={handleLocationClick}>
           Get Location
         </button>
-        {suggestions.length > 0 && (
+        {suggestions && suggestions.length > 0 && (
           <ul>
             {suggestions.map((suggestion) => (
               <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
