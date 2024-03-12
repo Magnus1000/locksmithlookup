@@ -14,6 +14,9 @@ const FormComponent = () => {
       }
     };
 
+    fetchSuggestions(); // Call the function
+  }, [inputValue]); // Close the useEffect hook
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
