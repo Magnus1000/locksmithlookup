@@ -6,16 +6,13 @@ const FormComponent = () => {
   React.useEffect(() => {
     const fetchSuggestions = async () => {
       if (inputValue.trim() !== '') {
-        const response = await fetch(`/api/suggestions?query=${encodeURIComponent(inputValue)}`);
+        const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/locationSuggestions?q=${encodeURIComponent(inputValue)}`);
         const data = await response.json();
         setSuggestions(data.features);
       } else {
         setSuggestions([]);
       }
     };
-
-    fetchSuggestions();
-  }, [inputValue]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
