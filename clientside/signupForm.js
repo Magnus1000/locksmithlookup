@@ -3,6 +3,7 @@ const FormComponent = () => {
   const [inputValue, setInputValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([]);
   const [userLocation, setUserLocation] = React.useState(null);
+  const [locksmith, setLocksmith] = React.useState(null);
 
   React.useEffect(() => {
     const fetchSuggestions = async () => {
@@ -115,6 +116,11 @@ const FormComponent = () => {
         <button type="button" onClick={fetchLocksmith}>House</button>
         <button type="button" onClick={fetchLocksmith}>Car</button>
       </div>
+      {locksmith && locksmith[0] && (
+        <div>
+          Nearest Locksmith: {locksmith[0].locksmith}, {locksmith[0].phone}
+        </div>
+      )}
     </form>
   );
 };
