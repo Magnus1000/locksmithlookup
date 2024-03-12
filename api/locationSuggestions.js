@@ -5,7 +5,7 @@ const cors = require('cors');
 // Initialize CORS middleware
 const corsHandler = cors({ origin: true });
 
-// Validate and use the MAPBOX_TOKEN environment variable
+// Validate and use the MAPBOX_TOKEN environment variable 
 const mapboxToken = process.env.MAPBOX_TOKEN;
 if (!mapboxToken) {
   console.error("MAPBOX_TOKEN is not set");
