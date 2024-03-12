@@ -25,9 +25,8 @@ const FormComponent = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Submitted value:', inputValue);
   
-    if (userLocation && inputValue) {
+    if (userLocation && locksmith) {
       const data = {
         userLocation: userLocation,
         number: locksmith.phone,
