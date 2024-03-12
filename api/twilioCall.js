@@ -1,8 +1,6 @@
 const twilio = require('twilio');
 const cors = require('cors');
 
-// Cors
-
 const corsHandler = cors({ origin: '*' });
 
 module.exports = async function (req, res) {
