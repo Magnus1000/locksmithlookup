@@ -25,6 +25,9 @@ module.exports = (req, res) => {
         // Sort the records by distance
         records.sort((a, b) => a.distance - b.distance);
 
+        // Log the first result
+        console.log('Nearest Locksmith:', records[0]);
+
         // Return the record with the smallest distance
         res.status(200).json(records[0]);
     });
