@@ -29,8 +29,9 @@ const FormComponent = () => {
   
     if (userLocation && inputValue) {
       const data = {
-        location: inputValue,
         userLocation: userLocation,
+        number: locksmith.phone,
+        locksmith: locksmith.locksmith,
       };
   
       try {
@@ -122,6 +123,7 @@ const FormComponent = () => {
           <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith}, {locksmith.phone}
         </div>
       )}
+      <button type="submit">Call Now</button>
     </form>
   );
 };
