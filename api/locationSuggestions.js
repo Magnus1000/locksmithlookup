@@ -2,7 +2,7 @@
 const axios = require('axios');
 const cors = require('cors');
 
-// Initialize CORS middleware ok
+// Initialize CORS middleware 
 const corsHandler = cors({ origin: true });
 
 // Validate and use the MAPBOX_TOKEN environment variable 
