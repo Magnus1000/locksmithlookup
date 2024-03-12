@@ -5,7 +5,7 @@ exports.handler = async function (event, context) {
   const { DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER } = process.env;
 
   const client = twilio(DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN);
-  const locksmithNumber = '+13656750166'; // Replace with the actual locksmith's number
+  const locksmithNumber = '+14379797777'; // Replace with the actual locksmith's number
 
   try {
     const response = new twilio.twiml.VoiceResponse();
