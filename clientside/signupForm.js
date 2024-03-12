@@ -1,5 +1,5 @@
 const FormComponent = () => {
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = React.useState('');
   
     const handleInputChange = (event) => {
       setInputValue(event.target.value);
