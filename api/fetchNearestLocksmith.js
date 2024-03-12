@@ -19,7 +19,7 @@ module.exports = (req, res) => {
             const recordLat = Number(record.fields.lat);
             const recordLng = Number(record.fields.lng);
             const distance = Math.sqrt(Math.pow(recordLat - latNumber, 2) + Math.pow(recordLng - lngNumber, 2));
-            return { ...record, distance };
+            return { ...record.fields, distance };
         });
 
         // Sort the records by distance
