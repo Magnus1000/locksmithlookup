@@ -2,7 +2,7 @@
 const axios = require('axios');
 const cors = require('cors');
 
-// Initialize CORS middleware
+// Initialize CORS middleware ok
 const corsHandler = cors({ origin: true });
 
 // Validate and use the MAPBOX_TOKEN environment variable 
@@ -44,7 +44,7 @@ module.exports = async (req, res) => {
           country: feature.context.find(c => c.id.startsWith('country'))?.text || ''
         };
       });
-      
+
       // Log the suggestions
       console.log('Suggestions:', suggestions);
 
