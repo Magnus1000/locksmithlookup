@@ -108,18 +108,18 @@ const FormComponent = () => {
           </div>
         )}
       </div>
-      {locksmith && (
+      {userLocation && (
         <div>
-          Nearest Locksmith: {locksmith.locksmith}, {locksmith.phone}
+          User Location: {userLocation.latitude}, {userLocation.longitude}
         </div>
       )}
       <div>
         <button type="button" onClick={fetchLocksmith}>House</button>
         <button type="button" onClick={fetchLocksmith}>Car</button>
       </div>
-      {locksmith && locksmith[0] && (
+      {locksmith && (
         <div>
-          Nearest Locksmith: {locksmith[0].locksmith}, {locksmith[0].phone}
+          <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith}, {locksmith.phone}
         </div>
       )}
     </form>
