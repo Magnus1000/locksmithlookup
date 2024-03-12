@@ -90,13 +90,13 @@ const FormComponent = () => {
           Get Location
         </button>
         {suggestions && suggestions.length > 0 && (
-          <ul>
+          <div>
             {suggestions.map((suggestion) => (
-              <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
+              <div key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
                 {suggestion.place_name}
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         )}
       </div>
       <div>
