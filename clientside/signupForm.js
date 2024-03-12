@@ -80,6 +80,7 @@ const FormComponent = () => {
       const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmith.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}`);
       const data = await response.json();
       setLocksmith(data);
+      console.log('Nearest locksmith:', data);
     } catch (error) {
       console.error('Error fetching nearest locksmith:', error);
     }
@@ -107,9 +108,9 @@ const FormComponent = () => {
           </div>
         )}
       </div>
-      {userLocation && (
+      {locksmith && (
         <div>
-          User Location: {userLocation.latitude}, {userLocation.longitude}
+          Nearest Locksmith: {locksmith.locksmith}, {locksmith.phone}
         </div>
       )}
       <div>
