@@ -8,7 +8,7 @@ const FormComponent = () => {
       if (inputValue.trim() !== '') {
         const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/locationSuggestions?q=${encodeURIComponent(inputValue)}`);
         const data = await response.json();
-        setSuggestions(data.features);
+        setSuggestions(data.suggestions); // Assuming the API returns an array of suggestions
       } else {
         setSuggestions([]);
       }
