@@ -38,13 +38,13 @@ module.exports = async (req, res) => {
       // Prepare suggestion items based on features
       const suggestions = features.map((feature) => {
         return {
-          place_name: feature.place_name,
+          full_address: feature.place_name,
           coordinates: feature.geometry.coordinates,
           region: feature.context.find(c => c.id.startsWith('region'))?.text || '',
           country: feature.context.find(c => c.id.startsWith('country'))?.text || ''
         };
       });
-
+      
       // Log the suggestions
       console.log('Suggestions:', suggestions);
 
