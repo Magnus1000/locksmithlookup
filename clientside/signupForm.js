@@ -74,12 +74,18 @@ const FormComponent = () => {
     }
   };
 
+  const fetchLocksmith = async () => {
+    try {
+      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmith.js?lat=${latitude}&lng=${longitude}`);
+      const data = await response.json();
+      setLocksmith(data);
+    } catch (error) {
+      console.error('Error fetching nearest locksmith:', error);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <button type="button">Button 1</button>
-        <button type="button">Button 2</button>
-      </div>
       <div>
         <input
           type="text"
@@ -100,14 +106,15 @@ const FormComponent = () => {
           </div>
         )}
       </div>
-      <div>
-        <button type="submit">Submit</button>
-      </div>
       {userLocation && (
         <div>
           User Location: {userLocation.latitude}, {userLocation.longitude}
         </div>
       )}
+      <div>
+        <button type="button" onClick={fetchLocksmith}>House</button>
+        <button type="button" onClick={fetchLocksmith}>Car</button>
+      </div>
     </form>
   );
 };

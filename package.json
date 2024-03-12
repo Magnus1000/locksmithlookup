@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "airtable": "^0.12.2",
     "axios": "^1.6.7",
     "cors": "^2.8.5",
     "twilio": "^5.0.0"
