@@ -77,7 +77,7 @@ const FormComponent = () => {
 
   const fetchLocksmith = async () => {
     try {
-      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmith.js?lat=${latitude}&lng=${longitude}`);
+      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmith.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}`);
       const data = await response.json();
       setLocksmith(data);
     } catch (error) {
