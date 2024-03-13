@@ -37,10 +37,10 @@ const FormComponent = () => {
       try {
         const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/makeCall.js', {
           method: 'POST',
+          body: JSON.stringify(data),
           headers: {
             'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+          }
         });
   
         if (response.ok) {
