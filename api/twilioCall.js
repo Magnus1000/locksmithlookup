@@ -6,7 +6,7 @@ const corsHandler = cors({ origin: '*' });
 module.exports = async function (req, res) {
     // Handle CORS
     corsHandler(req, res, async () => {
-        console.log('Event:', req); // Log the event
+        console.log('Event:', req); 
 
         const { userLocation, number, locksmith } = JSON.parse(req.body);
         console.log('User Location:', userLocation); // Log the user location
