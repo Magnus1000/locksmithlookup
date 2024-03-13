@@ -6,8 +6,8 @@ const corsHandler = cors({ origin: '*' });
 module.exports = (req, res) => {
     // Handle CORS
     corsHandler(req, res, async () => {
-        const { DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER } = process.env;
-        const client = new Twilio(DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN);
+        const { TWILIO_ACCOUNT_SID, TWILIO_TOKEN, TWILIO_NUMBER } = process.env;
+        const client = new Twilio(TWILIO_ACCOUNT_SID, TWILIO_TOKEN);
 
         // Extract the locksmith's phone number from the request
         const { number } = req.body;
