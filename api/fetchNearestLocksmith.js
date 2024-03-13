@@ -14,7 +14,7 @@ module.exports = (req, res) => {
         const latNumber = Number(lat);
         const lngNumber = Number(lng);
 
-        // Calculate the distance between each record and the provided coordinates
+        // Calculate the distance between each record and the provided coordinate
         records = records.map((record) => {
             const recordLat = Number(record.fields.lat);
             const recordLng = Number(record.fields.lng);
