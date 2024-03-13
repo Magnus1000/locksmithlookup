@@ -9,13 +9,11 @@ module.exports = (req, res) => {
         const { DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN, TWILIO_NUMBER } = process.env;
         const client = new Twilio(DEV_TWILIO_ACCOUNT_SID, DEV_TWILIO_TOKEN);
 
-        // Parse the request body
-        const body = JSON.parse(req.body || '{}');
-
-        console.log('Request body log:', body);
-
         // Extract the locksmith's phone number from the request
-        const { number } = body;
+        const { number } = req.body;
+
+        // Log the number to the console
+        console.log('Locksmith number:', number);
 
         if (!number) {
             return res.status(400).send('Locksmith number is required');
