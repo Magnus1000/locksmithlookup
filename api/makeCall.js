@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     // Parse the request body
     const body = JSON.parse(req.body || '{}');
 
-    console.log('Request body:', body);
+    console.log('Request body log:', body);
 
     // Extract the locksmith's phone number from the request
     const { number } = body;
@@ -35,6 +35,6 @@ module.exports = async (req, res) => {
         res.status(200).send(`Call initiated: ${call.sid}`);
     } catch (error) {
         console.error(`Error initiating call: ${error.message}`);
-        res.status(500).send('Failed to initiate call');
+        return res.status(500).send('Failed to initiate call');
     }
 };
