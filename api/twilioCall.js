@@ -8,7 +8,7 @@ module.exports = async function (req, res) {
     corsHandler(req, res, async () => {
         console.log('Event:', req); 
 
-        const { userLocation, number, locksmith } = JSON.parse(req.body);
+        const { userLocation, number, locksmith } = req.body;
         console.log('User Location:', userLocation); // Log the user location
         console.log('Number:', number); // Log the number
         console.log('Locksmith:', locksmith); // Log the locksmith
