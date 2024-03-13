@@ -36,7 +36,7 @@ const FormComponent = () => {
       console.log('Initiating Twilio call:', data);
   
       try {
-        const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/twilioCall.js', {
+        const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/makeCall.js', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
