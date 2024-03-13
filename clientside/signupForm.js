@@ -88,7 +88,7 @@ const FormComponent = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
       <div>
         <input
           type="text"
@@ -120,11 +120,11 @@ const FormComponent = () => {
       </div>
       {locksmith && (
         <div>
-          <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith}, {locksmith.phone}
+          <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith}, 
+          <a href={`tel:${locksmith.phone}`}>{locksmith.phone}</a>
         </div>
       )}
-      <button type="submit">Call Now</button>
-    </form>
+    </div>
   );
 };
 
