@@ -1,6 +1,7 @@
 const Airtable = require('airtable');
 const cors = require('cors');
 
+// Cors
 const corsHandler = cors({ origin: '*' });
 
 module.exports = (req, res) => {
