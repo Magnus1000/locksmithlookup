@@ -32,6 +32,8 @@ const FormComponent = () => {
         number: locksmith.phone,
         locksmith: locksmith.locksmith,
       };
+
+      console.log('Initiating Twilio call:', data);
   
       try {
         const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/twilioCall.js', {
