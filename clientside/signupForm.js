@@ -28,7 +28,6 @@ const FormComponent = () => {
   
     if (userLocation && locksmith) {
       const data = {
-        userLocation: userLocation,
         number: locksmith.phone,
         locksmith: locksmith.locksmith,
       };
