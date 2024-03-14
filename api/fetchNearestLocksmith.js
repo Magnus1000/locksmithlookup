@@ -20,6 +20,24 @@ module.exports = (req, res) => {
             filterByFormula: `AND({day_of_week} = '${currentDay}', {time_start} != 'unavailable', {time_end} != 'unavailable')`
         }).all();
 
+        // Log the availability records to the console
+        console.log('Initially Available Locksmiths', availabilityRecords);
+
+        // Convert time strings to unix timestamps
+        availabilityRecords = availabilityRecords.map(record => {
+            const timeStart = new Date(`1970-01-01T${record.fields.time_start}`);
+            const timeEnd = new Date(`1970-01-01T${record.fields.time_end}`);
+            return { ...record.fields, timeStart, timeEnd };
+        });
+
+        // Filter out records where the current time is outside the available time range
+        availabilityRecords = availabilityRecords.filter(record => {
+            return now >= record.timeStart && now <= record.timeEnd;
+        });
+
+        // Log the available locksmiths to the console
+        console.log('Available Locksmiths after checking opening hours', availabilityRecords);
+
         // Check if we have any available locksmiths
         if (availabilityRecords.length === 0) {
             console.log('No locksmiths available at this time.');
