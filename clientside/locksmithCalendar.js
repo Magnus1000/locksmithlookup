@@ -78,8 +78,8 @@ const AvailabilitySelector = () => {
             [day]: {
                 ...tempAvailability[day],
                 available: !tempAvailability[day].available, // toggle the availability
-                time_start: newStartTime,
-                time_end: newEndTime,
+                startTime: newStartTime,
+                endTime: newEndTime,
                 // Update prev_time_start and prev_time_end only if we are toggling to unavailable
                 prev_time_start: isCurrentlyUnavailable ? tempAvailability[day].prev_time_start : tempAvailability[day].time_start,
                 prev_time_end: isCurrentlyUnavailable ? tempAvailability[day].prev_time_end : tempAvailability[day].time_end,
