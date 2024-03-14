@@ -49,6 +49,13 @@ const AvailabilitySelector = () => {
         });
     };
 
+    const handle24HoursChange = (day, event) => {
+        setTempAvailability({
+          ...tempAvailability,
+          [day]: { ...tempAvailability[day], startTime: '12:00am', endTime: '11:59pm', allDay: event.target.checked },
+        });
+    };
+
     const generateTimes = (start, end) => {
         const times = [];
         let current = new Date(start.getTime());
@@ -151,6 +158,16 @@ const AvailabilitySelector = () => {
                                     </div>
                                     </Box>
                                 }
+                            />
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    checked={tempAvailability[day].allDay}
+                                    onChange={(event) => handle24HoursChange(day, event)}
+                                    disabled={!isEditing}
+                                    />
+                                }
+                                label="24 hours"
                             />
                         </Box>
                     ))}
