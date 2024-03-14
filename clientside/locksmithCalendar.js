@@ -20,7 +20,7 @@ const AvailabilitySelector = () => {
         friday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         saturday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
     });
-    const classes = React.useStyles();
+    const classes = useStyles();
 
     const [tempAvailability, setTempAvailability] = React.useState(availability);
     const [isEditing, setIsEditing] = React.useState(false);
