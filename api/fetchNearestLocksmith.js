@@ -26,8 +26,8 @@ module.exports = (req, res) => {
 
         // Convert time strings to unix timestamps
         const availableLocksmithsTimeUnix = availableLocksmiths.map(record => {
-            const timeStart = moment.tz(`1970-01-01T${record.fields.time_start}`, record.fields.locksmith_timezone).toDate();
-            const timeEnd = moment.tz(`1970-01-01T${record.fields.time_end}`, record.fields.locksmith_timezone).toDate();
+            const timeStart = moment.tz(`1970-01-01 ${record.fields.time_start}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
+            const timeEnd = moment.tz(`1970-01-01 ${record.fields.time_end}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
             return { ...record.fields, timeStart, timeEnd };
         });
 
