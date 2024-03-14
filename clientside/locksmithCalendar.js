@@ -114,7 +114,7 @@ const AvailabilitySelector = () => {
             <Button variant="contained" color="primary" onClick={handleCancel}>
                 Cancel
             </Button>
-            <Button variant="contained" color="primary" onClick={handleSave}>
+            <Button variant="contained" color="secondary" onClick={handleSave}>
                 Save and Close
             </Button>
         </div>
