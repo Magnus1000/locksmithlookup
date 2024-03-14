@@ -38,6 +38,8 @@ const AvailabilitySelector = () => {
             time_end: endTime,
         }));
 
+        console.log('availability:', availability);
+
         fetch('https://locksmithlookup-magnus1000team.vercel.app/api/updateLocksmithAvailability.js', {
             method: 'POST',
             headers: {
