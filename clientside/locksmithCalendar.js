@@ -80,7 +80,12 @@ const AvailabilitySelector = () => {
     return (
         <div className="availabilty-page-body">
             <div className="availability-header">
-                <Button variant="contained" color="primary" onClick={handleEdit}>
+                <Button variant="contained" 
+                    onClick={handleEdit}
+                    sx={{
+                        borderRadius: 50
+                    }}
+                >
                     Edit
                 </Button>
                 <Button variant="contained"
