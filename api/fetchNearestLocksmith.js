@@ -50,18 +50,8 @@ module.exports = (req, res) => {
             return res.status(404).json({ error: 'No locksmiths available at this time.' });
         }
 
-        // Map available locksmith IDs to an object for easy access
-        const availableLocksmithIds = availableLocksmithsOpen.reduce((acc, record) => {
-            if (record.fields && record.fields.locksmith_id) {
-                record.fields.locksmith_id.forEach(id => {
-                    acc[id] = true;
-                });
-            }
-            return acc;
-        }, {});
-
         // Retrieve all locksmith records
-        let locksmithRecords = availableLocksmithIds;
+        let locksmithRecords = availableLocksmithsOpen;
 
         // Convert lat and lng to numbers
         const latNumber = Number(lat);
