@@ -81,20 +81,13 @@ const AvailabilitySelector = () => {
     return (
         <div className="availabilty-page-body">
             <div className="availability-header">
-                <Box>
                 <Button
                     variant="outlined"
                     color="default"
                     onClick={handleEdit}
-                    sx={{
-                    textTransform: 'capitalize',
-                    color: 'grey',
-                    backgroundColor: 'transparent',
-                    }}
                 >
                     Edit
                 </Button>
-                </Box>
             </div>
             <div className="availability-div-wrapper">
                 <div className="availability-header">
@@ -132,33 +125,21 @@ const AvailabilitySelector = () => {
                     ))}
                 </div>
                 <div className="button-wrapper">
-                    <Box>
-                        <Button
-                            variant="text"
-                            color="default"
-                            onClick={handleCancel}
-                            sx={{
-                            textTransform: 'capitalize',
-                            color: 'grey',
-                            backgroundColor: 'transparent',
-                            border: 'none',
-                            }}
-                        >
-                            Cancel
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="default"
-                            onClick={handleSave}
-                            sx={{
-                            textTransform: 'capitalize',
-                            backgroundColor: 'blue',
-                            color: 'white',
-                            }}
-                        >
-                            Save and Close
-                        </Button>
-                    </Box>
+                    <Button
+                        variant="text"
+                        color="default"
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="default"
+                        onClick={handleSave}
+                    >
+                        Save and Close
+                    </Button>
                 </div>
             </div>
         </div>
