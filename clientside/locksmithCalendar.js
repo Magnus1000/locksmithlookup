@@ -2,7 +2,7 @@
 //import { Checkbox, FormControlLabel, Typography } from '@mui/material';
 
 const AvailabilitySelector = () => {
-  const [availability, setAvailability] = useState({
+  const [availability, setAvailability] = React.useState({
     tuesday: false,
     wednesday: false,
     thursday: false,
