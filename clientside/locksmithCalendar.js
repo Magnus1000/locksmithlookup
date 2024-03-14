@@ -8,7 +8,6 @@ const AvailabilitySelector = () => {
         thursday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         friday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         saturday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
-        sunday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
     });
 
     const [tempAvailability, setTempAvailability] = React.useState(availability);
@@ -81,11 +80,7 @@ const AvailabilitySelector = () => {
     return (
         <div className="availabilty-page-body">
             <div className="availability-header">
-                <Button
-                    variant="outlined"
-                    color="default"
-                    onClick={handleEdit}
-                >
+                <Button variant="contained" color="primary" onClick={handleEdit}>
                     Edit
                 </Button>
             </div>
@@ -94,7 +89,7 @@ const AvailabilitySelector = () => {
                     <Typography variant="h6">Weekly hours</Typography>
                 </div>
                 <div className="availability-div">
-                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
+                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
                         <FormControlLabel
                             key={day}
                             control={
@@ -124,24 +119,13 @@ const AvailabilitySelector = () => {
                         />
                     ))}
                 </div>
-                <div className="button-wrapper">
-                    <Button
-                        variant="text"
-                        color="default"
-                        onClick={handleCancel}
-                    >
-                        Cancel
-                    </Button>
-
-                    <Button
-                        variant="contained"
-                        color="default"
-                        onClick={handleSave}
-                    >
-                        Save and Close
-                    </Button>
-                </div>
             </div>
+            <Button variant="contained" color="primary" onClick={handleCancel}>
+                Cancel
+            </Button>
+            <Button variant="contained" color="secondary" onClick={handleSave}>
+                Save and Close
+            </Button>
         </div>
     );
 };
