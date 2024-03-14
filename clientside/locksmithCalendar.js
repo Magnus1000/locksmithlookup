@@ -132,10 +132,20 @@ const AvailabilitySelector = () => {
                     ))}
                 </div>
             </div>
-            <Button variant="contained" color="primary" onClick={handleCancel}>
+            <Button variant="contained" 
+                onClick={handleCancel}
+                sx={{
+                    borderRadius: 50
+                }}
+            >
                 Cancel
             </Button>
-            <Button variant="contained" color="secondary" onClick={handleSave}>
+            <Button variant="contained" 
+                onClick={handleSave}
+                sx={{
+                    borderRadius: 50
+                }}
+            >
                 Save and Close
             </Button>
         </div>
