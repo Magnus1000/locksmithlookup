@@ -18,7 +18,7 @@ module.exports = (req, res) => {
         // Function to find a record
         const findRecord = async (day_of_week) => {
             const records = await base('tblnDEcMDY1AXPS39').select({
-                filterByFormula: `AND({day_of_week} = '${day_of_week}', {locksmith} = '${locksmith}')`,
+                filterByFormula: `AND({day_of_week} = '${day_of_week}', {locksmith_id} = '${locksmith}')`,
             }).firstPage();
             return records.length > 0 ? records[0] : null;
         };
