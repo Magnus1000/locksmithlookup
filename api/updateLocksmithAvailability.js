@@ -12,6 +12,11 @@ module.exports = (req, res) => {
         // Parse the request body to extract locksmith_id and availability
         const { locksmith, availability } = req.body;
 
+        // Transform locksmith into an array (with one locksmith ID) to match the Airtable schema
+        const locksmithArray = Array.isArray(locksmith) ? locksmith : [locksmith];
+        
+
+
         // Function to find a record
         const findRecord = async (day_of_week) => {
             const records = await base('tblnDEcMDY1AXPS39').select({
@@ -26,7 +31,7 @@ module.exports = (req, res) => {
                 {
                     fields: {
                         day_of_week,
-                        locksmith,
+                        locksmithArray,
                         time_start,
                         time_end,
                     },
