@@ -1,6 +1,6 @@
 const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button, makeStyles } = MaterialUI;
 
-const useStyles = MaterialUI.makeStyles({
+const useStyles = MaterialUIStyles.makeStyles({
     label: {
       display: 'flex',
       flexDirection: 'row',
