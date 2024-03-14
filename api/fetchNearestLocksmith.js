@@ -53,6 +53,8 @@ module.exports = (req, res) => {
         // Retrieve all locksmith records
         let locksmithRecords = availableLocksmithsOpen;
 
+        console.log('Locksmiths', locksmithRecords);
+
         // Convert lat and lng to numbers
         const latNumber = Number(lat);
         const lngNumber = Number(lng);
@@ -64,7 +66,7 @@ module.exports = (req, res) => {
             const distance = Math.sqrt(Math.pow(recordLat - latNumber, 2) + Math.pow(recordLng - lngNumber, 2));
             return { ...record.fields, distance };
         });
-        
+
         // Sort the available locksmiths by distance
         locksmithRecords.sort((a, b) => a.distance - b.distance);
 
