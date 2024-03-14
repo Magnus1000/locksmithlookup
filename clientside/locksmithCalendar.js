@@ -1,14 +1,13 @@
-const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button, makeStyles } = MaterialUI;
+const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button } = MaterialUI;
+const { styled } = muiSystem;
 
-const useStyles = muiStylesFactory.makeStyles({
-    label: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignContent: 'center',
-      alignItems: 'center',
-      gap: '10px',
-      minWidth: '100%',
-    },
+const Label = styled('span')({
+  display: 'flex',
+  flexDirection: 'row',
+  alignContent: 'center',
+  alignItems: 'center',
+  gap: '10px',
+  minWidth: '100%',
 });
 
 const AvailabilitySelector = () => {
@@ -112,12 +111,12 @@ const AvailabilitySelector = () => {
                             />
                         }
                         label={
-                            <span className={classes.label}>
-                            <Typography>{day.toUpperCase()}</Typography>
-                            {renderTimeDropdown(day, 'startTime')}
-                            <Typography variant="body2">-</Typography>
-                            {renderTimeDropdown(day, 'endTime')}
-                            </span>
+                            <Label>
+                                <Typography>{day.toUpperCase()}</Typography>
+                                {renderTimeDropdown(day, 'startTime')}
+                                <Typography variant="body2">-</Typography>
+                                {renderTimeDropdown(day, 'endTime')}
+                          </Label>
                         }
                         />
                     ))}
