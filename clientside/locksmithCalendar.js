@@ -117,7 +117,6 @@ const AvailabilitySelector = () => {
                                 }
                                 style={{
                                     width: '100%',
-                                    backgroundColor: 'blue',
                                     display: 'flex',
                                     flexDirection: 'row',
                                 }}
