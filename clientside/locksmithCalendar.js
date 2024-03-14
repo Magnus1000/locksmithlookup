@@ -46,7 +46,7 @@ const AvailabilitySelector = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                locksmith: 'rec84eujtSSmKDves',
+                locksmith: 'recJpkfvlundnly50',
                 availability,
             }),
         })
@@ -85,8 +85,6 @@ const AvailabilitySelector = () => {
                 prev_time_end: isCurrentlyUnavailable ? tempAvailability[day].prev_time_end : tempAvailability[day].time_end,
             },
         });
-
-        console.log('tempAvailability:', tempAvailability);
     };    
 
     const handleTimeChange = (day, field, value) => {
