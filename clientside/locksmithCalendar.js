@@ -122,52 +122,58 @@ const AvailabilitySelector = () => {
                             }}
                         >
                             <FormControlLabel
-                                key={day}
-                                control={
-                                    <Checkbox
-                                        checked={tempAvailability[day].available}
-                                        onChange={() => handleAvailabilityChange(day)}
-                                        disabled={!isEditing}
-                                    />
-                                }
-                                style={{
-                                    width: '100%',
+                            key={day}
+                            control={
+                                <Checkbox
+                                checked={tempAvailability[day].available}
+                                onChange={() => handleAvailabilityChange(day)}
+                                disabled={!isEditing}
+                                />
+                            }
+                            style={{
+                                width: '100%',
+                                display: 'flex',
+                                flexDirection: 'row',
+                            }}
+                            label={
+                                <Box
+                                sx={{
                                     display: 'flex',
                                     flexDirection: 'row',
+                                    alignContent: 'center',
+                                    alignItems: 'center',
+                                    gap: '10px',
+                                    minWidth: '100%',
+                                    justifyContent: 'space-between',
+                                    flex: 1,
                                 }}
-                                label={
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'row',
-                                            alignContent: 'center',
-                                            alignItems: 'center',
-                                            gap: '10px',
-                                            minWidth: '100%',
-                                            justifyContent: 'space-between',
-                                            flex: 1,
-                                        }}
-                                    >
-                                    <div className="label-field-wrapper">
-                                        <Typography sx={{ textTransform: 'capitalize', width: '100px' }}>{day}</Typography>
-                                        <div className="dropdown-select-wrapper">
-                                            {renderTimeDropdown(day, 'startTime')}
-                                            <Typography variant="body2">-</Typography>
-                                            {renderTimeDropdown(day, 'endTime')}
-                                        </div>
+                                >
+                                <div className="label-field-wrapper">
+                                    <Typography sx={{ textTransform: 'capitalize', width: '100px' }}>{day}</Typography>
+                                    {tempAvailability[day].available ? (
+                                    <div className="dropdown-select-wrapper">
+                                        {renderTimeDropdown(day, 'startTime')}
+                                        <Typography variant="body2">-</Typography>
+                                        {renderTimeDropdown(day, 'endTime')}
                                     </div>
-                                    </Box>
-                                }
+                                    ) : (
+                                    <Typography variant="body2" sx={{ marginLeft: '16px' }}>Unavailable</Typography>
+                                    )}
+                                </div>
+                                </Box>
+                            }
                             />
                             <FormControlLabel
-                                control={
-                                    <Checkbox
-                                    checked={tempAvailability[day].allDay}
-                                    onChange={(event) => handle24HoursChange(day, event)}
-                                    disabled={!isEditing}
-                                    />
-                                }
-                                label="24 hours"
+                            control={
+                                <Checkbox
+                                checked={tempAvailability[day].allDay}
+                                onChange={(event) => handle24HoursChange(day, event)}
+                                disabled={!isEditing}
+                                />
+                            }
+                            label={
+                                <Typography sx={{ fontSize: '0.75rem' }}>24 hours</Typography> // Change font size as needed
+                            }
                             />
                         </Box>
                     ))}
