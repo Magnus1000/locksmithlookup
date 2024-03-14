@@ -100,35 +100,41 @@ const AvailabilitySelector = () => {
                 </div>
                 <div className="availability-div">
                     {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
-                        <FormControlLabel
-                            key={day}
-                            control={
-                                <Checkbox
-                                    checked={tempAvailability[day].available}
-                                    onChange={() => handleAvailabilityChange(day)}
-                                    disabled={!isEditing}
-                                />
-                            }
-                            label={
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        alignContent: 'center',
-                                        alignItems: 'center',
-                                        gap: '10px',
-                                        minWidth: '100%',
-                                    }}
-                                >
-                                    <Typography sx={{ textTransform: 'capitalize' }}>{day}</Typography>
-                                    <div className="dropdown-select-wrapper">
-                                        {renderTimeDropdown(day, 'startTime')}
-                                        <Typography variant="body2">-</Typography>
-                                        {renderTimeDropdown(day, 'endTime')}
-                                    </div>
-                                </Box>
-                            }
-                        />
+                        <Box
+                            sx={{
+                                width: '100%',
+                            }}
+                        >
+                            <FormControlLabel
+                                key={day}
+                                control={
+                                    <Checkbox
+                                        checked={tempAvailability[day].available}
+                                        onChange={() => handleAvailabilityChange(day)}
+                                        disabled={!isEditing}
+                                    />
+                                }
+                                label={
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+                                            alignContent: 'center',
+                                            alignItems: 'center',
+                                            gap: '10px',
+                                            minWidth: '100%',
+                                        }}
+                                    >
+                                        <Typography sx={{ textTransform: 'capitalize' }}>{day}</Typography>
+                                        <div className="dropdown-select-wrapper">
+                                            {renderTimeDropdown(day, 'startTime')}
+                                            <Typography variant="body2">-</Typography>
+                                            {renderTimeDropdown(day, 'endTime')}
+                                        </div>
+                                    </Box>
+                                }
+                            />
+                        </Box>
                     ))}
                 </div>
             </div>
