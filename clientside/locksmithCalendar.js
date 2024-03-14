@@ -115,6 +115,10 @@ const AvailabilitySelector = () => {
                                         disabled={!isEditing}
                                     />
                                 }
+                                style={{
+                                    width: '100%',
+                                    backgroundColor: 'blue',
+                                }}
                                 label={
                                     <Box
                                         sx={{
