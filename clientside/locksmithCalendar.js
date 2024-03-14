@@ -61,7 +61,14 @@ const AvailabilitySelector = () => {
     const handleAvailabilityChange = (day) => {
         setTempAvailability({
             ...tempAvailability,
-            [day]: { ...tempAvailability[day], available: !tempAvailability[day].available },
+            [day]: {
+                ...tempAvailability[day],
+                available: !tempAvailability[day].available,
+                time_start: !tempAvailability[day].available ? tempAvailability[day].time_start : "unavailable",
+                time_end: !tempAvailability[day].available ? tempAvailability[day].time_end : "unavailable",
+                prev_time_start: !tempAvailability[day].available ? tempAvailability[day].time_start : tempAvailability[day].prev_time_start,
+                prev_time_end: !tempAvailability[day].available ? tempAvailability[day].time_end : tempAvailability[day].prev_time_end,
+            },
         });
     };
 
