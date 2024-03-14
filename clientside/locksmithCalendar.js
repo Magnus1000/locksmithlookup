@@ -69,6 +69,7 @@ const AvailabilitySelector = () => {
         <Select
             value={tempAvailability[day][field]}
             onChange={(e) => handleTimeChange(day, field, e.target.value)}
+            disabled={!isEditing}
             sx={{
                 height: '44px',
                 width: '100px',
