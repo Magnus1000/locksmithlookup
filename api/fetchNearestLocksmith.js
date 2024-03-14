@@ -59,12 +59,12 @@ module.exports = (req, res) => {
 
         // Calculate the distance between each available locksmith and the provided coordinate
         locksmithRecords = locksmithRecords.map((record) => {
-            const recordLat = Number(record.fields.locksmith_lat);
-            const recordLng = Number(record.fields.locksmith_lng);
+            const recordLat = Number(record.fields.locksmith_lat[0]);
+            const recordLng = Number(record.fields.locksmith_lng[0]);
             const distance = Math.sqrt(Math.pow(recordLat - latNumber, 2) + Math.pow(recordLng - lngNumber, 2));
             return { ...record.fields, distance };
         });
-
+        
         // Sort the available locksmiths by distance
         locksmithRecords.sort((a, b) => a.distance - b.distance);
 
