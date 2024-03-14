@@ -67,11 +67,11 @@ const AvailabilitySelector = () => {
 
     const renderTimeDropdown = (day, field) => (
         <Select
-            value={availability[day][field]}
+            value={tempAvailability[day][field]}
             onChange={(e) => handleTimeChange(day, field, e.target.value)}
             sx={{
                 height: '44px',
-                width: '80px',
+                width: '100px',
             }}
         >
             {generateTimes(new Date(2022, 0, 1, 0, 0), new Date(2022, 0, 1, 23, 30)).map((time) => (
@@ -148,22 +148,28 @@ const AvailabilitySelector = () => {
                     ))}
                 </div>
             </div>
-            <Button variant="contained" 
-                onClick={handleCancel}
-                sx={{
-                    borderRadius: 50
-                }}
-            >
-                Cancel
-            </Button>
-            <Button variant="contained" 
-                onClick={handleSave}
-                sx={{
-                    borderRadius: 50
-                }}
-            >
-                Save and Close
-            </Button>
+            {edit ? (
+                <div className="availability-button-row-bottom-div">
+                    <Button
+                        variant="contained"
+                        onClick={handleCancel}
+                        sx={{
+                            borderRadius: 50,
+                        }}
+                    >
+                        Cancel
+                    </Button>
+                    <Button
+                        variant="contained"
+                        onClick={handleSave}
+                        sx={{
+                            borderRadius: 50,
+                        }}
+                    >
+                        Save and Close
+                    </Button>
+                </div>
+            ) : null}
         </div>
     );
 };
