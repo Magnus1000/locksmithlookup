@@ -1,5 +1,6 @@
 //import React, { useState } from 'react';
 //import { Checkbox, FormControlLabel, Typography } from '@mui/material';
+const { Checkbox, FormControlLabel, Typography } = MaterialUI;
 
 const AvailabilitySelector = () => {
   const [availability, setAvailability] = React.useState({
