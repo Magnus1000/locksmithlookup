@@ -120,8 +120,8 @@ const FormComponent = () => {
       </div>
       {locksmith && (
         <div>
-          <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith}, 
-          <a href={`tel:${locksmith.phone}`}>{locksmith.phone}</a>
+          <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith_name}, 
+          <a href={`tel:${locksmith.locksmith_phone}`}>{locksmith.locksmith_phone}</a>
         </div>
       )}
     </div>
