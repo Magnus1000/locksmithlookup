@@ -14,6 +14,12 @@ const AvailabilitySelector = () => {
     const [tempAvailability, setTempAvailability] = React.useState(availability);
     const [isEditing, setIsEditing] = React.useState(false);
 
+
+    React.useEffect(() => {
+        setTempAvailability(availability);
+    }, [availability]);
+      
+
     const handleEdit = () => {
         setTempAvailability(availability);
         setIsEditing(true);
@@ -45,15 +51,16 @@ const AvailabilitySelector = () => {
 
     const generateTimes = (start, end) => {
         const times = [];
-        let current = start;
-
+        let current = new Date(start.getTime());
+      
         while (current <= end) {
-            times.push(current);
-            current.setMinutes(current.getMinutes() + 30);
+          times.push(new Date(current.getTime())); // Create a new Date object for each time
+          current.setMinutes(current.getMinutes() + 30);
         }
-
+      
         return times;
     };
+      
 
     const formatTime = (date) => {
         const hours = date.getHours();
