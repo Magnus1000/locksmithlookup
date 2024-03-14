@@ -66,9 +66,9 @@ const AvailabilitySelector = () => {
 
         console.log('isCurrentlyUnavailable:', isCurrentlyUnavailable);
     
-        // If it's available, set times to "unavailable" (because "available" is being toggled off)
-        const newStartTime = isCurrentlyUnavailable ? "unavailable" : tempAvailability[day].prev_time_start;
-        const newEndTime = isCurrentlyUnavailable ? "unavailable" : tempAvailability[day].prev_time_end;
+        // If available = false, set times to "unavailable"
+        const newStartTime = isCurrentlyUnavailable ? tempAvailability[day].prev_time_start : "unavailable";
+        const newEndTime = isCurrentlyUnavailable ? tempAvailability[day].prev_time_end : "unavailable";
 
         console.log('newStartTime:', newStartTime);
         console.log('newEndTime:', newEndTime);
