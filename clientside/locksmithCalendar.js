@@ -102,6 +102,7 @@ const AvailabilitySelector = () => {
                     {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
                         <Box
                             sx={{
+                                display: 'flex',
                                 width: '100%',
                             }}
                         >
@@ -123,6 +124,7 @@ const AvailabilitySelector = () => {
                                             alignItems: 'center',
                                             gap: '10px',
                                             minWidth: '100%',
+                                            justifyContent: 'space-between' 
                                         }}
                                     >
                                         <Typography sx={{ textTransform: 'capitalize' }}>{day}</Typography>
