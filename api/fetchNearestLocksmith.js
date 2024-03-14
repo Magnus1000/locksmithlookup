@@ -16,36 +16,36 @@ module.exports = (req, res) => {
         const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
 
         // Query the availability table for locksmiths available at the current day and time
-        const availabilityRecords = await base('tblnDEcMDY1AXPS39').select({
+        const availableLocksmiths = await base('tblnDEcMDY1AXPS39').select({
             filterByFormula: `AND({day_of_week} = '${currentDay}', {time_start} != 'unavailable', {time_end} != 'unavailable')`
         }).all();
 
         // Log the availability records to the console
-        console.log('Initially Available Locksmiths', availabilityRecords);
+        console.log('Initially Available Locksmiths', availableLocksmiths);
 
         // Convert time strings to unix timestamps
-        availabilityRecords = availabilityRecords.map(record => {
+        const availableLocksmithsTimeUnix = availableLocksmiths.map(record => {
             const timeStart = new Date(`1970-01-01T${record.fields.time_start}`);
             const timeEnd = new Date(`1970-01-01T${record.fields.time_end}`);
             return { ...record.fields, timeStart, timeEnd };
         });
 
         // Filter out records where the current time is outside the available time range
-        availabilityRecords = availabilityRecords.filter(record => {
+        const availabileLocksmithsOpen = availableLocksmithsTimeUnix.filter(record => {
             return now >= record.timeStart && now <= record.timeEnd;
         });
 
         // Log the available locksmiths to the console
-        console.log('Available Locksmiths after checking opening hours', availabilityRecords);
+        console.log('Available Locksmiths after checking opening hours', availabileLocksmithsOpen);
 
         // Check if we have any available locksmiths
-        if (availabilityRecords.length === 0) {
+        if (availabileLocksmithsOpen.length === 0) {
             console.log('No locksmiths available at this time.');
             return res.status(404).json({ error: 'No locksmiths available at this time.' });
         }
 
         // Map available locksmith IDs to an object for easy access
-        const availableLocksmithIds = availabilityRecords.reduce((acc, record) => {
+        const availableLocksmithIds = availabileLocksmithsOpen.reduce((acc, record) => {
             acc[record.fields.locksmith_id] = true;
             return acc;
         }, {});
