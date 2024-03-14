@@ -14,6 +14,8 @@ module.exports = (req, res) => {
         
         // Fetch the current date and time
         const now = new Date();
+        console.log('Current Date and Time:', now);
+
         const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
 
         // Query the availability table for locksmiths available at the current day and time
@@ -27,7 +29,9 @@ module.exports = (req, res) => {
         // Convert time strings to unix timestamps
         const availableLocksmithsTimeUnix = availableLocksmiths.map(record => {
             const timeStart = moment.tz(`1970-01-01 ${record.fields.time_start}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
+            console.log('timeStart', timeStart);
             const timeEnd = moment.tz(`1970-01-01 ${record.fields.time_end}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
+            console.log('timeEnd', timeEnd);
             return { ...record.fields, timeStart, timeEnd };
         });
 
