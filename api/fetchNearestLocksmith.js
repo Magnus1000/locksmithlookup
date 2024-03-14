@@ -26,8 +26,8 @@ module.exports = (req, res) => {
         // Log the availability records to the console
         console.log('Initially Available Locksmiths', availableLocksmiths);
 
-        // Convert time strings to unix timestamps
-        const availableLocksmithsTimeUnix = availableLocksmiths.map(record => {
+        // Convert time strings to iso timestamps
+        const availableLocksmithsTimeIso = availableLocksmiths.map(record => {
             const today = moment().format('YYYY-MM-DD');
             const timeStart = moment.tz(`${today} ${record.fields.time_start}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
             console.log('timeStart', timeStart);
@@ -37,21 +37,21 @@ module.exports = (req, res) => {
         });
 
         // Filter out records where the current time is outside the available time range
-        const availabileLocksmithsOpen = availableLocksmithsTimeUnix.filter(record => {
-            return now >= record.timeStart && now <= record.timeEnd;
+        const availableLocksmithsOpen = availableLocksmithsTimeIso.filter(record => {
+            return record.timeStart && record.timeEnd && now >= record.timeStart && now <= record.timeEnd;
         });
 
         // Log the available locksmiths to the console
-        console.log('Available Locksmiths after checking opening hours', availabileLocksmithsOpen);
+        console.log('Available Locksmiths after checking opening hours', availableLocksmithsOpen);
 
         // Check if we have any available locksmiths
-        if (availabileLocksmithsOpen.length === 0) {
+        if (availableLocksmithsOpen.length === 0) {
             console.log('No locksmiths available at this time.');
             return res.status(404).json({ error: 'No locksmiths available at this time.' });
         }
 
         // Map available locksmith IDs to an object for easy access
-        const availableLocksmithIds = availabileLocksmithsOpen.reduce((acc, record) => {
+        const availableLocksmithIds = availableLocksmithsOpen.reduce((acc, record) => {
             acc[record.fields.locksmith_id] = true;
             return acc;
         }, {});
