@@ -9,61 +9,63 @@ const corsHandler = cors({ origin: '*' });
 
 module.exports = (req, res) => {
     corsHandler(req, res, async () => {
-        // Parse the request body to extract day, locksmith_id, time_start, and time_end
-        const { day_of_week, locksmith_id, time_start, time_end } = req.body;
+        // Parse the request body to extract locksmith_id and availability
+        const { locksmith_id, availability } = req.body;
 
         // Function to find a record
-        const findRecord = async () => {
-            const records = await base('Table_Name').select({
-                filterByFormula: `AND({day_of_week} = '${day_of_week}', {locksmith_id} = '${locksmith_id}')`
+        const findRecord = async (day_of_week) => {
+            const records = await base('tblnDEcMDY1AXPS39').select({
+                filterByFormula: `AND({day_of_week} = '${day_of_week}', {locksmith_id} = '${locksmith_id}')`,
             }).firstPage();
             return records.length > 0 ? records[0] : null;
         };
 
         // Function to create a new record
-        const createRecord = async () => {
-            const records = await base('Table_Name').create([
+        const createRecord = async (day_of_week, time_start, time_end) => {
+            const records = await base('tblnDEcMDY1AXPS39').create([
                 {
                     fields: {
                         day_of_week,
                         locksmith_id,
                         time_start,
-                        time_end
-                    }
-                }
+                        time_end,
+                    },
+                },
             ]);
             return records[0];
         };
 
         // Function to update an existing record
-        const updateRecord = async (recordId) => {
-            const records = await base('Table_Name').update([
+        const updateRecord = async (recordId, time_start, time_end) => {
+            const records = await base('tblnDEcMDY1AXPS39').update([
                 {
                     id: recordId,
                     fields: {
                         time_start,
-                        time_end
-                    }
-                }
+                        time_end,
+                    },
+                },
             ]);
             return records[0];
         };
 
         try {
-            // Check if a record exists
-            const existingRecord = await findRecord();
-            
-            let result;
-            if (existingRecord) {
-                // Update the existing record
-                result = await updateRecord(existingRecord.id);
-            } else {
-                // Create a new record
-                result = await createRecord();
+            // Loop over the availability array and process each availability object
+            for (const { day_of_week, time_start, time_end } of availability) {
+                // Check if a record exists
+                const existingRecord = await findRecord(day_of_week);
+
+                if (existingRecord) {
+                    // Update the existing record
+                    await updateRecord(existingRecord.id, time_start, time_end);
+                } else {
+                    // Create a new record
+                    await createRecord(day_of_week, time_start, time_end);
+                }
             }
 
-            // Respond with the result
-            res.json(result);
+            // Respond with a success message
+            res.json({ message: 'Availability updated successfully.' });
         } catch (error) {
             console.error('Error:', error);
             res.status(500).json({ error: 'An error occurred while processing the request.' });
