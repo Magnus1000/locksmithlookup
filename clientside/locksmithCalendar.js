@@ -8,7 +8,6 @@ const AvailabilitySelector = () => {
         thursday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         friday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         saturday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
-        sunday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
     });
 
     const [tempAvailability, setTempAvailability] = React.useState(availability);
@@ -99,7 +98,7 @@ const AvailabilitySelector = () => {
                     <Typography variant="h6">Weekly hours</Typography>
                 </div>
                 <div className="availability-div">
-                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
+                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
                         <FormControlLabel
                             key={day}
                             control={
@@ -130,30 +129,30 @@ const AvailabilitySelector = () => {
                     ))}
                 </div>
                 <div className="button-wrapper">
-                    <Button
-                        variant="text"
-                        color="default"
-                        onClick={handleCancel}
-                        sx={{
-                            textTransform: 'capitalize',
-                            color: 'grey',
-                            backgroundColor: 'transparent',
-                            border: 'none',
-                        }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleSave}
-                        sx={{
-                            textTransform: 'capitalize',
-                            backgroundColor: 'blue',
-                        }}
-                    >
-                        Save and Close
-                    </Button>
+                <Button
+                    variant="text"
+                    color="default"
+                    onClick={handleCancel}
+                    sx={{
+                        textTransform: 'capitalize',
+                        color: 'grey',
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                    }}
+                >
+                    Cancel
+                </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSave}
+                    sx={{
+                        textTransform: 'capitalize',
+                        backgroundColor: 'blue',
+                    }}
+                >
+                    Save and Close
+                </Button>
                 </div>
             </div>
         </div>
