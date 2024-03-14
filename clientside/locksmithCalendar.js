@@ -31,8 +31,24 @@ const AvailabilitySelector = () => {
     };
 
     const handleSave = () => {
-        setAvailability(tempAvailability);
-        setIsEditing(false);
+        fetch('https://locksmithlookup-magnus1000team.vercel.app/api/updateLocksmithAvailability.js', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                locksmith_id: 777,
+                availability: tempAvailability,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setAvailability(tempAvailability);
+                setIsEditing(false);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     };
 
     const handleAvailabilityChange = (day) => {
