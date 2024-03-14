@@ -10,12 +10,12 @@ const corsHandler = cors({ origin: '*' });
 module.exports = (req, res) => {
     corsHandler(req, res, async () => {
         // Parse the request body to extract locksmith_id and availability
-        const { locksmith_id, availability } = req.body;
+        const { locksmith, availability } = req.body;
 
         // Function to find a record
         const findRecord = async (day_of_week) => {
             const records = await base('tblnDEcMDY1AXPS39').select({
-                filterByFormula: `AND({day_of_week} = '${day_of_week}', {locksmith_id} = '${locksmith_id}')`,
+                filterByFormula: `AND({day_of_week} = '${day_of_week}', {locksmith} = '${locksmith}')`,
             }).firstPage();
             return records.length > 0 ? records[0] : null;
         };
@@ -26,7 +26,7 @@ module.exports = (req, res) => {
                 {
                     fields: {
                         day_of_week,
-                        locksmith_id,
+                        locksmith,
                         time_start,
                         time_end,
                     },

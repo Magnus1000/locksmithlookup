@@ -44,7 +44,7 @@ const AvailabilitySelector = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                locksmith_id: '777',
+                locksmith: 'rec84eujtSSmKDves',
                 availability,
             }),
         })
