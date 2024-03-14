@@ -78,37 +78,45 @@ const AvailabilitySelector = () => {
     );
 
     return (
-        <div>
-          <Button variant="contained" color="primary" onClick={handleEdit}>
-            Edit
-          </Button>
-          <Typography variant="h6">Weekly hours</Typography>
-          {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
-            <FormControlLabel
-              key={day}
-              control={
-                <Checkbox
-                  checked={tempAvailability[day].available}
-                  onChange={() => handleAvailabilityChange(day)}
-                  disabled={!isEditing}
-                />
-              }
-              label={
-                <>
-                  <Typography>{day.toUpperCase()}</Typography>
-                  {renderTimeDropdown(day, 'startTime')}
-                  <Typography variant="body2">-</Typography>
-                  {renderTimeDropdown(day, 'endTime')}
-                </>
-              }
-            />
-          ))}
-          <Button variant="contained" color="primary" onClick={handleCancel}>
-            Cancel
-          </Button>
-          <Button variant="contained" color="primary" onClick={handleSave}>
-            Save and Close
-          </Button>
+        <div className="availabilty-page-body">
+            <div className="availability-header">
+                <Button variant="contained" color="primary" onClick={handleEdit}>
+                    Edit
+                </Button>
+            </div>
+            <div className="availability-div-wrapper">
+                <div className="availability-header">
+                    <Typography variant="h6">Weekly hours</Typography>
+                </div>
+                <div className="availability-div">
+                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
+                        <FormControlLabel
+                        key={day}
+                        control={
+                            <Checkbox
+                            checked={tempAvailability[day].available}
+                            onChange={() => handleAvailabilityChange(day)}
+                            disabled={!isEditing}
+                            />
+                        }
+                        label={
+                            <>
+                            <Typography>{day.toUpperCase()}</Typography>
+                            {renderTimeDropdown(day, 'startTime')}
+                            <Typography variant="body2">-</Typography>
+                            {renderTimeDropdown(day, 'endTime')}
+                            </>
+                        }
+                        />
+                    ))}
+                </div>
+            </div>
+            <Button variant="contained" color="primary" onClick={handleCancel}>
+                Cancel
+            </Button>
+            <Button variant="contained" color="primary" onClick={handleSave}>
+                Save and Close
+            </Button>
         </div>
     );
 };
