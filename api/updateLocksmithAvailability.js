@@ -14,8 +14,6 @@ module.exports = (req, res) => {
 
         // Transform locksmith into an array (with one locksmith ID) to match the Airtable schema
         const locksmithArray = Array.isArray(locksmith) ? locksmith : [locksmith];
-        
-
 
         // Function to find a record
         const findRecord = async (day_of_week) => {
@@ -31,7 +29,7 @@ module.exports = (req, res) => {
                 {
                     fields: {
                         day_of_week,
-                        locksmithArray,
+                        locksmith: locksmithArray,
                         time_start,
                         time_end,
                     },
