@@ -59,18 +59,27 @@ const AvailabilitySelector = () => {
     };
 
     const handleAvailabilityChange = (day) => {
+        // Check if the day is currently unavailable
+        const isCurrentlyUnavailable = !tempAvailability[day].available;
+    
+        // If it's unavailable, we're switching it to available, hence restore the previous times
+        // Otherwise, set times to "unavailable"
+        const newStartTime = isCurrentlyUnavailable ? tempAvailability[day].prev_time_start : "unavailable";
+        const newEndTime = isCurrentlyUnavailable ? tempAvailability[day].prev_time_end : "unavailable";
+    
         setTempAvailability({
             ...tempAvailability,
             [day]: {
                 ...tempAvailability[day],
-                available: !tempAvailability[day].available,
-                time_start: !tempAvailability[day].available ? tempAvailability[day].time_start : "unavailable",
-                time_end: !tempAvailability[day].available ? tempAvailability[day].time_end : "unavailable",
-                prev_time_start: !tempAvailability[day].available ? tempAvailability[day].time_start : tempAvailability[day].prev_time_start,
-                prev_time_end: !tempAvailability[day].available ? tempAvailability[day].time_end : tempAvailability[day].prev_time_end,
+                available: !tempAvailability[day].available, // toggle the availability
+                time_start: newStartTime,
+                time_end: newEndTime,
+                // Update prev_time_start and prev_time_end only if we are toggling to unavailable
+                prev_time_start: isCurrentlyUnavailable ? tempAvailability[day].prev_time_start : tempAvailability[day].time_start,
+                prev_time_end: isCurrentlyUnavailable ? tempAvailability[day].prev_time_end : tempAvailability[day].time_end,
             },
         });
-    };
+    };    
 
     const handleTimeChange = (day, field, value) => {
         setTempAvailability({
