@@ -81,18 +81,20 @@ const AvailabilitySelector = () => {
     return (
         <div className="availabilty-page-body">
             <div className="availability-header">
+                <Box>
                 <Button
                     variant="outlined"
                     color="default"
                     onClick={handleEdit}
                     sx={{
-                        textTransform: 'capitalize',
-                        color: 'grey',
-                        backgroundColor: 'transparent',
+                    textTransform: 'capitalize',
+                    color: 'grey',
+                    backgroundColor: 'transparent',
                     }}
                 >
                     Edit
                 </Button>
+                </Box>
             </div>
             <div className="availability-div-wrapper">
                 <div className="availability-header">
@@ -130,31 +132,33 @@ const AvailabilitySelector = () => {
                     ))}
                 </div>
                 <div className="button-wrapper">
-                    <Button
-                        variant="text"
-                        color="default"
-                        onClick={handleCancel}
-                        sx={{
+                    <Box>
+                        <Button
+                            variant="text"
+                            color="default"
+                            onClick={handleCancel}
+                            sx={{
                             textTransform: 'capitalize',
                             color: 'grey',
                             backgroundColor: 'transparent',
                             border: 'none',
-                        }}
-                    >
-                        Cancel
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="default"
-                        onClick={handleSave}
-                        sx={{
+                            }}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="default"
+                            onClick={handleSave}
+                            sx={{
                             textTransform: 'capitalize',
                             backgroundColor: 'blue',
                             color: 'white',
-                        }}
-                    >
-                        Save and Close
-                    </Button>
+                            }}
+                        >
+                            Save and Close
+                        </Button>
+                    </Box>
                 </div>
             </div>
         </div>
