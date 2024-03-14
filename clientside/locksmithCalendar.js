@@ -31,14 +31,21 @@ const AvailabilitySelector = () => {
     };
 
     const handleSave = () => {
+        // Transform tempAvailability into an array of objects
+        const availability = Object.entries(tempAvailability).map(([day_of_week, { startTime, endTime }]) => ({
+            day_of_week,
+            time_start: startTime,
+            time_end: endTime,
+        }));
+
         fetch('https://locksmithlookup-magnus1000team.vercel.app/api/updateLocksmithAvailability.js', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                locksmith_id: 777,
-                availability: tempAvailability,
+                locksmith_id: '777',
+                availability,
             }),
         })
             .then((response) => response.json())
