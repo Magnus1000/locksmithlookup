@@ -1,5 +1,6 @@
 const Airtable = require('airtable');
 const cors = require('cors');
+const moment = require('moment-timezone');
 
 // Enable Cross-Origin Resource Sharing (CORS)
 const corsHandler = cors({ origin: '*' });
@@ -25,8 +26,8 @@ module.exports = (req, res) => {
 
         // Convert time strings to unix timestamps
         const availableLocksmithsTimeUnix = availableLocksmiths.map(record => {
-            const timeStart = new Date(`1970-01-01T${record.fields.time_start}`);
-            const timeEnd = new Date(`1970-01-01T${record.fields.time_end}`);
+            const timeStart = moment.tz(`1970-01-01T${record.fields.time_start}`, record.fields.locksmith_timezone).toDate();
+            const timeEnd = moment.tz(`1970-01-01T${record.fields.time_end}`, record.fields.locksmith_timezone).toDate();
             return { ...record.fields, timeStart, timeEnd };
         });
 
