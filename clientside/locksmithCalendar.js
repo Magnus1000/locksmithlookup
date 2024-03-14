@@ -1,4 +1,15 @@
-const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button } = MaterialUI;
+const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button, makeStyles } = MaterialUI;
+
+const useStyles = makeStyles({
+    label: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignContent: 'center',
+      alignItems: 'center',
+      gap: '10px',
+      minWidth: '100%',
+    },
+});
 
 const AvailabilitySelector = () => {
     const [availability, setAvailability] = React.useState({
@@ -9,6 +20,7 @@ const AvailabilitySelector = () => {
         friday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         saturday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
     });
+    const classes = React.useStyles();
 
     const [tempAvailability, setTempAvailability] = React.useState(availability);
     const [isEditing, setIsEditing] = React.useState(false);
@@ -100,12 +112,12 @@ const AvailabilitySelector = () => {
                             />
                         }
                         label={
-                            <>
+                            <span className={classes.label}>
                             <Typography>{day.toUpperCase()}</Typography>
                             {renderTimeDropdown(day, 'startTime')}
                             <Typography variant="body2">-</Typography>
                             {renderTimeDropdown(day, 'endTime')}
-                            </>
+                            </span>
                         }
                         />
                     ))}
