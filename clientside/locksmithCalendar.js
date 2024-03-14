@@ -69,6 +69,10 @@ const AvailabilitySelector = () => {
         <Select
             value={availability[day][field]}
             onChange={(e) => handleTimeChange(day, field, e.target.value)}
+            sx={{
+                height: '44px',
+                width: '80px',
+            }}
         >
             {generateTimes(new Date(2022, 0, 1, 0, 0), new Date(2022, 0, 1, 23, 30)).map((time) => (
                 <MenuItem key={formatTime(time)} value={formatTime(time)}>
@@ -116,10 +120,12 @@ const AvailabilitySelector = () => {
                                         minWidth: '100%',
                                     }}
                                 >
-                                    <Typography>{day.toUpperCase()}</Typography>
-                                    {renderTimeDropdown(day, 'startTime')}
-                                    <Typography variant="body2">-</Typography>
-                                    {renderTimeDropdown(day, 'endTime')}
+                                    <Typography sx={{ textTransform: 'capitalize' }}>{day}</Typography>
+                                    <div className>
+                                        {renderTimeDropdown(day, 'startTime')}
+                                        <Typography variant="body2">-</Typography>
+                                        {renderTimeDropdown(day, 'endTime')}
+                                    </div>
                                 </Box>
                             }
                         />
