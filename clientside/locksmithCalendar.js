@@ -149,7 +149,7 @@ const AvailabilitySelector = () => {
                     ))}
                 </div>
             </div>
-            {edit ? (
+            {isEditing ? (
                 <div className="availability-button-row-bottom-div">
                     <Button
                         variant="contained"
