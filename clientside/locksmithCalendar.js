@@ -128,7 +128,8 @@ const AvailabilitySelector = () => {
                                             alignItems: 'center',
                                             gap: '10px',
                                             minWidth: '100%',
-                                            justifyContent: 'space-between' 
+                                            justifyContent: 'space-between',
+                                            flex: 1,
                                         }}
                                     >
                                         <Typography sx={{ textTransform: 'capitalize' }}>{day}</Typography>
