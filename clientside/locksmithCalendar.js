@@ -79,7 +79,7 @@ const AvailabilitySelector = () => {
             disabled={!isEditing}
             sx={{
                 height: '44px',
-                width: '100px',
+                width: '120px',
             }}
         >
             {generateTimes(new Date(2022, 0, 1, 0, 0), new Date(2022, 0, 1, 23, 30)).map((time) => (
