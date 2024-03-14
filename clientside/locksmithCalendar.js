@@ -1,14 +1,4 @@
-const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button } = MaterialUI;
-const { styled } = muiSystem;
-
-const Label = styled('span')({
-  display: 'flex',
-  flexDirection: 'row',
-  alignContent: 'center',
-  alignItems: 'center',
-  gap: '10px',
-  minWidth: '100%',
-});
+const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button, Box } = MaterialUI;
 
 const AvailabilitySelector = () => {
     const [availability, setAvailability] = React.useState({
@@ -19,21 +9,20 @@ const AvailabilitySelector = () => {
         friday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
         saturday: { available: true, startTime: '9:00am', endTime: '5:00pm' },
     });
-    const classes = useStyles();
 
     const [tempAvailability, setTempAvailability] = React.useState(availability);
     const [isEditing, setIsEditing] = React.useState(false);
-  
+
     const handleEdit = () => {
         setTempAvailability(availability);
         setIsEditing(true);
     };
-  
+
     const handleCancel = () => {
         setTempAvailability(availability);
         setIsEditing(false);
     };
-  
+
     const handleSave = () => {
         setAvailability(tempAvailability);
         setIsEditing(false);
@@ -45,7 +34,7 @@ const AvailabilitySelector = () => {
             [day]: { ...tempAvailability[day], available: !tempAvailability[day].available },
         });
     };
-    
+
     const handleTimeChange = (day, field, value) => {
         setTempAvailability({
             ...tempAvailability,
@@ -102,22 +91,31 @@ const AvailabilitySelector = () => {
                 <div className="availability-div">
                     {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].map((day) => (
                         <FormControlLabel
-                        key={day}
-                        control={
-                            <Checkbox
-                            checked={tempAvailability[day].available}
-                            onChange={() => handleAvailabilityChange(day)}
-                            disabled={!isEditing}
-                            />
-                        }
-                        label={
-                            <Label>
-                                <Typography>{day.toUpperCase()}</Typography>
-                                {renderTimeDropdown(day, 'startTime')}
-                                <Typography variant="body2">-</Typography>
-                                {renderTimeDropdown(day, 'endTime')}
-                          </Label>
-                        }
+                            key={day}
+                            control={
+                                <Checkbox
+                                    checked={tempAvailability[day].available}
+                                    onChange={() => handleAvailabilityChange(day)}
+                                    disabled={!isEditing}
+                                />
+                            }
+                            label={
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignContent: 'center',
+                                        alignItems: 'center',
+                                        gap: '10px',
+                                        minWidth: '100%',
+                                    }}
+                                >
+                                    <Typography>{day.toUpperCase()}</Typography>
+                                    {renderTimeDropdown(day, 'startTime')}
+                                    <Typography variant="body2">-</Typography>
+                                    {renderTimeDropdown(day, 'endTime')}
+                                </Box>
+                            }
                         />
                     ))}
                 </div>
