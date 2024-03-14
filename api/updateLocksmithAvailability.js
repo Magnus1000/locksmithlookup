@@ -12,6 +12,9 @@ module.exports = (req, res) => {
         // Parse the request body to extract locksmith_id and availability
         const { locksmith, availability } = req.body;
 
+        // Log the availability to the console
+        console.log('Availability:', availability);
+
         // Transform locksmith into an array (with one locksmith ID) to match the Airtable schema
         const locksmithArray = Array.isArray(locksmith) ? locksmith : [locksmith];
 
