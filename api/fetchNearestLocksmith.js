@@ -52,7 +52,11 @@ module.exports = (req, res) => {
 
         // Map available locksmith IDs to an object for easy access
         const availableLocksmithIds = availableLocksmithsOpen.reduce((acc, record) => {
-            acc[record.fields.locksmith_id] = true;
+            if (record.fields && record.fields.locksmith_id) {
+                record.fields.locksmith_id.forEach(id => {
+                    acc[id] = true;
+                });
+            }
             return acc;
         }, {});
 
