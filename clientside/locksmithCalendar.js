@@ -121,7 +121,7 @@ const AvailabilitySelector = () => {
                                     }}
                                 >
                                     <Typography sx={{ textTransform: 'capitalize' }}>{day}</Typography>
-                                    <div className>
+                                    <div className="dropdown-select-wrapper">
                                         {renderTimeDropdown(day, 'startTime')}
                                         <Typography variant="body2">-</Typography>
                                         {renderTimeDropdown(day, 'endTime')}
