@@ -120,24 +120,24 @@ const AvailabilitySelector = () => {
                                 display: 'flex',
                                 width: '100%',
                             }}
-                        >
+                            >
                             <FormControlLabel
-                            key={day}
-                            control={
+                                key={day}
+                                control={
                                 <Checkbox
-                                checked={tempAvailability[day].available}
-                                onChange={() => handleAvailabilityChange(day)}
-                                disabled={!isEditing}
+                                    checked={tempAvailability[day].available}
+                                    onChange={() => handleAvailabilityChange(day)}
+                                    disabled={!isEditing}
                                 />
-                            }
-                            style={{
+                                }
+                                style={{
                                 width: '100%',
                                 display: 'flex',
                                 flexDirection: 'row',
-                            }}
-                            label={
+                                }}
+                                label={
                                 <Box
-                                sx={{
+                                    sx={{
                                     display: 'flex',
                                     flexDirection: 'row',
                                     alignContent: 'center',
@@ -146,35 +146,35 @@ const AvailabilitySelector = () => {
                                     minWidth: '100%',
                                     justifyContent: 'space-between',
                                     flex: 1,
-                                }}
+                                    }}
                                 >
-                                <div className="label-field-wrapper">
+                                    <div className="label-field-wrapper">
                                     <Typography sx={{ textTransform: 'capitalize', width: '100px' }}>{day}</Typography>
                                     {tempAvailability[day].available ? (
-                                    <div className="dropdown-select-wrapper">
+                                        <div className="dropdown-select-wrapper">
                                         {renderTimeDropdown(day, 'startTime')}
                                         <Typography variant="body2">-</Typography>
                                         {renderTimeDropdown(day, 'endTime')}
-                                    </div>
+                                        </div>
                                     ) : (
-                                    <Typography variant="body2" sx={{ marginLeft: '16px' }}>Unavailable</Typography>
+                                        <Typography sx={{ marginLeft: '16px', fontSize: '0.75rem' }}>Unavailable</Typography>
                                     )}
-                                </div>
+                                    </div>
                                 </Box>
-                            }
+                                }
                             />
-                            <FormControlLabel
-                            control={
-                                <Checkbox
-                                checked={tempAvailability[day].allDay}
-                                onChange={(event) => handle24HoursChange(day, event)}
-                                disabled={!isEditing}
+                            {tempAvailability[day].available && (
+                                <FormControlLabel
+                                control={
+                                    <Checkbox
+                                    checked={tempAvailability[day].allDay}
+                                    onChange={(event) => handle24HoursChange(day, event)}
+                                    disabled={!isEditing}
+                                    />
+                                }
+                                label={<Typography sx={{ fontSize: '0.75rem' }}>24 hours</Typography>}
                                 />
-                            }
-                            label={
-                                <Typography sx={{ fontSize: '0.75rem' }}>24 hours</Typography> // Change font size as needed
-                            }
-                            />
+                            )}
                         </Box>
                     ))}
                 </div>
