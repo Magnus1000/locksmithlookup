@@ -61,10 +61,7 @@ module.exports = (req, res) => {
         }, {});
 
         // Retrieve all locksmith records
-        let locksmithRecords = await base(process.env.AIRTABLE_TABLE_ID).select().all();
-        
-        // Filter out locksmiths who are not available right now
-        locksmithRecords = locksmithRecords.filter(record => availableLocksmithIds[record.id]);
+        let locksmithRecords = availableLocksmithIds;
 
         // Convert lat and lng to numbers
         const latNumber = Number(lat);
@@ -72,8 +69,8 @@ module.exports = (req, res) => {
 
         // Calculate the distance between each available locksmith and the provided coordinate
         locksmithRecords = locksmithRecords.map((record) => {
-            const recordLat = Number(record.fields.lat);
-            const recordLng = Number(record.fields.lng);
+            const recordLat = Number(record.fields.locksmith_lat);
+            const recordLng = Number(record.fields.locksmith_lng);
             const distance = Math.sqrt(Math.pow(recordLat - latNumber, 2) + Math.pow(recordLng - lngNumber, 2));
             return { ...record.fields, distance };
         });
