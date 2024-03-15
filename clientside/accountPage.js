@@ -382,26 +382,3 @@ const App = () => {
 };
   
 ReactDOM.render(<App />, document.getElementById('root'));
-
-const { useEffect } = React;
-
-const { useEffect, useState } = React;
-
-const MemberRedirect = () => {
-    const [memberId, setMemberId] = useState(null);
-    const [memberName, setMemberName] = useState(null);
-
-    useEffect(() => {
-        window.$memberstackDom.getCurrentMember().then((member) => {
-            if (member.data) {
-                console.log('there is a member', member);
-                setMemberId(member.data.id);
-                setMemberName(member.data.name);
-            } else {
-                console.log('no member', member);
-            }
-        });
-    }, []);
-
-    return null;
-};
