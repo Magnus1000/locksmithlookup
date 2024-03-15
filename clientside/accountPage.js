@@ -283,12 +283,12 @@ const VerticalNav = ({ setActivePage }) => {
       <div id="verticalNav" className="vertical-nav-wrapper">
         <div className="vertical-nav-top">
             <div className="vertical-nav-text-wrapper">
-                <div className="dashboard-account-name">
+                <h1 className="dashboard-account-name">
                     {memberName}
-                </div>
-                <div className="dashboard-account-id">
+                </h1>
+                <p className="dashboard-account-id">
                     {memberId}
-                </div>
+                </p>
             </div>
             <div
                 id="dashboardButton"
