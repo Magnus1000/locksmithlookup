@@ -34,14 +34,14 @@ const VerticalNav = () => {
             className={`vertical-nav-menu-item ${activeItem === 'dashboard' ? 'active' : ''}`}
             onClick={() => handleNavClick('dashboard')}
           >
-            <div className="nav-menu-text">Calendar</div>
+            <div className="nav-menu-text">Dashboard</div>
           </div>
           <div
             id="membersButton"
             className={`vertical-nav-menu-item ${activeItem === 'members' ? 'active' : ''}`}
             onClick={() => handleNavClick('members')}
           >
-            <div className="nav-menu-text">Members</div>
+            <div className="nav-menu-text">Analytics</div>
           </div>
         </div>
       </div>
