@@ -161,6 +161,11 @@ const AvailabilitySelector = () => {
                         borderWidth: '0',
                         borderColor: 'var(--transparent);',
                         boxShadow: 'none',
+                        '&:hover': {
+                            backgroundColor: 'var(--hover-color)',
+                            boxShadow: 'none',
+                            borderColor: 'var(--grey-text)',
+                        },
                     }}
                 >
                     Edit
@@ -248,6 +253,11 @@ const AvailabilitySelector = () => {
                             color: 'var(--grey-text)',
                             borderWidth: '0',
                             boxShadow: 'none',
+                            '&:hover': {
+                                backgroundColor: 'var(--hover-color)',
+                                boxShadow: 'none',
+                                borderColor: 'var(--grey-text)',
+                            },
                         }}
                     >
                         Cancel
@@ -261,6 +271,12 @@ const AvailabilitySelector = () => {
                             fontFamily: 'inherit',
                             backgroundColor: 'var(--color-primary)',
                             boxShadow: 'none',
+                            '&:hover': {
+                                backgroundColor: 'var(--color-primary)',
+                                boxShadow: 'none',
+                                outlineWidth: '1px',
+                                outlineColor: 'var(--black)',
+                            },
                         }}
                     >
                         Save and Close
