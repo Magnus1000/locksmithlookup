@@ -145,6 +145,9 @@ const AvailabilitySelector = () => {
     return (
         <div className="availabilty-page-body">
             <div className="availability-button-row-top-div">
+                <div className="availability-header">
+                    <Typography variant="h6">Weekly hours</Typography>
+                </div>
                 <Button variant="contained" 
                     onClick={handleEdit}
                     sx={{
@@ -159,9 +162,6 @@ const AvailabilitySelector = () => {
                 </Button>
             </div>
             <div className="availability-div-wrapper">
-                <div className="availability-header">
-                    <Typography variant="h6">Weekly hours</Typography>
-                </div>
                 <div className="availability-div">
                     {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
                         <Box
