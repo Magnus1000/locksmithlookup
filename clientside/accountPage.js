@@ -250,7 +250,7 @@ const AvailabilitySelector = () => {
     );
 };
 
-const VerticalNav = () => {
+const VerticalNav = ({ setActivePage }) => {
     // Assuming you might want to manage which menu item is active
     const [activeItem, setActiveItem] = React.useState('dashboard');
   
