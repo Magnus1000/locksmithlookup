@@ -238,13 +238,13 @@ const AvailabilitySelector = () => {
                                     checked={tempAvailability[day].allDay}
                                     onChange={(event) => handle24HoursChange(day, event)}
                                     disabled={!isEditing}
-                                    />
                                     sx={{
                                         color: 'var(--primary-color)',
                                         '&.Mui-checked': {
                                             color: 'var(--primary-color)',
                                         },
                                     }}
+                                    />
                                 }
                                 label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center' }}>24 hours</Typography>}
                                 />
