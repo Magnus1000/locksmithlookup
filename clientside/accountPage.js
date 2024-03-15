@@ -439,11 +439,10 @@ const Dashboard = () => {
                     label: 'Completed',
                     data: [10, 8, 12, 6, 15, 9, 11],
                     backgroundColor: 'var(--color-primary-20)',
-                    borderColor: 'var(--color-primary)',
+                    borderColor: 'rgba(55, 114, 255, 100)',
                     borderWidth: 1,
                     fontFamily: 'inherit',
                     fontSize: '0.938rem',
-                    color: 'var(--font-color)',
                 },
                 {
                     label: 'Not Completed',
