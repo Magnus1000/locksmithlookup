@@ -438,8 +438,8 @@ const Dashboard = () => {
                 {
                     label: 'Completed',
                     data: [10, 8, 12, 6, 15, 9, 11],
-                    backgroundColor: 'rgba(136, 132, 216, 0.2)',
-                    borderColor: 'rgba(136, 132, 216, 1)',
+                    backgroundColor: 'var(--color-primary-20)',
+                    borderColor: 'var(--color-primary)',
                     borderWidth: 1,
                     fontFamily: 'inherit',
                     fontSize: '0.938rem',
@@ -448,8 +448,8 @@ const Dashboard = () => {
                 {
                     label: 'Not Completed',
                     data: [5, 7, 3, 9, 2, 6, 4],
-                    backgroundColor: 'rgba(130, 202, 157, 0.2)',
-                    borderColor: 'rgba(130, 202, 157, 1)',
+                    backgroundColor: 'var(--hover-color)',
+                    borderColor: 'var(--disabled-color)',
                     borderWidth: 1,
                     fontFamily: 'inherit',
                     fontSize: '0.938rem',
