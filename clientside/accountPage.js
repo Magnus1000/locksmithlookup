@@ -135,7 +135,7 @@ const AvailabilitySelector = () => {
             }}
         >
             {generateTimes(new Date(2022, 0, 1, 0, 0), new Date(2022, 0, 1, 23, 30)).map((time) => (
-                <MenuItem key={formatTime(time)} value={formatTime(time)}>
+                <MenuItem key={formatTime(time)} value={formatTime(time)} style={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '1rem' }}>
                     {formatTime(time)}
                 </MenuItem>
             ))}
@@ -146,7 +146,9 @@ const AvailabilitySelector = () => {
         <div className="availabilty-page-body">
             <div className="availability-button-row-top-div">
                 <div className="availability-header">
-                    <Typography variant="h6">Weekly hours</Typography>
+                    <Typography variant="h6" style={{ fontFamily: 'inherit', fontWeight: '600', fontSize: '2rem' }}>
+                        Availability
+                    </Typography>
                 </div>
                 <Button variant="contained" 
                     onClick={handleEdit}
@@ -154,7 +156,10 @@ const AvailabilitySelector = () => {
                         borderRadius: '0.5rem',
                         textTransform: 'none',
                         fontFamily: 'inherit',
-                        backgroundColor: 'var(--color-primary)',
+                        backgroundColor: 'var(--transparent)',
+                        color: 'var(--grey-text)',
+                        borderWidth: '0',
+                        borderColor: 'var(--transparent);',
                         boxShadow: 'none',
                     }}
                 >
@@ -198,7 +203,7 @@ const AvailabilitySelector = () => {
                                     }}
                                 >
                                     <div className="label-field-wrapper">
-                                    <Typography sx={{ textTransform: 'capitalize', width: '100px' }}>{day}</Typography>
+                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '1rem' }}>{day}</Typography>
                                     {tempAvailability[day].available ? (
                                         <div className="dropdown-select-wrapper">
                                         {renderTimeDropdown(day, 'startTime')}
@@ -206,7 +211,7 @@ const AvailabilitySelector = () => {
                                         {renderTimeDropdown(day, 'endTime')}
                                         </div>
                                     ) : (
-                                        <Typography sx={{ marginLeft: '16px', fontSize: '0.75rem' }}>Unavailable</Typography>
+                                        <Typography sx={{ marginLeft: '16px', fontSize: '0.75rem', fontFamily: 'inherit', fontWeight: '400' }}>Unavailable</Typography>
                                     )}
                                     </div>
                                 </Box>
@@ -221,7 +226,7 @@ const AvailabilitySelector = () => {
                                     disabled={!isEditing}
                                     />
                                 }
-                                label={<Typography sx={{ fontSize: '0.75rem' }}>24 hours</Typography>}
+                                label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center' }}>24 hours</Typography>}
                                 />
                             )}
                         </Box>
