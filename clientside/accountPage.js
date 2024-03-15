@@ -300,7 +300,7 @@ const VerticalNav = ({ setActivePage }) => {
           </div>
         </div>
         <div className="vertical-nav-bottom">
-            <button className="vertical-nav-menu-item">
+            <button className="vertical-nav-menu-item" data-ms-action="logout">
                 Logout
             </button>
         </div>
