@@ -235,15 +235,18 @@ const AvailabilitySelector = () => {
                                 <FormControlLabel
                                 control={
                                     <Checkbox
-                                    checked={tempAvailability[day].allDay}
-                                    onChange={(event) => handle24HoursChange(day, event)}
-                                    disabled={!isEditing}
-                                    sx={{
-                                        color: 'var(--grey-text)',
-                                        '&.Mui-checked': {
-                                            color: 'var(--color-primary)',
-                                        },
-                                    }}
+                                        checked={tempAvailability[day].allDay}
+                                        onChange={(event) => handle24HoursChange(day, event)}
+                                        disabled={!isEditing}
+                                        sx={{
+                                            color: 'var(--grey-text)',
+                                            '&.Mui-checked': {
+                                                color: 'var(--color-primary)',
+                                            },
+                                            '&.Mui-disabled': {
+                                                color: 'var(--disabled-color)',
+                                            },
+                                        }}
                                     />
                                 }
                                 label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center', color: 'var(--grey-text)' }}>24 hours</Typography>}
