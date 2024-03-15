@@ -382,6 +382,15 @@ const VerticalNav = ({ setActivePage }) => {
             }
         });
     }, []);
+
+    const handleLogout = () => {
+        window.$memberstackDom.logout().then(() => {
+            console.log('Member logged out successfully');
+            // perform any necessary actions after logout
+        }).catch((error) => {
+            console.error('Error logging out:', error);
+        });
+    };
   
     // Handler for navigation item clicks
     const handleNavClick = (item) => {
@@ -423,15 +432,7 @@ const VerticalNav = ({ setActivePage }) => {
                 <button 
                     id="logoutButton"
                     className="button-secondary light" 
-                    onClick={() => {
-                        window.$memberstackDom.logout().then(() => {
-                            console.log('Member logged out successfully');
-                            // perform any necessary actions after logout
-                            // e.g., redirect to login page or update UI
-                        }).catch((error) => {
-                            console.error('Error logging out:', error);
-                        });
-                    }}
+                    onClick={handleLogout}
                 >
                     Logout
                 </button>
