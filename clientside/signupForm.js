@@ -125,14 +125,19 @@ const FormComponent = () => {
           User Location: {userLocation.latitude}, {userLocation.longitude}
         </div>
       )}
-      <div>
-        <button type="button" onClick={fetchLocksmith}>House</button>
-        <button type="button" onClick={fetchLocksmith}>Car</button>
+      <div className="button-wrapper">
+        <button type="button" className="button-secondary" onClick={fetchLocksmith}>House</button>
+        <button type="button" className="button-secondary" onClick={fetchLocksmith}>Car</button>
       </div>
       {locksmith && (
-        <div>
-          <span className="locksmith-label">Nearest Locksmith:</span> {locksmith.locksmith_name}, 
-          <a href={`tel:${locksmith.locksmith_phone}`}>{locksmith.locksmith_phone}</a>
+        <div className="selected-locksmith-wrapper">
+          <a href={`tel:${locksmith.locksmith_phone}`}>
+            <div className="locksmith-item">
+              <p className="locksmith-title"> {locksmith.locksmith_name} </p>
+              <p className="locksmith-cta"> Call Now </p>
+              <p className="locksmith-distance"> {locksmith.locksmith_distance} </p>
+            </div>
+          </a>
         </div>
       )}
     </div>
