@@ -332,6 +332,9 @@ const Dashboard = () => {
                 y: {
                     beginAtZero: true,
                 },
+                x: {
+                    stacked: true,
+                },
             },
         };
 
