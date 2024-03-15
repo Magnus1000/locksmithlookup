@@ -191,9 +191,9 @@ const AvailabilitySelector = () => {
                                     onChange={() => handleAvailabilityChange(day)}
                                     disabled={!isEditing}
                                     sx={{
-                                        color: 'var(--primary-color)',
+                                        color: 'var(--black)',
                                         '&.Mui-checked': {
-                                            color: 'var(--primary-color)',
+                                            color: 'var(--color-primary)',
                                         },
                                     }}
                                 />
@@ -239,9 +239,9 @@ const AvailabilitySelector = () => {
                                     onChange={(event) => handle24HoursChange(day, event)}
                                     disabled={!isEditing}
                                     sx={{
-                                        color: 'var(--primary-color)',
+                                        color: 'var(--black)',
                                         '&.Mui-checked': {
-                                            color: 'var(--primary-color)',
+                                            color: 'var(--color-primary)',
                                         },
                                     }}
                                     />
