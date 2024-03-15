@@ -148,7 +148,9 @@ const AvailabilitySelector = () => {
                 <Button variant="contained" 
                     onClick={handleEdit}
                     sx={{
-                        borderRadius: 50
+                        borderRadius: '0.5rem',
+                        textTransform: 'none',
+                        fontFamily: 'inherit',
                     }}
                 >
                     Edit
@@ -230,7 +232,12 @@ const AvailabilitySelector = () => {
                         variant="contained"
                         onClick={handleCancel}
                         sx={{
-                            borderRadius: 50,
+                            borderRadius: '0.5rem',
+                            textTransform: 'none',
+                            fontFamily: 'inherit',
+                            marginRight: '0.5rem',
+                            borderColor: 'transparent',
+                            borderWidth: '0',
                         }}
                     >
                         Cancel
@@ -239,7 +246,12 @@ const AvailabilitySelector = () => {
                         variant="contained"
                         onClick={handleSave}
                         sx={{
-                            borderRadius: 50,
+                            borderRadius: '0.5rem',
+                            textTransform: 'none',
+                            fontFamily: 'inherit',
+                            borderColor: 'blue',
+                            borderWidth: '0',
+                            backgroundColor: 'blue',
                         }}
                     >
                         Save and Close
