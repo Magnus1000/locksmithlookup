@@ -423,8 +423,12 @@ const VerticalNav = ({ setActivePage }) => {
                 <button 
                     className="button-secondary light" 
                     onClick={() => {
-                        window.MemberStack.onReady.then(function(MemberStack) {
-                            MemberStack.logout();
+                        window.$memberstackDom.getCurrentMember().then((member) => {
+                            if (member.data) {
+                                window.MemberStack.onReady.then(function(MemberStack) {
+                                    MemberStack.logout();
+                                });
+                            }
                         });
                     }}
                 >
