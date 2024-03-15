@@ -191,7 +191,7 @@ const AvailabilitySelector = () => {
                                     onChange={() => handleAvailabilityChange(day)}
                                     disabled={!isEditing}
                                     sx={{
-                                        color: 'var(--black)',
+                                        color: 'var(--font-color)',
                                         '&.Mui-checked': {
                                             color: 'var(--color-primary)',
                                         },
@@ -217,7 +217,7 @@ const AvailabilitySelector = () => {
                                     }}
                                 >
                                     <div className="label-field-wrapper">
-                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '0.938rem' }}>{day}</Typography>
+                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '0.938rem', color: 'var(--font-color)' }}>{day}</Typography>
                                     {tempAvailability[day].available ? (
                                         <div className="dropdown-select-wrapper">
                                         {renderTimeDropdown(day, 'startTime')}
@@ -225,7 +225,7 @@ const AvailabilitySelector = () => {
                                         {renderTimeDropdown(day, 'endTime')}
                                         </div>
                                     ) : (
-                                        <Typography sx={{ marginLeft: '16px', fontSize: '0.75rem', fontFamily: 'inherit', fontWeight: '400' }}>Unavailable</Typography>
+                                        <Typography sx={{ marginLeft: '16px', fontSize: '0.75rem', fontFamily: 'inherit', fontWeight: '400', color: 'var(--font-color)' }}>Unavailable</Typography>
                                     )}
                                     </div>
                                 </Box>
@@ -249,7 +249,7 @@ const AvailabilitySelector = () => {
                                         }}
                                     />
                                 }
-                                label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center', color: 'var(--grey-text)' }}>24 hours</Typography>}
+                                label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center', color: 'var(--font-color)' }}>24 hours</Typography>}
                                 />
                             )}
                         </Box>
