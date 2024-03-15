@@ -98,8 +98,8 @@ const FormComponent = () => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="locksmith-form-wrapper">
+      <div className="locksmith-form-div">
         <input
           type="text"
           value={inputValue}
