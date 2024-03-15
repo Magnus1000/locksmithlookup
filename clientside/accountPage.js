@@ -262,6 +262,7 @@ const VerticalNav = () => {
     // Handler for navigation item clicks
     const handleNavClick = (item) => {
       setActiveItem(item);
+      setActivePage(item);
       // Here you can also add any actions to perform on navigation item click
       // For example, redirecting to a different page or changing the view
     };
@@ -293,22 +294,36 @@ const VerticalNav = () => {
             className={`vertical-nav-menu-item ${activeItem === 'members' ? 'active' : ''}`}
             onClick={() => handleNavClick('members')}
           >
-            <div className="nav-menu-text">Analytics</div>
+            <div className="nav-menu-text">Calendar</div>
           </div>
         </div>
       </div>
     );
 };
 
+const Dashboard = () => {
+    return (
+        <div className="dashboard">
+            <div className="dashboard-div">Div 1</div>
+            <div className="dashboard-div">Div 2</div>
+            <div className="dashboard-div">Div 3</div>
+            <div className="dashboard-div">Div 4</div>
+        </div>
+    );
+};
+
 // Create the parent component App and mount it to the root element
 const App = () => {
+    const [activePage, setActivePage] = React.useState('Dashboard');
+
     return (
         <>
             <div className="vertical-nav-wrapper">
-                <VerticalNav />
+                <VerticalNav setActivePage={setActivePage} />
             </div>
             <div className="vertical-nav-content">
-                <AvailabilitySelector />
+                {activePage === 'Dashboard' && <Dashboard />}
+                {activePage === 'Calendar' && <AvailabilitySelector />}
             </div>
         </>
     );
