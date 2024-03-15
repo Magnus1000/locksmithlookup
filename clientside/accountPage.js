@@ -280,35 +280,37 @@ const VerticalNav = ({ setActivePage }) => {
     };
   
     return (
-        <div className="vertical-nav-top">
-            <div className="vertical-nav-text-wrapper">
-                <h1 className="dashboard-account-name">
-                    {memberName}
-                </h1>
-                <p className="dashboard-account-id">
-                    {memberId}
-                </p>
+        <>
+            <div className="vertical-nav-top">
+                <div className="vertical-nav-text-wrapper">
+                    <h1 className="dashboard-account-name">
+                        {memberName}
+                    </h1>
+                    <p className="dashboard-account-id">
+                        {memberId}
+                    </p>
+                </div>
+                <div
+                    id="dashboardButton"
+                    className={`vertical-nav-menu-item ${activeItem === 'dashboard' ? 'active' : ''}`}
+                    onClick={() => handleNavClick('dashboard')}
+                >
+                    <div className="nav-menu-text">Dashboard</div>
+                </div>
+                <div
+                    id="calenderButton"
+                    className={`vertical-nav-menu-item ${activeItem === 'calendar' ? 'active' : ''}`}
+                    onClick={() => handleNavClick('calendar')}
+                >
+                    <div className="nav-menu-text">Calendar</div>
+                </div>
             </div>
-            <div
-                id="dashboardButton"
-                className={`vertical-nav-menu-item ${activeItem === 'dashboard' ? 'active' : ''}`}
-                onClick={() => handleNavClick('dashboard')}
-            >
-                <div className="nav-menu-text">Dashboard</div>
+            <div className="vertical-nav-bottom">
+                <button className="button-secondary light" data-ms-action="logout">
+                    Logout
+                </button>
             </div>
-            <div
-                id="calenderButton"
-                className={`vertical-nav-menu-item ${activeItem === 'calendar' ? 'active' : ''}`}
-                onClick={() => handleNavClick('calendar')}
-            >
-                <div className="nav-menu-text">Calendar</div>
-            </div>
-        </div>
-        <div className="vertical-nav-bottom">
-            <button className="button-secondary light" data-ms-action="logout">
-                Logout
-            </button>
-        </div>
+        </>
     );
 };
 
