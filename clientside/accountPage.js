@@ -217,7 +217,7 @@ const AvailabilitySelector = () => {
                                     }}
                                 >
                                     <div className="label-field-wrapper">
-                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '0.00938rem' }}>{day}</Typography>
+                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '0.938rem' }}>{day}</Typography>
                                     {tempAvailability[day].available ? (
                                         <div className="dropdown-select-wrapper">
                                         {renderTimeDropdown(day, 'startTime')}
@@ -239,14 +239,14 @@ const AvailabilitySelector = () => {
                                     onChange={(event) => handle24HoursChange(day, event)}
                                     disabled={!isEditing}
                                     sx={{
-                                        color: 'var(--black)',
+                                        color: 'var(--grey-text)',
                                         '&.Mui-checked': {
                                             color: 'var(--color-primary)',
                                         },
                                     }}
                                     />
                                 }
-                                label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center' }}>24 hours</Typography>}
+                                label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center', color: 'var(--grey-text)' }}>24 hours</Typography>}
                                 />
                             )}
                         </Box>
