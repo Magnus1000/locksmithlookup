@@ -280,7 +280,6 @@ const VerticalNav = ({ setActivePage }) => {
     };
   
     return (
-      <div id="verticalNav" className="vertical-nav-wrapper">
         <div className="vertical-nav-top">
             <div className="vertical-nav-text-wrapper">
                 <h1 className="dashboard-account-name">
@@ -304,13 +303,12 @@ const VerticalNav = ({ setActivePage }) => {
             >
                 <div className="nav-menu-text">Calendar</div>
             </div>
-            </div>
-            <div className="vertical-nav-bottom">
-                <button className="button-secondary light" data-ms-action="logout">
-                    Logout
-                </button>
-            </div>
-      </div>
+        </div>
+        <div className="vertical-nav-bottom">
+            <button className="button-secondary light" data-ms-action="logout">
+                Logout
+            </button>
+        </div>
     );
 };
 
