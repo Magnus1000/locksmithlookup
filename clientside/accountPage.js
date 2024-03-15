@@ -262,7 +262,7 @@ const VerticalNav = ({ setActivePage }) => {
             if (member.data) {
                 console.log('there is a member', member);
                 setMemberId(member.data.id);
-                setMemberName(member.data.name);
+                setMemberName(member.data.first-name);
             } else {
                 console.log('no member', member);
             }
