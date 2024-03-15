@@ -151,6 +151,8 @@ const AvailabilitySelector = () => {
                         borderRadius: '0.5rem',
                         textTransform: 'none',
                         fontFamily: 'inherit',
+                        backgroundColor: 'var(--color-primary)',
+                        boxShadow: 'none',
                     }}
                 >
                     Edit
@@ -236,8 +238,11 @@ const AvailabilitySelector = () => {
                             textTransform: 'none',
                             fontFamily: 'inherit',
                             marginRight: '0.5rem',
-                            borderColor: 'transparent',
+                            borderColor: 'var(--transparent)',
+                            backgroundColor: 'var(--transparent)',
+                            color: 'var(--grey-text)',
                             borderWidth: '0',
+                            boxShadow: 'none',
                         }}
                     >
                         Cancel
@@ -249,9 +254,8 @@ const AvailabilitySelector = () => {
                             borderRadius: '0.5rem',
                             textTransform: 'none',
                             fontFamily: 'inherit',
-                            borderColor: 'blue',
-                            borderWidth: '0',
-                            backgroundColor: 'blue',
+                            backgroundColor: 'var(--color-primary)',
+                            boxShadow: 'none',
                         }}
                     >
                         Save and Close
