@@ -385,6 +385,7 @@ const VerticalNav = ({ setActivePage }) => {
 
     const handleLogout = () => {
         window.$memberstackDom.logout().then(() => {
+            console.log('Logged out');
             window.location.href = '/'; // replace '/' with the path to your home page
         });
     };
