@@ -253,8 +253,8 @@ const AvailabilitySelector = () => {
 const VerticalNav = ({ setActivePage }) => {
     // Assuming you might want to manage which menu item is active
     const [activeItem, setActiveItem] = React.useState('dashboard');
-    const [memberId, setMemberId] = useState(null);
-    const [memberName, setMemberName] = useState(null);
+    const [memberId, setMemberId] = React.useState(null);
+    const [memberName, setMemberName] = React.useState(null);
   
     // This effect runs once when the component is mounted.
     React.useEffect(() => {
