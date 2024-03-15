@@ -441,6 +441,9 @@ const Dashboard = () => {
                     backgroundColor: 'rgba(136, 132, 216, 0.2)',
                     borderColor: 'rgba(136, 132, 216, 1)',
                     borderWidth: 1,
+                    fontFamily: 'inherit',
+                    fontSize: '0.938rem',
+                    color: 'var(--font-color)',
                 },
                 {
                     label: 'Not Completed',
@@ -448,6 +451,9 @@ const Dashboard = () => {
                     backgroundColor: 'rgba(130, 202, 157, 0.2)',
                     borderColor: 'rgba(130, 202, 157, 1)',
                     borderWidth: 1,
+                    fontFamily: 'inherit',
+                    fontSize: '0.938rem',
+                    color: 'var(--font-color)',
                 },
             ],
         };
@@ -459,6 +465,13 @@ const Dashboard = () => {
                 },
                 x: {
                     stacked: true,
+                    ticks: {
+                        font: {
+                            size: '0.938rem',
+                            family: 'inherit',
+                            color: 'var(--font-color)',
+                        },
+                    },
                 },
             },
         };
