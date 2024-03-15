@@ -9,12 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (locationsMenu && locationsIcon && locationsDropdown) {
         console.log('All elements found');
 
-        locationsMenu.addEventListener('click', function() {
+        locationsMenu.addEventListener('click', function(event) {
             console.log('locationsMenu clicked');
 
             locationsDropdown.classList.toggle('open');
             locationsIcon.classList.toggle('open');
             locationsMenu.classList.toggle('open');
+
+            event.stopPropagation(); // prevent event from bubbling up to the document
         });
     } else {
         console.log('One or more elements not found');
