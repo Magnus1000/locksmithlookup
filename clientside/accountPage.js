@@ -303,10 +303,14 @@ const VerticalNav = () => {
 // Create the parent component App and mount it to the root element
 const App = () => {
     return (
-      <div>
-        <VerticalNav />
-        <AvailabilitySelector />
-      </div>
+        <>
+            <div className="vertical-nav-wrapper">
+                <VerticalNav />
+            </div>
+            <div className="vertical-nav-content">
+                <AvailabilitySelector />
+            </div>
+        </>
     );
 };
   
