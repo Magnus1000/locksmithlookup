@@ -146,7 +146,7 @@ const AvailabilitySelector = () => {
         <div className="availabilty-page-body">
             <div className="availability-button-row-top-div">
                 <div className="availability-header">
-                    <Typography variant="h6" style={{ fontFamily: 'inherit', fontWeight: '600', fontSize: '2rem' }}>
+                    <Typography variant="h6" style={{ fontFamily: 'inherit', fontWeight: '700', fontSize: '1.3rem' }}>
                         Availability
                     </Typography>
                 </div>
@@ -161,10 +161,13 @@ const AvailabilitySelector = () => {
                         borderWidth: '0',
                         borderColor: 'var(--transparent);',
                         boxShadow: 'none',
+                        fontSize: '0.75rem',
                         '&:hover': {
                             backgroundColor: 'var(--hover-color)',
                             boxShadow: 'none',
-                            borderColor: 'var(--grey-text)',
+                            outlineColor: 'var(--grey-text)',
+                            outlineWidth: '1px',
+                            outlineStyle: 'solid',
                         },
                     }}
                 >
@@ -208,7 +211,7 @@ const AvailabilitySelector = () => {
                                     }}
                                 >
                                     <div className="label-field-wrapper">
-                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '1rem' }}>{day}</Typography>
+                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '0.00938rem' }}>{day}</Typography>
                                     {tempAvailability[day].available ? (
                                         <div className="dropdown-select-wrapper">
                                         {renderTimeDropdown(day, 'startTime')}
@@ -276,6 +279,7 @@ const AvailabilitySelector = () => {
                                 boxShadow: 'none',
                                 outlineWidth: '1px',
                                 outlineColor: 'var(--black)',
+                                outlineStyle: 'solid',
                             },
                         }}
                     >
