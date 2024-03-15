@@ -195,6 +195,9 @@ const AvailabilitySelector = () => {
                                         '&.Mui-checked': {
                                             color: 'var(--color-primary)',
                                         },
+                                        '&.Mui-disabled': {
+                                            color: 'var(--disabled-color)',
+                                        },
                                     }}
                                 />
                                 }
@@ -217,39 +220,79 @@ const AvailabilitySelector = () => {
                                     }}
                                 >
                                     <div className="label-field-wrapper">
-                                    <Typography sx={{ textTransform: 'capitalize', width: '100px', fontFamily: 'inherit', fontWeight: '400', fontSize: '0.938rem', color: 'var(--font-color)' }}>{day}</Typography>
-                                    {tempAvailability[day].available ? (
-                                        <div className="dropdown-select-wrapper">
-                                        {renderTimeDropdown(day, 'startTime')}
-                                        <Typography variant="body2">-</Typography>
-                                        {renderTimeDropdown(day, 'endTime')}
-                                        </div>
-                                    ) : (
-                                        <Typography sx={{ marginLeft: '16px', fontSize: '0.75rem', fontFamily: 'inherit', fontWeight: '400', color: 'var(--font-color)' }}>Unavailable</Typography>
-                                    )}
+                                        <Typography 
+                                            sx={{ 
+                                                textTransform: 'capitalize', 
+                                                width: '100px', 
+                                                fontFamily: 'inherit', 
+                                                fontWeight: '400', 
+                                                fontSize: '0.938rem', 
+                                                color: isEditing ? 'var(--font-color)' : 'var(--disabled-color)' 
+                                            }}
+                                        >
+                                            {day}
+                                        </Typography>
+                                        {tempAvailability[day].available ? (
+                                            <div className="dropdown-select-wrapper">
+                                                {renderTimeDropdown(day, 'startTime')}
+                                                <Typography 
+                                                    variant="body2"
+                                                    sx={{ 
+                                                        color: isEditing ? 'var(--font-color)' : 'var(--disabled-color)' 
+                                                    }}
+                                                >
+                                                    -
+                                                </Typography>
+                                                {renderTimeDropdown(day, 'endTime')}
+                                            </div>
+                                        ) : (
+                                            <Typography 
+                                                sx={{ 
+                                                    marginLeft: '16px', 
+                                                    fontSize: '0.75rem', 
+                                                    fontFamily: 'inherit', 
+                                                    fontWeight: '400', 
+                                                    color: isEditing ? 'var(--font-color)' : 'var(--disabled-color)' 
+                                                }}
+                                            >
+                                                Unavailable
+                                            </Typography>
+                                        )}
                                     </div>
                                 </Box>
                                 }
                             />
                             {tempAvailability[day].available && (
                                 <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={tempAvailability[day].allDay}
-                                        onChange={(event) => handle24HoursChange(day, event)}
-                                        disabled={!isEditing}
-                                        sx={{
-                                            color: 'var(--grey-text)',
-                                            '&.Mui-checked': {
-                                                color: 'var(--color-primary)',
-                                            },
-                                            '&.Mui-disabled': {
-                                                color: 'var(--disabled-color)',
-                                            },
-                                        }}
-                                    />
-                                }
-                                label={<Typography sx={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '0.7rem', textAlign: 'center', color: 'var(--font-color)' }}>24 hours</Typography>}
+                                    control={
+                                        <Checkbox
+                                            checked={tempAvailability[day].allDay}
+                                            onChange={(event) => handle24HoursChange(day, event)}
+                                            disabled={!isEditing}
+                                            sx={{
+                                                color: 'var(--grey-text)',
+                                                '&.Mui-checked': {
+                                                    color: 'var(--color-primary)',
+                                                },
+                                                '&.Mui-disabled': {
+                                                    color: 'var(--disabled-color)',
+                                                },
+                                            }}
+                                        />
+                                    }
+                                    label={
+                                        <Typography 
+                                            sx={{ 
+                                                fontFamily: 'inherit', 
+                                                fontWeight: '400', 
+                                                fontSize: '0.7rem', 
+                                                textAlign: 'center', 
+                                                color: isEditing ? 'var(--font-color)' : 'var(--disabled-color)' 
+                                            }}
+                                        >
+                                            24 hours
+                                        </Typography>
+                                    }
                                 />
                             )}
                         </Box>
