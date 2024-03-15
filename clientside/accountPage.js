@@ -316,7 +316,7 @@ const Dashboard = () => {
 
 // Create the parent component App and mount it to the root element
 const App = () => {
-    const [activePage, setActivePage] = React.useState('Dashboard');
+    const [activePage, setActivePage] = React.useState('dashboard');
 
     return (
         <>
