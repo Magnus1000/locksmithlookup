@@ -421,6 +421,7 @@ const VerticalNav = ({ setActivePage }) => {
             </div>
             <div className="vertical-nav-bottom">
                 <button 
+                    id="logoutButton"
                     className="button-secondary light" 
                     onClick={() => {
                         window.$memberstackDom.logout();
