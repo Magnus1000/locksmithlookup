@@ -304,21 +304,51 @@ const VerticalNav = ({ setActivePage }) => {
 };
 
 const Dashboard = () => {
-        const [chartHTML, setChartHTML] = React.useState('');
-    
-        React.useEffect(() => {
-            fetch('https://locksmithlookup-magnus1000team.vercel.app/api/renderCharts')
-                .then(response => response.text())
-                .then(html => setChartHTML(html));
-        }, []);
-    
-        return (
-            <div className="dashboard">
-                <div className="dashboard-div">
-                    <div className="dashboard-chat-div" dangerouslySetInnerHTML={{ __html: chartHTML }} />
-                </div>
+    const chartRef = React.useRef(null);
+
+    React.useEffect(() => {
+        const data = {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [
+                {
+                    label: 'Completed',
+                    data: [10, 8, 12, 6, 15, 9, 11],
+                    backgroundColor: 'rgba(136, 132, 216, 0.2)',
+                    borderColor: 'rgba(136, 132, 216, 1)',
+                    borderWidth: 1,
+                },
+                {
+                    label: 'Not Completed',
+                    data: [5, 7, 3, 9, 2, 6, 4],
+                    backgroundColor: 'rgba(130, 202, 157, 0.2)',
+                    borderColor: 'rgba(130, 202, 157, 1)',
+                    borderWidth: 1,
+                },
+            ],
+        };
+
+        const options = {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        };
+
+        new Chart(chartRef.current, {
+            type: 'bar',
+            data,
+            options,
+        });
+    }, []);
+
+    return (
+        <div className="dashboard">
+            <div className="dashboard-div">
+                <canvas ref={chartRef} />
             </div>
-        );
+        </div>
+    );
 };
 
 // Create the parent component App and mount it to the root element
