@@ -262,7 +262,9 @@ const VerticalNav = ({ setActivePage }) => {
     // Handler for navigation item clicks
     const handleNavClick = (item) => {
       setActiveItem(item);
+      console.log('The active vertical nav item is:', item);
       setActivePage(item);
+      console.log('The active page is:', item);
       // Here you can also add any actions to perform on navigation item click
       // For example, redirecting to a different page or changing the view
     };
@@ -290,9 +292,9 @@ const VerticalNav = ({ setActivePage }) => {
             <div className="nav-menu-text">Dashboard</div>
           </div>
           <div
-            id="membersButton"
-            className={`vertical-nav-menu-item ${activeItem === 'members' ? 'active' : ''}`}
-            onClick={() => handleNavClick('members')}
+            id="calenderButton"
+            className={`vertical-nav-menu-item ${activeItem === 'calendar' ? 'active' : ''}`}
+            onClick={() => handleNavClick('calendar')}
           >
             <div className="nav-menu-text">Calendar</div>
           </div>
@@ -322,8 +324,8 @@ const App = () => {
                 <VerticalNav setActivePage={setActivePage} />
             </div>
             <div className="vertical-nav-content">
-                {activePage === 'Dashboard' && <Dashboard />}
-                {activePage === 'Calendar' && <AvailabilitySelector />}
+                {activePage === 'dashboard' && <Dashboard />}
+                {activePage === 'calendar' && <AvailabilitySelector />}
             </div>
         </>
     );
