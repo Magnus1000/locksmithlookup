@@ -282,7 +282,6 @@ const VerticalNav = ({ setActivePage }) => {
     return (
       <div id="verticalNav" className="vertical-nav-wrapper">
         <div className="vertical-nav-top">
-          <a href="#" className="vertical-nav-logo-wrapper">
             <div className="vertical-nav-text-wrapper">
                 <div className="dashboard-account-name">
                     {memberName}
@@ -291,27 +290,26 @@ const VerticalNav = ({ setActivePage }) => {
                     {memberId}
                 </div>
             </div>
-          </a>
-          <div
-            id="dashboardButton"
-            className={`vertical-nav-menu-item ${activeItem === 'dashboard' ? 'active' : ''}`}
-            onClick={() => handleNavClick('dashboard')}
-          >
-            <div className="nav-menu-text">Dashboard</div>
-          </div>
-          <div
-            id="calenderButton"
-            className={`vertical-nav-menu-item ${activeItem === 'calendar' ? 'active' : ''}`}
-            onClick={() => handleNavClick('calendar')}
-          >
-            <div className="nav-menu-text">Calendar</div>
-          </div>
-        </div>
-        <div className="vertical-nav-bottom">
-            <button className="button-secondary light" data-ms-action="logout">
-                Logout
-            </button>
-        </div>
+            <div
+                id="dashboardButton"
+                className={`vertical-nav-menu-item ${activeItem === 'dashboard' ? 'active' : ''}`}
+                onClick={() => handleNavClick('dashboard')}
+            >
+                <div className="nav-menu-text">Dashboard</div>
+            </div>
+            <div
+                id="calenderButton"
+                className={`vertical-nav-menu-item ${activeItem === 'calendar' ? 'active' : ''}`}
+                onClick={() => handleNavClick('calendar')}
+            >
+                <div className="nav-menu-text">Calendar</div>
+            </div>
+            </div>
+            <div className="vertical-nav-bottom">
+                <button className="button-secondary light" data-ms-action="logout">
+                    Logout
+                </button>
+            </div>
       </div>
     );
 };
