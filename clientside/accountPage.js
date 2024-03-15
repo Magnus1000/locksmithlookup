@@ -384,11 +384,15 @@ const VerticalNav = ({ setActivePage }) => {
     }, []);
 
     const handleLogout = () => {
-        window.$memberstackDom.logout().then(() => {
-            console.log('Member logged out successfully');
-            // perform any necessary actions after logout
-        }).catch((error) => {
-            console.error('Error logging out:', error);
+        window.$memberstackDom.getCurrentMember().then((member) => {
+            if (member.data) {
+                window.$memberstackDom.logout().then(() => {
+                    console.log('Member logged out successfully');
+                    // perform any necessary actions after logout
+                }).catch((error) => {
+                    console.error('Error logging out:', error);
+                });
+            }
         });
     };
   
