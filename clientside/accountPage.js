@@ -272,16 +272,9 @@ const VerticalNav = ({ setActivePage }) => {
     return (
       <div id="verticalNav" className="vertical-nav-wrapper">
         <div className="vertical-nav-top">
-          <a href="#" className="vertical-nav-logo-wrapper w-inline-block">
-            <img
-              src="https://assets-global.website-files.com/65f04d35c17450fc8221d933/65f36c6ba6275a8d3638ddd4_eagledutylogo-clear.svg"
-              loading="lazy"
-              width="71.5"
-              alt=""
-              className="vertical-nav-image"
-            />
+          <a href="#" className="vertical-nav-logo-wrapper">
             <div className="vertical-nav-text-wrapper">
-              <div className="logo-text-dashboard">Locksmith Dispatch</div>
+              <div className="dashboard-account-name" data-ms-member="first-name"></div>
             </div>
           </a>
           <div
