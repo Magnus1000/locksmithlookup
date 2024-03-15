@@ -271,7 +271,7 @@ const VerticalNav = ({ setActivePage }) => {
   
     return (
       <div id="verticalNav" className="vertical-nav-wrapper">
-        <div className="vertical-nav-menu-wrapper">
+        <div className="vertical-nav-top">
           <a href="#" className="vertical-nav-logo-wrapper w-inline-block">
             <img
               src="https://assets-global.website-files.com/65f04d35c17450fc8221d933/65f36c6ba6275a8d3638ddd4_eagledutylogo-clear.svg"
@@ -298,6 +298,11 @@ const VerticalNav = ({ setActivePage }) => {
           >
             <div className="nav-menu-text">Calendar</div>
           </div>
+        </div>
+        <div className="vertical-nav-bottom">
+            <button className="vertical-nav-menu-item">
+                Logout
+            </button>
         </div>
       </div>
     );
