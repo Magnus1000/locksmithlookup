@@ -420,7 +420,10 @@ const VerticalNav = ({ setActivePage }) => {
                 </div>
             </div>
             <div className="vertical-nav-bottom">
-                <button className="button-secondary light" data-ms-action="logout">
+                <button 
+                    className="button-secondary light" 
+                    onClick={() => MemberStack.logout()}
+                >
                     Logout
                 </button>
             </div>
@@ -444,6 +447,7 @@ const Dashboard = () => {
                     fontFamily: 'inherit',
                     fontSize: '0.938rem',
                     color: 'rgba(1, 6, 19, 1)',
+                    stack: 'stack0', 
                 },
                 {
                     label: 'Not Completed',
@@ -454,6 +458,7 @@ const Dashboard = () => {
                     fontFamily: 'inherit',
                     fontSize: '0.938rem',
                     color: 'rgba(1, 6, 19, 1)',
+                    stack: 'stack0', 
                 },
             ],
         };
