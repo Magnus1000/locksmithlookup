@@ -1,5 +1,4 @@
 const { Checkbox, FormControlLabel, Typography, Select, MenuItem, Button, Box } = MaterialUI;
-const { BarChart, BarSeries } = XCharts;
 
 const AvailabilitySelector = () => {
     const [availability, setAvailability] = React.useState({
