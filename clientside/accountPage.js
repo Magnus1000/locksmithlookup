@@ -422,7 +422,11 @@ const VerticalNav = ({ setActivePage }) => {
             <div className="vertical-nav-bottom">
                 <button 
                     className="button-secondary light" 
-                    onClick={() => MemberStack.logout()}
+                    onClick={() => {
+                        window.MemberStack.onReady.then(function(MemberStack) {
+                            MemberStack.logout();
+                        });
+                    }}
                 >
                     Logout
                 </button>
