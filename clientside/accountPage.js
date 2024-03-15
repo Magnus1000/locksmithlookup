@@ -253,10 +253,20 @@ const AvailabilitySelector = () => {
 const VerticalNav = ({ setActivePage }) => {
     // Assuming you might want to manage which menu item is active
     const [activeItem, setActiveItem] = React.useState('dashboard');
+    const [memberId, setMemberId] = useState(null);
+    const [memberName, setMemberName] = useState(null);
   
     // This effect runs once when the component is mounted.
     React.useEffect(() => {
-      // Any initialization can go here
+        window.$memberstackDom.getCurrentMember().then((member) => {
+            if (member.data) {
+                console.log('there is a member', member);
+                setMemberId(member.data.id);
+                setMemberName(member.data.name);
+            } else {
+                console.log('no member', member);
+            }
+        });
     }, []);
   
     // Handler for navigation item clicks
@@ -274,7 +284,9 @@ const VerticalNav = ({ setActivePage }) => {
         <div className="vertical-nav-top">
           <a href="#" className="vertical-nav-logo-wrapper">
             <div className="vertical-nav-text-wrapper">
-              <div className="dashboard-account-name" data-ms-member="first-name"></div>
+                <div className="dashboard-account-name">
+                    {memberName} (ID: {memberId})
+                </div>
             </div>
           </a>
           <div
@@ -370,3 +382,26 @@ const App = () => {
 };
   
 ReactDOM.render(<App />, document.getElementById('root'));
+
+const { useEffect } = React;
+
+const { useEffect, useState } = React;
+
+const MemberRedirect = () => {
+    const [memberId, setMemberId] = useState(null);
+    const [memberName, setMemberName] = useState(null);
+
+    useEffect(() => {
+        window.$memberstackDom.getCurrentMember().then((member) => {
+            if (member.data) {
+                console.log('there is a member', member);
+                setMemberId(member.data.id);
+                setMemberName(member.data.name);
+            } else {
+                console.log('no member', member);
+            }
+        });
+    }, []);
+
+    return null;
+};
