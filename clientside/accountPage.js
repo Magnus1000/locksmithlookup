@@ -424,6 +424,7 @@ const VerticalNav = ({ setActivePage }) => {
                     className="button-secondary light" 
                     onClick={() => {
                         window.$memberstackDom.logout();
+                        console.log('Logging out');
                     }}
                 >
                     Logout
