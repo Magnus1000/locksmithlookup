@@ -348,7 +348,7 @@ const Dashboard = () => {
     return (
         <div className="dashboard">
             <div className="dashboard-div">
-                <canvas ref={chartRef} />
+                <canvas ref={chartRef} style={{ height: '288px' }} />
             </div>
         </div>
     );
