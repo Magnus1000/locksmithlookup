@@ -3,7 +3,7 @@ const VerticalNav = () => {
     const [activeItem, setActiveItem] = React.useState('dashboard');
   
     // This effect runs once when the component is mounted.
-    useEffect(() => {
+    React.useEffect(() => {
       // Any initialization can go here
     }, []);
   
