@@ -146,7 +146,7 @@ const AvailabilitySelector = () => {
         <div className="availabilty-page-body">
             <div className="availability-button-row-top-div">
                 <div className="availability-header">
-                    <Typography variant="h6" style={{ fontFamily: 'inherit', fontWeight: '700', fontSize: '1.3rem' }}>
+                    <Typography variant="h6" style={{ fontFamily: 'inherit', fontWeight: '700', fontSize: '1.3rem', color: 'var(--font-color)' }}>
                         Availability
                     </Typography>
                 </div>
