@@ -1,17 +1,14 @@
 const React = require('react');
-const { createChart } = require('@mui/x-charts');
+const { BarChart, BarSeries } = require('@mui/x-charts');
 const { renderToStaticMarkup } = require('react-dom/server');
 const cors = require('cors');
 
 const corsHandler = cors({ origin: '*' });
 
 const renderChart = (data) => {
-    const chart = createChart(
-        <BarChart data={data} width={600} height={300}>
-            <BarSeries dataKey="completed" stackId="a" color="#8884d8" />
-            <BarSeries dataKey="notCompleted" stackId="a" color="#82ca9d" />
-        </BarChart>
-    );
+    const chart = new BarChart({ data, width: 600, height: 300 });
+    chart.addSeries(new BarSeries({ dataKey: 'completed', stackId: 'a', color: '#8884d8' }));
+    chart.addSeries(new BarSeries({ dataKey: 'notCompleted', stackId: 'a', color: '#82ca9d' }));
 
     const html = renderToStaticMarkup(
         <div>
