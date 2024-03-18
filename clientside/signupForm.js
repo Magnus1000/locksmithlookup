@@ -130,56 +130,39 @@ const FormComponent = () => {
       </div>
       <div className="locksmith-form-wrapper">
         <div className="locksmith-form-div">
-          {/*
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-              placeholder="Enter a location"
-            />
-          */}
           <div className="single-button-wrapper">
             <button className="button-primary-blue-100" type="button" onClick={handleLocationClick}>
               <LocationIcon />
               Get Location
             </button>
           </div>
-          {suggestions && suggestions.length > 0 && (
-            <div>
-              {suggestions.map((suggestion) => (
-                <div key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
-                  {suggestion.place_name}
+          {userLocation && (<div className="dual-button-wrapper">
+            <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><HouseIcon />House</button>
+            <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><CarIcon />Car</button>
+          </div>)}
+          {locksmiths && locksmiths.length > 0 && (
+            <div className="suggested-locksmith-wrapper">
+              <div className="suggested-locksmith-title">
+                {userLocation && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {userLocation.latitude}, {userLocation.longitude}</p>)}
+              </div>
+              {locksmiths.slice(0, 5).map((locksmith, index) => (
+                <div key={index} className="locksmith-item">
+                  <div className="locksmith-item-column-left">
+                    <p className="locksmith-title"> {locksmith.locksmith_name} </p>
+                    <p className="locksmith-distance"> {formatDistance(locksmith.distance)} &middot; Open Now </p>
+                    {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
+                  </div>
+                  <a href={`tel:${locksmith.locksmith_phone}`}>
+                    <div className="locksmith-item-column-right">
+                      <PhoneIcon />
+                      <p className="call-now-text">Call Now</p>
+                    </div>
+                  </a>
                 </div>
               ))}
             </div>
           )}
         </div>
-        {userLocation && (<div className="dual-button-wrapper">
-          <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><HouseIcon />House</button>
-          <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><CarIcon />Car</button>
-        </div>)}
-        {locksmiths && locksmiths.length > 0 && (
-          <div className="suggested-locksmith-wrapper">
-            <div className="suggested-locksmith-title">
-              {userLocation && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {userLocation.latitude}, {userLocation.longitude}</p>)}
-            </div>
-            {locksmiths.slice(0, 5).map((locksmith, index) => (
-              <div key={index} className="locksmith-item">
-                <div className="locksmith-item-column-left">
-                  <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-                  <p className="locksmith-distance"> {formatDistance(locksmith.distance)} &middot; Open Now </p>
-                  {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
-                </div>
-                <a href={`tel:${locksmith.locksmith_phone}`}>
-                  <div className="locksmith-item-column-right">
-                    <PhoneIcon />
-                    <p className="call-now-text">Call Now</p>
-                  </div>
-                </a>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </>
   );
