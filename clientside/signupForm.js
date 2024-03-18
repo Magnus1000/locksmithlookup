@@ -4,6 +4,7 @@ const FormComponent = () => {
   const [suggestions, setSuggestions] = React.useState([]);
   const [userLocation, setUserLocation] = React.useState({ latitude: 43.70, longitude: -79.42 });
   const [locksmiths, setLocksmiths] = React.useState(null);
+  const [selectedLocksmith, setSelectedLocksmith] = React.useState(null);
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -42,6 +43,11 @@ const FormComponent = () => {
     setInputValue(suggestion.place_name);
     setSuggestions([]);
   };
+
+  // Function to handle selecting a locksmith
+  const handleLocksmithSelect = (locksmith) => {
+    setSelectedLocksmith(locksmith); // Update the selected locksmith state
+  };  
 
   const handleLocationClick = () => {
     if (navigator.geolocation) {
@@ -149,7 +155,11 @@ const FormComponent = () => {
                 {userLocation && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {userLocation.latitude}, {userLocation.longitude}</p>)}
               </div>
               {locksmiths.slice(0, 5).map((locksmith, index) => (
-                <div key={index} className="locksmith-item">
+                <div
+                  key={index}
+                  className={`locksmith-item ${selectedLocksmith === locksmith ? 'selected' : ''}`}
+                  onClick={() => handleLocksmithSelect(locksmith)} // Handle click to select a locksmith
+                >
                   <div className="locksmith-item-column-left">
                     <p className="locksmith-title"> {locksmith.locksmith_name} </p>
                     <div className="distance-available-wrapper">
