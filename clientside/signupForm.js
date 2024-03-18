@@ -125,7 +125,9 @@ const FormComponent = () => {
   };
 
   return (
-    <div className="locksmith-map-wrapper" ref={mapRef}>
+    <>
+      <div className="locksmith-map-wrapper" ref={mapRef}>
+      </div>
       <div className="locksmith-form-wrapper">
         <div className="locksmith-form-div">
           {/*
@@ -179,7 +181,7 @@ const FormComponent = () => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };
 
