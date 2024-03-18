@@ -182,7 +182,7 @@ const FormComponent = () => {
 
   // Helper function to format distance
   const formatDistance = (distanceUnrounded) => {
-    return `${distanceUnrounded.toFixed(2)}km away`;
+    return `${distanceUnrounded.toFixed(1)}km away`;
   };
 
   return (
