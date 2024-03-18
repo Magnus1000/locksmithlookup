@@ -134,8 +134,8 @@ const FormComponent = () => {
         </div>
       )}
       <div className="dual-button-wrapper">
-        <button type="button" className="button-secondary-50" onClick={fetchLocksmith}>House</button>
-        <button type="button" className="button-secondary-50" onClick={fetchLocksmith}>Car</button>
+        <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}>House</button>
+        <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}>Car</button>
       </div>
       {locksmiths && locksmiths.length > 0 && (
         <div className="suggested-locksmith-wrapper">
