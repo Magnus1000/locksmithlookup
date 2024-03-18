@@ -71,6 +71,12 @@ const FormComponent = () => {
       const data = await response.json();
       setLocksmiths(data); // Change this line
       console.log('Nearest locksmiths:', data); // Change this line
+
+      // Check if data is an array and has at least one element
+      if (Array.isArray(data) && data.length > 0) {
+        setSelectedLocksmith(data[0]); // Set the first locksmith as selected
+      }
+
     } catch (error) {
       console.error('Error fetching nearest locksmiths:', error); // Change this line
     }
