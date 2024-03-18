@@ -4,6 +4,7 @@ const FormComponent = () => {
   const [suggestions, setSuggestions] = React.useState([]);
   const [userLocation, setUserLocation] = React.useState({ latitude: 43.70, longitude: -79.42 });
   const [locksmiths, setLocksmiths] = React.useState(null);
+  const mapRef = React.useRef(null);
 
   React.useEffect(() => {
     const fetchSuggestions = async () => {
@@ -24,7 +25,7 @@ const FormComponent = () => {
     mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
 
     const map = new mapboxgl.Map({
-      container: 'locksmith-map-wrapper',
+      container: mapRef.current,
       style: process.env.MAPBOX_STYLE,
       center: [userLocation.longitude, userLocation.latitude],
       zoom: 10
@@ -124,7 +125,7 @@ const FormComponent = () => {
   };
 
   return (
-    <div className="locksmith-map-wrapper">
+    <div className="locksmith-map-wrapper" ref={mapRef}>
       <div className="locksmith-form-wrapper">
         <div className="locksmith-form-div">
           {/*
