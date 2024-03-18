@@ -107,7 +107,7 @@ const FormComponent = () => {
           placeholder="Enter a location"
         />
         <div className="single-button-wrapper">
-          <button className="button-primary-blue 100" type="button" onClick={handleLocationClick}>
+          <button className="button-primary-blue.100" type="button" onClick={handleLocationClick}>
             <LocationIcon />
             Get Location
           </button>
@@ -128,8 +128,8 @@ const FormComponent = () => {
         </div>
       )}
       <div className="dual-button-wrapper">
-        <button type="button" className="button-secondary 50" onClick={fetchLocksmith}>House</button>
-        <button type="button" className="button-secondary 50" onClick={fetchLocksmith}>Car</button>
+        <button type="button" className="button-secondary.50" onClick={fetchLocksmith}>House</button>
+        <button type="button" className="button-secondary.50" onClick={fetchLocksmith}>Car</button>
       </div>
       {locksmith && (
         <div className="suggested-locksmith-wrapper">
