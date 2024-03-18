@@ -144,7 +144,7 @@ const FormComponent = () => {
               <div className="locksmith-item-column-left">
                 <p className="locksmith-title"> {locksmith.locksmith_name} </p>
                 <p className="locksmith-distance"> {formatDistance(locksmith.distance)} </p>
-                <p className="locksmith-tags">{index === 0 ? 'Closest' : ''}</p>
+                <p className="locksmith-tag">{index === 0 ? 'Closest' : ''}</p>
               </div>
               <a href={`tel:${locksmith.locksmith_phone}`}>
                 <div className="locksmith-item-column-right">
