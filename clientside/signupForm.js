@@ -83,9 +83,10 @@ const FormComponent = () => {
           setUserLocation({ latitude, longitude });
 
           // Fetch location name
-          const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ`);
+          const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ&place_type=neighborhood,locality,place,postcode,region,country`);
           const data = await response.json();
-          const placeName = data.features[0]?.place_name; // Get the place name from the response
+          const feature = data.features.find(feature => feature.place_type.includes('neighborhood') || feature.place_type.includes('locality') || feature.place_type.includes('place'));
+          const placeName = feature ? feature.place_name : ''; // Get the place name from the response
 
           console.log('Location:', placeName); // Log the place name
 
