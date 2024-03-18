@@ -3,7 +3,7 @@ const FormComponent = () => {
   const [inputValue, setInputValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([]);
   const [userLocation, setUserLocation] = React.useState(null);
-  const [locksmith, setLocksmith] = React.useState(null);
+  const [locksmiths, setLocksmiths] = React.useState(null);
 
   React.useEffect(() => {
     const fetchSuggestions = async () => {
@@ -80,10 +80,10 @@ const FormComponent = () => {
     try {
       const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}`);
       const data = await response.json();
-      setLocksmith(data);
-      console.log('Nearest locksmith:', data);
+      setLocksmiths(data); // Change this line
+      console.log('Nearest locksmiths:', data); // Change this line
     } catch (error) {
-      console.error('Error fetching nearest locksmith:', error);
+      console.error('Error fetching nearest locksmiths:', error); // Change this line
     }
   };
 
