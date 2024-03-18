@@ -106,10 +106,12 @@ const FormComponent = () => {
           onChange={handleInputChange}
           placeholder="Enter a location"
         />
-        <button className="button-primary-blue" type="button" onClick={handleLocationClick}>
-          <LocationIcon />
-          Get Location
-        </button>
+        <div className="single-button-wrapper">
+          <button className="button-primary-blue 100" type="button" onClick={handleLocationClick}>
+            <LocationIcon />
+            Get Location
+          </button>
+        </div>
         {suggestions && suggestions.length > 0 && (
           <div>
             {suggestions.map((suggestion) => (
@@ -125,19 +127,23 @@ const FormComponent = () => {
           User Location: {userLocation.latitude}, {userLocation.longitude}
         </div>
       )}
-      <div className="button-wrapper">
-        <button type="button" className="button-secondary" onClick={fetchLocksmith}>House</button>
-        <button type="button" className="button-secondary" onClick={fetchLocksmith}>Car</button>
+      <div className="dual-button-wrapper">
+        <button type="button" className="button-secondary 50" onClick={fetchLocksmith}>House</button>
+        <button type="button" className="button-secondary 50" onClick={fetchLocksmith}>Car</button>
       </div>
       {locksmith && (
-        <div className="selected-locksmith-wrapper">
-          <a href={`tel:${locksmith.locksmith_phone}`}>
+        <div className="suggested-locksmith-wrapper">
             <div className="locksmith-item">
-              <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-              <p className="locksmith-cta"> Call Now </p>
-              <p className="locksmith-distance"> {locksmith.locksmith_distance} </p>
+              <div className="locksmith-item-column-left">
+                <p className="locksmith-title"> {locksmith.locksmith_name} </p>
+                <p className="locksmith-distance"> {locksmith.distance} </p>
+              </div>
+              <a href={`tel:${locksmith.locksmith_phone}`}>
+                <div className="locksmith-item-column-right">
+                  <p className="locksmith-cta"> Call Now </p>
+                </div>
+              </a>
             </div>
-          </a>
         </div>
       )}
     </div>
