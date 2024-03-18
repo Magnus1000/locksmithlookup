@@ -152,7 +152,11 @@ const FormComponent = () => {
                 <div key={index} className="locksmith-item">
                   <div className="locksmith-item-column-left">
                     <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-                    <p className="locksmith-distance"> {formatDistance(locksmith.distance)} &middot; Open Now </p>
+                    <div className="distance-available-wrapper">
+                      <p className="locksmith-distance"> {formatDistance(locksmith.distance)}</p>
+                      <div className="locksmith-dot"></div>
+                      <p className="locksmith-available">Online</p>
+                    </div>
                     {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
                   </div>
                   <a href={`tel:${locksmith.locksmith_phone}`}>
