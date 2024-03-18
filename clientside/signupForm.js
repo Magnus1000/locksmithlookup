@@ -163,7 +163,7 @@ const FormComponent = () => {
               {locksmiths.slice(0, 5).map((locksmith, index) => (
                 <div
                   key={index}
-                  className={`locksmith-item ${selectedLocksmith === locksmith ? 'selected' : ''}`}
+                  className={`locksmith-item${selectedLocksmith === locksmith ? 'selected ' : ''}`}
                   onClick={() => handleLocksmithSelect(locksmith)} // Handle click to select a locksmith
                 >
                   <div className="locksmith-item-column-left">
