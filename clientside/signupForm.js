@@ -22,7 +22,7 @@ const FormComponent = () => {
 
   // Render Map
   React.useEffect(() => {
-    mapboxgl.accessToken = pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ;
+    mapboxgl.accessToken = 'pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ';
 
     const map = new mapboxgl.Map({
       container: mapRef.current,
