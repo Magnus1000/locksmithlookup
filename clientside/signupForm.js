@@ -76,9 +76,9 @@ const FormComponent = () => {
     }
   };
 
-  const fetchLocksmith = async () => {
+  const fetchLocksmiths = async () => {
     try {
-      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmith.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}`);
+      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}`);
       const data = await response.json();
       setLocksmith(data);
       console.log('Nearest locksmith:', data);
@@ -95,6 +95,12 @@ const FormComponent = () => {
             />
         </svg>
     );
+  };
+
+  // Helper function to format distance
+  const formatDistance = (distanceInMeters) => {
+    const distanceInKilometers = distanceInMeters / 1000;
+    return `${distanceInKilometers.toFixed(2)}km away`;
   };
 
   return (
@@ -131,12 +137,14 @@ const FormComponent = () => {
         <button type="button" className="button-secondary-50" onClick={fetchLocksmith}>House</button>
         <button type="button" className="button-secondary-50" onClick={fetchLocksmith}>Car</button>
       </div>
-      {locksmith && (
+      {locksmiths && locksmiths.length > 0 && (
         <div className="suggested-locksmith-wrapper">
-            <div className="locksmith-item">
+          {locksmiths.slice(0, 5).map((locksmith, index) => (
+            <div key={index} className="locksmith-item">
               <div className="locksmith-item-column-left">
                 <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-                <p className="locksmith-distance"> {locksmith.distance} </p>
+                <p className="locksmith-distance"> {formatDistance(locksmith.distance)} </p>
+                <p className="locksmith-tags">{index === 0 ? 'Closest' : ''}</p>
               </div>
               <a href={`tel:${locksmith.locksmith_phone}`}>
                 <div className="locksmith-item-column-right">
@@ -144,6 +152,7 @@ const FormComponent = () => {
                 </div>
               </a>
             </div>
+          ))}
         </div>
       )}
     </div>

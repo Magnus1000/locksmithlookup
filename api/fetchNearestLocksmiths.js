@@ -71,9 +71,9 @@ module.exports = (req, res) => {
         locksmithRecords.sort((a, b) => a.distance - b.distance);
 
         // Log the nearest available locksmith
-        console.log('Nearest Available Locksmith:', locksmithRecords[0]);
+        console.log('Nearest Available Locksmiths:', locksmithRecords);
 
         // Return the nearest available locksmith
-        res.status(200).json(locksmithRecords[0]);
+        res.status(200).json(locksmithRecords);
     });
 };
