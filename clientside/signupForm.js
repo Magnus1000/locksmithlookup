@@ -21,18 +21,39 @@ const FormComponent = () => {
     fetchSuggestions(); // Call the function
   }, [inputValue]); // Close the useEffect hook
 
-  // Render Map
+  // Define map outside of useEffect so it can be accessed in other hooks
+  let map;
+
   React.useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ';
 
-    const map = new mapboxgl.Map({
+    map = new mapboxgl.Map({
       container: mapRef.current,
       style: 'mapbox://styles/magnus1993/cll28qk0n006a01pu7y9h0ouv',
       center: [userLocation.longitude, userLocation.latitude],
       zoom: 10
     });
 
+    // Disable scroll zoom
+    map.scrollZoom.disable();
+
+    // Disable map rotation when right clicked + dragging
+    map.dragRotate.disable();
+
+    // Disable map pitch when right clicked + dragging
+    map.touchZoomRotate.disableRotation();
+
+    // Disable drag pan
+    map.dragPan.disable();
+
     return () => map.remove();
+  }, []);
+
+  // Update map center when userLocation changes
+  React.useEffect(() => {
+    if (map) {
+      map.setCenter([userLocation.longitude, userLocation.latitude]);
+    }
   }, [userLocation]);
 
   const handleInputChange = (event) => {
