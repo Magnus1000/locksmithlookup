@@ -2,7 +2,7 @@
 const FormComponent = () => {
   const [inputValue, setInputValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([]);
-  const [userLocation, setUserLocation] = React.useState(null);
+  const [userLocation, setUserLocation] = React.useState({ latitude: 43.70, longitude: -79.42 });
   const [locksmiths, setLocksmiths] = React.useState(null);
 
   React.useEffect(() => {
@@ -19,40 +19,22 @@ const FormComponent = () => {
     fetchSuggestions(); // Call the function
   }, [inputValue]); // Close the useEffect hook
 
+  // Render Map
+  React.useEffect(() => {
+    mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+
+    const map = new mapboxgl.Map({
+      container: 'locksmith-map-wrapper',
+      style: process.env.MAPBOX_STYLE,
+      center: [userLocation.longitude, userLocation.latitude],
+      zoom: 10
+    });
+
+    return () => map.remove();
+  }, [userLocation]);
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    if (userLocation && locksmith) {
-      const data = {
-        number: locksmith.phone,
-        locksmith: locksmith.locksmith,
-      };
-
-      console.log('Initiating Twilio call:', data);
-  
-      try {
-        const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/makeCall.js', {
-          method: 'POST',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          console.log('Twilio call initiated:', result);
-        } else {
-          console.error('Error initiating Twilio call:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error initiating Twilio call:', error);
-      }
-    }
   };
 
   const handleSuggestionClick = (suggestion) => {
@@ -142,58 +124,60 @@ const FormComponent = () => {
   };
 
   return (
-    <div className="locksmith-form-wrapper">
-      <div className="locksmith-form-div">
-        {/*
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            placeholder="Enter a location"
-          />
-        */}
-        <div className="single-button-wrapper">
-          <button className="button-primary-blue-100" type="button" onClick={handleLocationClick}>
-            <LocationIcon />
-            Get Location
-          </button>
+    <div className="locksmith-map-wrapper">
+      <div className="locksmith-form-wrapper">
+        <div className="locksmith-form-div">
+          {/*
+            <input
+              type="text"
+              value={inputValue}
+              onChange={handleInputChange}
+              placeholder="Enter a location"
+            />
+          */}
+          <div className="single-button-wrapper">
+            <button className="button-primary-blue-100" type="button" onClick={handleLocationClick}>
+              <LocationIcon />
+              Get Location
+            </button>
+          </div>
+          {suggestions && suggestions.length > 0 && (
+            <div>
+              {suggestions.map((suggestion) => (
+                <div key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
+                  {suggestion.place_name}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-        {suggestions && suggestions.length > 0 && (
-          <div>
-            {suggestions.map((suggestion) => (
-              <div key={suggestion.id} onClick={() => handleSuggestionClick(suggestion)}>
-                {suggestion.place_name}
+        {userLocation && (<div className="dual-button-wrapper">
+          <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><HouseIcon />House</button>
+          <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><CarIcon />Car</button>
+        </div>)}
+        {locksmiths && locksmiths.length > 0 && (
+          <div className="suggested-locksmith-wrapper">
+            <div className="suggested-locksmith-title">
+              {userLocation && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {userLocation.latitude}, {userLocation.longitude}</p>)}
+            </div>
+            {locksmiths.slice(0, 5).map((locksmith, index) => (
+              <div key={index} className="locksmith-item">
+                <div className="locksmith-item-column-left">
+                  <p className="locksmith-title"> {locksmith.locksmith_name} </p>
+                  <p className="locksmith-distance"> {formatDistance(locksmith.distance)} &middot; Open Now </p>
+                  {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
+                </div>
+                <a href={`tel:${locksmith.locksmith_phone}`}>
+                  <div className="locksmith-item-column-right">
+                    <PhoneIcon />
+                    <p className="call-now-text">Call Now</p>
+                  </div>
+                </a>
               </div>
             ))}
           </div>
         )}
       </div>
-      {userLocation && (<div className="dual-button-wrapper">
-        <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><HouseIcon />House</button>
-        <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><CarIcon />Car</button>
-      </div>)}
-      {locksmiths && locksmiths.length > 0 && (
-        <div className="suggested-locksmith-wrapper">
-          <div className="suggested-locksmith-title">
-            {userLocation && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {userLocation.latitude}, {userLocation.longitude}</p>)}
-          </div>
-          {locksmiths.slice(0, 5).map((locksmith, index) => (
-            <div key={index} className="locksmith-item">
-              <div className="locksmith-item-column-left">
-                <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-                <p className="locksmith-distance"> {formatDistance(locksmith.distance)} &middot; Open Now </p>
-                {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
-              </div>
-              <a href={`tel:${locksmith.locksmith_phone}`}>
-                <div className="locksmith-item-column-right">
-                  <PhoneIcon />
-                  <p className="call-now-text">Call Now</p>
-                </div>
-              </a>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };
