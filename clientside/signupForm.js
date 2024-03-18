@@ -8,6 +8,7 @@ const FormComponent = () => {
   const [selectedLocksmith, setSelectedLocksmith] = React.useState(null);
   const [isFetching, setIsFetching] = React.useState(false);
   const [showDualButtons, setShowDualButtons] = React.useState(false);
+  const [selectedButton, setSelectedButton] = React.useState(null); 
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -202,10 +203,18 @@ const FormComponent = () => {
           </div>
           {showDualButtons && userLocation && (
             <div className="dual-button-wrapper">
-              <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}>
+              <button 
+                type="button" 
+                className={`button-secondary-50 ${selectedButton === 'house' ? 'selected' : ''}`} 
+                onClick={() => {fetchLocksmiths(); setSelectedButton('house');}}
+              >
                 <HouseIcon />House
               </button>
-              <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}>
+              <button 
+                type="button" 
+                className={`button-secondary-50 ${selectedButton === 'car' ? 'selected' : ''}`} 
+                onClick={() => {fetchLocksmiths(); setSelectedButton('car');}}
+              >
                 <CarIcon />Car
               </button>
             </div>
