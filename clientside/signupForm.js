@@ -131,7 +131,7 @@ const FormComponent = () => {
       <div className="locksmith-form-wrapper">
         <div className="locksmith-form-div">
           <div className="locksmith-form-header">
-            <p className="locksmith-form-header-text">Find the nearest available locksmith</p>
+            <p className="locksmith-form-header-text">Find the <span className="emphasis-text">nearest available</span> locksmith</p>
           </div>
           <div className="single-button-wrapper">
             <button className="button-primary-blue-100" type="button" onClick={handleLocationClick}>
