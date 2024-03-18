@@ -22,11 +22,11 @@ const FormComponent = () => {
 
   // Render Map
   React.useEffect(() => {
-    mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+    mapboxgl.accessToken = pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ;
 
     const map = new mapboxgl.Map({
       container: mapRef.current,
-      style: process.env.MAPBOX_STYLE,
+      style: 'mapbox://styles/magnus1993/cll28qk0n006a01pu7y9h0ouv',
       center: [userLocation.longitude, userLocation.latitude],
       zoom: 10
     });
