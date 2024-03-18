@@ -186,7 +186,8 @@ const FormComponent = () => {
               </div>
               <a href={`tel:${locksmith.locksmith_phone}`}>
                 <div className="locksmith-item-column-right">
-                  <p className="call-now-text"><PhoneIcon />Call Now</p>
+                  <PhoneIcon />
+                  <p className="call-now-text">Call Now</p>
                 </div>
               </a>
             </div>
