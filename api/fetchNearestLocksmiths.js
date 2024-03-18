@@ -59,12 +59,27 @@ module.exports = (req, res) => {
         const latNumber = Number(lat);
         const lngNumber = Number(lng);
 
+        const toRadians = (degrees) => degrees * (Math.PI / 180);
+
+        const calculateDistance = (lat1, lng1, lat2, lng2) => {
+          const R = 6371; // Earth's radius in kilometers
+          const dLat = toRadians(lat2 - lat1);
+          const dLng = toRadians(lng2 - lng1);
+          const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          const distance = R * c;
+          return distance;
+        };
+        
         // Calculate the distance between each available locksmith and the provided coordinate
         locksmithRecords = locksmithRecords.map((record) => {
-            const recordLat = Number(record.locksmith_lat[0]);
-            const recordLng = Number(record.locksmith_lng[0]);
-            const distance = Math.sqrt(Math.pow(recordLat - latNumber, 2) + Math.pow(recordLng - lngNumber, 2));
-            return { ...record, distance };
+          const recordLat = Number(record.locksmith_lat[0]);
+          const recordLng = Number(record.locksmith_lng[0]);
+          const distance = calculateDistance(latNumber, lngNumber, recordLat, recordLng);
+          return { ...record, distance };
         });
 
         // Sort the available locksmiths by distance
