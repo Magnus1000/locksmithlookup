@@ -144,12 +144,14 @@ const FormComponent = () => {
   return (
     <div className="locksmith-form-wrapper">
       <div className="locksmith-form-div">
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Enter a location"
-        />
+        {/*
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder="Enter a location"
+          />
+        */}
         <div className="single-button-wrapper">
           <button className="button-primary-blue-100" type="button" onClick={handleLocationClick}>
             <LocationIcon />
