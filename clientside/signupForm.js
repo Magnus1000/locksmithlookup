@@ -181,9 +181,8 @@ const FormComponent = () => {
 
 
   // Helper function to format distance
-  const formatDistance = (distanceInMeters) => {
-    const distanceInKilometers = distanceInMeters / 1000;
-    return `${distanceInKilometers.toFixed(2)}km away`;
+  const formatDistance = (distanceUnrounded) => {
+    return `${distanceUnrounded.toFixed(2)}km away`;
   };
 
   return (
