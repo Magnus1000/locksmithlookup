@@ -140,7 +140,7 @@ const FormComponent = () => {
               </div>
               <a href={`tel:${locksmith.locksmith_phone}`}>
                 <div className="locksmith-item-column-right">
-                  <p className="locksmith-cta"> Call Now </p>
+                  <p className="call-now-text"> Call Now </p>
                 </div>
               </a>
             </div>
