@@ -166,10 +166,10 @@ const FormComponent = () => {
           </div>
         )}
       </div>
-      <div className="dual-button-wrapper">
+      {userLocation && (<div className="dual-button-wrapper">
         <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><HouseIcon />House</button>
         <button type="button" className="button-secondary-50" onClick={fetchLocksmiths}><CarIcon />Car</button>
-      </div>
+      </div>)}
       {locksmiths && locksmiths.length > 0 && (
         <div className="suggested-locksmith-wrapper">
           <div className="suggested-locksmith-title">
@@ -179,7 +179,7 @@ const FormComponent = () => {
             <div key={index} className="locksmith-item">
               <div className="locksmith-item-column-left">
                 <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-                <p className="locksmith-distance"> {formatDistance(locksmith.distance)} </p>
+                <p className="locksmith-distance"> {formatDistance(locksmith.distance)} &middot; Open Now </p>
                 {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
               </div>
               <a href={`tel:${locksmith.locksmith_phone}`}>
