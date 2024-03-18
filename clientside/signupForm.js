@@ -3,6 +3,7 @@ const FormComponent = () => {
   const [inputValue, setInputValue] = React.useState('');
   const [suggestions, setSuggestions] = React.useState([]);
   const [userLocation, setUserLocation] = React.useState({ latitude: 43.70, longitude: -79.42 });
+  const [placename, setPlacename] = React.useState(''); 
   const [locksmiths, setLocksmiths] = React.useState(null);
   const [selectedLocksmith, setSelectedLocksmith] = React.useState(null);
   const [isFetching, setIsFetching] = React.useState(false);
@@ -74,13 +75,23 @@ const FormComponent = () => {
 
   const handleLocationClick = () => {
     setIsFetching(true);
+    setPlacename('');
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) => {
+        async (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
+
+          // Fetch location name
+          const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ`);
+          const data = await response.json();
+          const placeName = data.features[0]?.place_name; // Get the place name from the response
+
+          console.log('Location:', placeName); // Log the place name
+
           setIsFetching(false);
           setShowDualButtons(true);
+          setPlacename(placeName); // Set the place name state
         },
         (error) => {
           console.error('Error getting user location:', error);
@@ -201,7 +212,7 @@ const FormComponent = () => {
           {locksmiths && locksmiths.length > 0 && (
             <div className="suggested-locksmith-wrapper">
               <div className="suggested-locksmith-title">
-                {userLocation && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {userLocation.latitude}, {userLocation.longitude}</p>)}
+                {placename && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {placename}</p>)}
               </div>
               {locksmiths.slice(0, 5).map((locksmith, index) => (
                 <div
