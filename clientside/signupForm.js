@@ -163,7 +163,7 @@ const FormComponent = () => {
               {locksmiths.slice(0, 5).map((locksmith, index) => (
                 <div
                   key={index}
-                  className={`locksmith-item${selectedLocksmith === locksmith ? 'selected ' : ''}`}
+                  className={`locksmith-item ${selectedLocksmith === locksmith ? 'selected' : ''}`}
                   onClick={() => handleLocksmithSelect(locksmith)} // Handle click to select a locksmith
                 >
                   <div className="locksmith-item-column-left">
@@ -175,12 +175,14 @@ const FormComponent = () => {
                     </div>
                     {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
                   </div>
-                  <a href={`tel:${locksmith.locksmith_phone}`}>
-                    <div className="locksmith-item-column-right">
-                      <PhoneIcon />
-                      <p className="call-now-text">Call Now</p>
-                    </div>
-                  </a>
+                  {selectedLocksmith === locksmith && (
+                    <a href={`tel:${locksmith.locksmith_phone}`}>
+                      <div className="locksmith-item-column-right">
+                        <PhoneIcon />
+                        <p className="call-now-text">Call Now</p>
+                      </div>
+                    </a>
+                  )}
                 </div>
               ))}
             </div>
