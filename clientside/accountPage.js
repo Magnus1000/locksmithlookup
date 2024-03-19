@@ -161,7 +161,7 @@ const AvailabilitySelector = () => {
     // Add this function to generate the options for the dropdown
     const renderTimezoneDropdown = () => (
         <Select
-            value={selectedOption}
+            value={timezone}
             onChange={(e) => setTimezone(e.target.value)}
             disabled={!isEditing}
             sx={{
