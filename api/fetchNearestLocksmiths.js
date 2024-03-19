@@ -25,9 +25,6 @@ module.exports = (req, res) => {
             filterByFormula: `AND({day_of_week} = '${currentDay}', {time_start} != 'unavailable', {time_end} != 'unavailable')`
         }).all();
 
-        // Log the availability records to the console
-        console.log('Initially Available Locksmiths', availableLocksmiths);
-
         // Convert time strings to iso timestamps
         const availableLocksmithsTimeIso = availableLocksmiths.map(record => {
             const timeStart = moment.tz(`${currentDay} ${record.fields.time_start}`, 'dddd h:mma', record.fields.locksmith_timezone);
@@ -41,9 +38,6 @@ module.exports = (req, res) => {
             return record.timeStart && record.timeEnd && now.isBetween(record.timeStart, record.timeEnd);
         });
 
-        // Log the available locksmiths to the console
-        console.log('Available Locksmiths after checking opening hours', availableLocksmithsOpen);
-
         // Check if we have any available locksmiths
         if (availableLocksmithsOpen.length === 0) {
             console.log('No locksmiths available at this time.');
@@ -52,8 +46,6 @@ module.exports = (req, res) => {
 
         // Retrieve all locksmith records
         let locksmithRecords = availableLocksmithsOpen;
-
-        console.log('Locksmiths', locksmithRecords);
 
         // Convert lat and lng to numbers
         const latNumber = Number(lat);
