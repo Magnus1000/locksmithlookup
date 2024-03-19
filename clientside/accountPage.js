@@ -157,6 +157,25 @@ const AvailabilitySelector = () => {
         );
     };
 
+    // Add this function to generate the options for the dropdown
+    const renderTimezoneDropdown = () => (
+        <Select
+            value={selectedOption}
+            onChange={(e) => setSelectedOption(e.target.value)}
+            disabled={!isEditing}
+            sx={{
+                height: '44px',
+                width: '120px',
+            }}
+        >
+            {['America/New_York'].map((option) => (
+                <MenuItem key={option} value={option} style={{ fontFamily: 'inherit', fontWeight: '400', fontSize: '1rem' }}>
+                    {option}
+                </MenuItem>
+            ))}
+        </Select>
+    );
+
     return (
         <div className="availabilty-page-body">
             <div className="availability-button-row-top-div">
@@ -190,6 +209,9 @@ const AvailabilitySelector = () => {
                 </Button>
             </div>
             <div className="availability-div-wrapper">
+                <div className="availability-timezone-wrapper">
+                    {renderTimezoneDropdown()}
+                </div>
                 <div className="availability-div">
                     {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => (
                         <Box

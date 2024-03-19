@@ -28,7 +28,6 @@ module.exports = (req, res) => {
 
         // Convert time strings to iso timestamps
         const availableLocksmithsTimeIso = availableLocksmiths.map(record => {
-            const today = moment().format('YYYY-MM-DD');
             const timeStart = moment.tz(`${today} ${record.fields.time_start}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
             console.log('timeStart', timeStart);
             const timeEnd = moment.tz(`${today} ${record.fields.time_end}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
