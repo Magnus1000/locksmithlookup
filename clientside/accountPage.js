@@ -14,6 +14,7 @@ const AvailabilitySelector = () => {
     const [tempAvailability, setTempAvailability] = React.useState(availability);
     const [isEditing, setIsEditing] = React.useState(false);
     const [isSaving, setIsSaving] = React.useState(false);
+    const [timezone, setTimezone] = React.useState('America/New_York');
 
 
     React.useEffect(() => {
@@ -161,7 +162,7 @@ const AvailabilitySelector = () => {
     const renderTimezoneDropdown = () => (
         <Select
             value={selectedOption}
-            onChange={(e) => setSelectedOption(e.target.value)}
+            onChange={(e) => setTimezone(e.target.value)}
             disabled={!isEditing}
             sx={{
                 height: '44px',
