@@ -30,16 +30,15 @@ module.exports = (req, res) => {
 
         // Convert time strings to iso timestamps
         const availableLocksmithsTimeIso = availableLocksmiths.map(record => {
-            const timeStart = moment.tz(`${today} ${record.fields.time_start}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
-            console.log('timeStart', timeStart);
-            const timeEnd = moment.tz(`${today} ${record.fields.time_end}`, 'YYYY-MM-DD h:mma', record.fields.locksmith_timezone).toDate();
-            console.log('timeEnd', timeEnd);
+            const timeStart = moment.tz(`${currentDay} ${record.fields.time_start}`, 'dddd h:mma', record.fields.locksmith_timezone);
+            const timeEnd = moment.tz(`${currentDay} ${record.fields.time_end}`, 'dddd h:mma', record.fields.locksmith_timezone); 
             return { ...record.fields, timeStart, timeEnd };
         });
+        
 
         // Filter out records where the current time is outside the available time range
         const availableLocksmithsOpen = availableLocksmithsTimeIso.filter(record => {
-            return record.timeStart && record.timeEnd && now >= record.timeStart && now <= record.timeEnd;
+            return record.timeStart && record.timeEnd && now.isBetween(record.timeStart, record.timeEnd);
         });
 
         // Log the available locksmiths to the console
