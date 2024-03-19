@@ -108,10 +108,16 @@ const FormComponent = () => {
 
   const fetchLocksmiths = async () => {
     try {
-      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}`);
+      // Get the user's current timezone
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  
+      // Include the timezone in the API request
+      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}&tz=${encodeURIComponent(timezone)}`);
       const data = await response.json();
-      setLocksmiths(data); // Change this line
-      console.log('Nearest locksmiths:', data); // Change this line
+
+      // Set the locksmiths state
+      setLocksmiths(data); 
+      console.log('Nearest locksmiths:', data); 
 
       // Check if data is an array and has at least one element
       if (Array.isArray(data) && data.length > 0) {

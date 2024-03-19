@@ -7,16 +7,16 @@ const corsHandler = cors({ origin: '*' });
 
 module.exports = (req, res) => {
     corsHandler(req, res, async () => {
-        const { lat, lng } = req.query;
+        const { lat, lng, tz: userTimezone } = req.query;
 
         // Initialize Airtable with the API key and base ID
         const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID);
         
-        // Fetch the current date and time
-        const now = new Date();
+        // Fetch the current date and time in the user's timezone
+        const now = moment.tz(userTimezone);
         console.log('Current Date and Time:', now);
 
-        const currentDay = now.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+        const currentDay = now.format('dddd').toLowerCase();
 
         // Query the availability table for locksmiths available at the current day and time
         const availableLocksmiths = await base('tblnDEcMDY1AXPS39').select({
