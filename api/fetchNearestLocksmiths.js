@@ -15,8 +15,10 @@ module.exports = (req, res) => {
         // Fetch the current date and time in the user's timezone
         const now = moment.tz(userTimezone);
         console.log('Current Date and Time:', now);
+        console.log('Current Timezone:', userTimezone);
 
         const currentDay = now.format('dddd').toLowerCase();
+        console.log('Current Day:', currentDay);
 
         // Query the availability table for locksmiths available at the current day and time
         const availableLocksmiths = await base('tblnDEcMDY1AXPS39').select({
