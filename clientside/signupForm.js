@@ -109,6 +109,7 @@ const FormComponent = () => {
 
   const fetchLocksmiths = async () => {
     setFetchingLocksmiths(true);
+    setLocksmiths(null); // Clear the locksmiths state
     try {
       // Get the user's current timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
