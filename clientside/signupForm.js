@@ -114,21 +114,24 @@ const FormComponent = () => {
     try {
       // Get the user's current timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  
+
       // Include the timezone in the API request
       const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}&tz=${encodeURIComponent(timezone)}`);
       const data = await response.json();
 
-      setFetchingLocksmiths(false);
+      // Add a 2-second timeout before setting the state
+      setTimeout(() => {
+        setFetchingLocksmiths(false);
 
-      // Set the locksmiths state
-      setLocksmiths(data); 
-      console.log('Nearest locksmiths:', data); 
+        // Set the locksmiths state
+        setLocksmiths(data); 
+        console.log('Nearest locksmiths:', data); 
 
-      // Check if data is an array and has at least one element
-      if (Array.isArray(data) && data.length > 0) {
-        setSelectedLocksmith(data[0]); // Set the first locksmith as selected
-      }
+        // Check if data is an array and has at least one element
+        if (Array.isArray(data) && data.length > 0) {
+          setSelectedLocksmith(data[0]); // Set the first locksmith as selected
+        }
+      }, 2000); // 2000 milliseconds = 2 seconds
 
     } catch (error) {
       console.error('Error fetching nearest locksmiths:', error); // Change this line
