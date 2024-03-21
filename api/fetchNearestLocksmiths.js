@@ -7,7 +7,7 @@ const corsHandler = cors({ origin: '*' });
 
 module.exports = (req, res) => {
     corsHandler(req, res, async () => {
-        const { lat, lng, tz: userTimezone } = req.query;
+        const { lat, lng, tz: userTimezone, service } = req.query;
 
         // Initialize Airtable with the API key and base ID
         const base = new Airtable({ apiKey: process.env.AIRTABLE_API_KEY }).base(process.env.AIRTABLE_BASE_ID);
@@ -22,7 +22,7 @@ module.exports = (req, res) => {
 
         // Query the availability table for locksmiths available at the current day and time
         const availableLocksmiths = await base('tblnDEcMDY1AXPS39').select({
-            filterByFormula: `AND({day_of_week} = '${currentDay}', {time_start} != 'unavailable', {time_end} != 'unavailable')`
+          filterByFormula: `AND({day_of_week} = '${currentDay}', {time_start} != 'unavailable', {time_end} != 'unavailable', FIND('${service}', ARRAYJOIN(service_type, ',')))`
         }).all();
 
         // Convert time strings to iso timestamps
