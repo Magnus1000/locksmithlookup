@@ -57,8 +57,12 @@ const FormComponent = () => {
 
   // Update map center when userLocation changes
   React.useEffect(() => {
-    if (map) {
-      map.setCenter([userLocation.longitude, userLocation.latitude]);
+    if (map && userLocation) {
+      map.flyTo({
+        center: [userLocation.longitude, userLocation.latitude],
+        zoom: 12, // Adjust the zoom level as needed
+        duration: 1000, // Adjust the animation duration as needed
+      });
     }
   }, [userLocation]);
 
