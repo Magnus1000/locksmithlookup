@@ -209,12 +209,12 @@ const FormComponent = () => {
           </div>
           <div className="single-button-wrapper">
           <button 
-            className={`button-primary-blue-100 ${userLocation ? 'button-secondary-blue' : 'pulse'}`} 
+            className={`button-primary-blue-100 ${userLocation ? '' : 'pulse'}`}
             type="button" 
             onClick={handleLocationClick}
           >
-            {isFetching ? <LoadingIcon /> : (userLocation ? <LocationIcon2 /> : <LocationIcon />)}
-            {isFetching ? 'Fetching your location' : (userLocation ? placename : 'Get Location')}
+            {isFetching ? <LoadingIcon /> : (placename ? <LocationIcon2 /> : <LocationIcon />)}
+            {isFetching ? 'Fetching your location' : (placename ? placename : 'Get Location')}
           </button>
           </div>
           {showDualButtons && userLocation && (
