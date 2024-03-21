@@ -252,7 +252,7 @@ const FormComponent = () => {
           )}
           {noResults && (
             <div className="no-results">
-              <p>No locksmiths available at this time. Try Google.</p>
+              <p className="no-results-text">No locksmiths available at this time. Try Google.</p>
             </div>
           )}
           {locksmiths && locksmiths.length > 0 && (
