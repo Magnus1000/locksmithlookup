@@ -55,17 +55,6 @@ const FormComponent = () => {
     return () => map.remove();
   }, []);
 
-  // Update map center when userLocation changes
-  React.useEffect(() => {
-    if (map && userLocation) {
-      map.flyTo({
-        center: [userLocation.longitude, userLocation.latitude],
-        zoom: 12, // Adjust the zoom level as needed
-        duration: 1000, // Adjust the animation duration as needed
-      });
-    }
-  }, [userLocation]);
-
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -89,6 +78,7 @@ const FormComponent = () => {
         async (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
+          map.flyTo({ center: [longitude, latitude], zoom: 10 }); // Fly to the user's location
   
           // Fetch location name
           const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ&place_type=neighborhood,locality,place,region`);
