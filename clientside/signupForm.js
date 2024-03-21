@@ -125,7 +125,7 @@ const FormComponent = () => {
         setFetchingLocksmiths(false);
 
         // Check if data is the string "No locksmiths available at this time."
-        if (data === "No locksmiths available at this time.") {
+        if (data.error === "No locksmiths available at this time.") {
           setNoResults(true); // Set noResults to true
         } else {
           // Set the locksmiths state
