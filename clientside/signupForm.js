@@ -12,6 +12,7 @@ const FormComponent = () => {
   const [fetchingLocksmiths, setFetchingLocksmiths] = React.useState(false);
   const [noResults, setNoResults] = React.useState(false);
   const mapRef = React.useRef(null);
+  const mapInstanceRef = React.useRef(null); 
 
   React.useEffect(() => {
     const fetchSuggestions = async () => {
@@ -27,13 +28,10 @@ const FormComponent = () => {
     fetchSuggestions(); // Call the function
   }, [inputValue]); // Close the useEffect hook
 
-  // Define map outside of useEffect so it can be accessed in other hooks
-  let map;
-
   React.useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ';
 
-    map = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: mapRef.current,
       style: 'mapbox://styles/magnus1993/cll28qk0n006a01pu7y9h0ouv',
       center: [userLocation.longitude, userLocation.latitude],
@@ -52,8 +50,21 @@ const FormComponent = () => {
     // Disable drag pan
     map.dragPan.disable();
 
+    mapInstanceRef.current = map; // Store the map instance in the ref
+
     return () => map.remove();
   }, []);
+
+  React.useEffect(() => {
+    const map = mapInstanceRef.current; // Access the map instance from the ref
+    if (map && userLocation) {
+      map.flyTo({
+        center: [userLocation.longitude, userLocation.latitude],
+        zoom: 12, // Adjust the zoom level as needed
+        duration: 1000, // Adjust the animation duration as needed
+      });
+    }
+  }, [userLocation]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -78,7 +89,6 @@ const FormComponent = () => {
         async (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
-          map.flyTo({ center: [longitude, latitude], zoom: 10 }); // Fly to the user's location
   
           // Fetch location name
           const response = await fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ&place_type=neighborhood,locality,place,region`);
