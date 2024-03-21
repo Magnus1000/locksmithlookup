@@ -10,6 +10,7 @@ const FormComponent = () => {
   const [showDualButtons, setShowDualButtons] = React.useState(false);
   const [selectedButton, setSelectedButton] = React.useState(null); 
   const [fetchingLocksmiths, setFetchingLocksmiths] = React.useState(false);
+  const [noResults, setNoResults] = React.useState(false);
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -123,13 +124,18 @@ const FormComponent = () => {
       setTimeout(() => {
         setFetchingLocksmiths(false);
 
-        // Set the locksmiths state
-        setLocksmiths(data); 
-        console.log('Nearest locksmiths:', data); 
+        // Check if data is the string "No locksmiths available at this time."
+        if (data === "No locksmiths available at this time.") {
+          setNoResults(true); // Set noResults to true
+        } else {
+          // Set the locksmiths state
+          setLocksmiths(data); 
+          console.log('Nearest locksmiths:', data); 
 
-        // Check if data is an array and has at least one element
-        if (Array.isArray(data) && data.length > 0) {
-          setSelectedLocksmith(data[0]); // Set the first locksmith as selected
+          // Check if data is an array and has at least one element
+          if (Array.isArray(data) && data.length > 0) {
+            setSelectedLocksmith(data[0]); // Set the first locksmith as selected
+          }
         }
       }, 2000); // 2000 milliseconds = 2 seconds
 
@@ -242,6 +248,11 @@ const FormComponent = () => {
             <div className="loading-locksmiths">
               <LoadingIcon />
               Searching nearest available locksmiths
+            </div>
+          )}
+          {noResults && (
+            <div className="no-results">
+              <p>No locksmiths available at this time. Try Google.</p>
             </div>
           )}
           {locksmiths && locksmiths.length > 0 && (
