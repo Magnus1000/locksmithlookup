@@ -206,10 +206,14 @@ const FormComponent = () => {
             <p className="locksmith-form-header-text">Find the <span className="emphasis-text">nearest available</span> locksmith</p>
           </div>
           <div className="single-button-wrapper">
-            <button className="button-primary-blue-100" type="button" onClick={handleLocationClick}>
-              {isFetching ? <LoadingIcon /> : <LocationIcon />}
-              {isFetching ? 'Fetching your location' : 'Get Location'}
-            </button>
+          <button 
+            className={`button-primary-blue-100 ${userLocation ? 'button-secondary-blue' : 'pulse'}`} 
+            type="button" 
+            onClick={handleLocationClick}
+          >
+            {isFetching ? <LoadingIcon /> : (userLocation ? <LocationIcon2 /> : <LocationIcon />)}
+            {isFetching ? 'Fetching your location' : (userLocation ? placename : 'Get Location')}
+          </button>
           </div>
           {showDualButtons && userLocation && (
             <div className="dual-button-wrapper">
