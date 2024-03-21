@@ -108,15 +108,15 @@ const FormComponent = () => {
     }
   };
 
-  const fetchLocksmiths = async () => {
+  const fetchLocksmiths = async (serviceType) => {
     setFetchingLocksmiths(true);
     setLocksmiths(null); // Clear the locksmiths state
     try {
       // Get the user's current timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-      // Include the timezone in the API request
-      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}&tz=${encodeURIComponent(timezone)}`);
+      // Include the timezone and serviceType in the API request
+      const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}&tz=${encodeURIComponent(timezone)}&service=${encodeURIComponent(serviceType)}`);
       const data = await response.json();
 
       // Add a 2-second timeout before setting the state
@@ -225,14 +225,14 @@ const FormComponent = () => {
               <button 
                 type="button" 
                 className={`button-secondary-50 ${selectedButton === 'house' ? 'selected' : ''}`} 
-                onClick={() => {fetchLocksmiths(); setSelectedButton('house');}}
+                onClick={() => {fetchLocksmiths('house'); setSelectedButton('house');}}
               >
                 <HouseIcon />House
               </button>
               <button 
                 type="button" 
                 className={`button-secondary-50 ${selectedButton === 'car' ? 'selected' : ''}`} 
-                onClick={() => {fetchLocksmiths(); setSelectedButton('car');}}
+                onClick={() => {fetchLocksmiths('car'); setSelectedButton('car');}}
               >
                 <CarIcon />Car
               </button>
