@@ -76,6 +76,7 @@ const FormComponent = () => {
   };  
 
   const handleLocationClick = () => {
+    setLocksmiths(null); // Clear the locksmiths state
     setIsFetching(true);
     setPlacename('');
     if (navigator.geolocation) {
