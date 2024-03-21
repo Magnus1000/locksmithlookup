@@ -9,6 +9,7 @@ const FormComponent = () => {
   const [isFetching, setIsFetching] = React.useState(false);
   const [showDualButtons, setShowDualButtons] = React.useState(false);
   const [selectedButton, setSelectedButton] = React.useState(null); 
+  const [fetchingLocksmiths, setFetchingLocksmiths] = React.useState(false);
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -107,6 +108,7 @@ const FormComponent = () => {
   };
 
   const fetchLocksmiths = async () => {
+    setFetchingLocksmiths(true);
     try {
       // Get the user's current timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -114,6 +116,8 @@ const FormComponent = () => {
       // Include the timezone in the API request
       const response = await fetch(`https://locksmithlookup-magnus1000team.vercel.app/api/fetchNearestLocksmiths.js?lat=${userLocation.latitude}&lng=${userLocation.longitude}&tz=${encodeURIComponent(timezone)}`);
       const data = await response.json();
+
+      setFetchingLocksmiths(false);
 
       // Set the locksmiths state
       setLocksmiths(data); 
@@ -126,6 +130,7 @@ const FormComponent = () => {
 
     } catch (error) {
       console.error('Error fetching nearest locksmiths:', error); // Change this line
+      setFetchingLocksmiths(false);
     }
   };
 
@@ -222,6 +227,12 @@ const FormComponent = () => {
               >
                 <CarIcon />Car
               </button>
+            </div>
+          )}
+          {fetchingLocksmiths && (
+            <div className="loading-locksmiths">
+              <LoadingIcon />
+              Searching nearest available locksmiths
             </div>
           )}
           {locksmiths && locksmiths.length > 0 && (
