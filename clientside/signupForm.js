@@ -209,7 +209,7 @@ const FormComponent = () => {
           </div>
           <div className="single-button-wrapper">
           <button 
-            className={`button-primary-blue-100 ${userLocation ? '' : 'pulse'}`}
+            className={`button-primary-blue-100 ${placename ? '' : 'pulse'}`}
             type="button" 
             onClick={handleLocationClick}
           >
