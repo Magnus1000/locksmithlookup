@@ -6,8 +6,15 @@ const corsHandler = cors({ origin: '*' });
 module.exports = (req, res) => {
   corsHandler(req, res, async () => {
     try {
-      const data = req.body.data; // Assuming text is sent in the body of a POST request wrapped in a data field.
-      console.log('Data:', data);
+        let data;
+        try {
+            // Try to parse the data as JSON
+            data = JSON.parse(req.body.data);
+        } catch (error) {
+            // If parsing fails, treat the data as a string
+            data = req.body.data;
+        }
+        console.log('Data:', data);
 
       const days = data.split(', '); // Split the text into individual days
 
