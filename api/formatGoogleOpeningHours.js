@@ -23,10 +23,10 @@ module.exports = (req, res) => {
       const days = data.split(', ');
 
       const schedule = days.map((day) => {
-        const [dayOfWeek, hours] = day.split(': ');
+        const [dayOfWeek, hours] = day.replace(/\s/g, ' ').replace(/–/g, '-').split(': ');
         let [start, end] = hours === 'Open 24 hours'
-          ? ['12:00am', '11:59pm']
-          : hours.split(' – ');
+            ? ['12:00am', '11:59pm']
+            : hours.split(' - ');
 
         start = convertTimeFormat(start);
         end = convertTimeFormat(end);
