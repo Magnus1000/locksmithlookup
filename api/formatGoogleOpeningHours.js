@@ -47,17 +47,19 @@ module.exports = (req, res) => {
 };
 
 function convertTimeFormat(timeStr) {
+  // Check if the input string indicates closure or a 24-hour open schedule first
   if (timeStr === 'Open 24 hours') {
     return ['12:00am', '11:59pm'];
   }
 
-  if (timeStr === '12:00am' || timeStr === '11:59pm') {
-    return timeStr;
+  if (timeStr === 'Closed') {
+    return 'Closed'; // or any other appropriate representation for closed times
   }
 
+  // Now handle regular time strings
   const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
   if (!match) {
-    return 'invalid time';
+    return 'invalid time'; // Or handle this case differently as needed
   }
 
   let [_, hour, minute, meridian] = match;
@@ -72,5 +74,5 @@ function convertTimeFormat(timeStr) {
   hour = hour.toString().padStart(2, '0');
   minute = minute.padStart(2, '0');
 
-  return `${hour}:${minute}${meridian.toLowerCase()}`;
+  return `${hour}:${minute}`;
 }
