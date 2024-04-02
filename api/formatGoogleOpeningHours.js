@@ -7,8 +7,8 @@ module.exports = (req, res) => {
     corsHandler(req, res, async () => {
         // Your logic goes here
         try {
-            const text = req.body; // Assuming text is sent in the body of a POST request.
-            const days = text.split(', '); // Split the text into individual days
+            const data = req.body.data; // Assuming text is sent in the body of a POST request wrapped in a data field.
+            const days = data.split(', '); // Split the text into individual days
 
             const schedule = days.map((day) => {
                 const [dayOfWeek, hours] = day.split(': '); // Split the day from the hours
