@@ -44,29 +44,33 @@ module.exports = (req, res) => {
 
 // Helper function to convert time format
 function convertTimeFormat(timeStr) {
-  if (timeStr === '12:00am' || timeStr === '11:59pm') {
-    return timeStr;
-  }
-
-  // Match the parts of the time string
-  const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
-  if (!match) {
-    return 'invalid time'; // handle invalid time format
-  }
-
-  let [_, hour, minute, meridian] = match;
-  hour = parseInt(hour);
-
-  // Convert to 12-hour format
-  if (meridian.toLowerCase() === 'pm' && hour !== 12) {
-    hour += 12;
-  } else if (meridian.toLowerCase() === 'am' && hour === 12) {
-    hour = 0;
-  }
-
-  // Format hour and minute with leading zeros
-  hour = hour.toString().padStart(2, '0');
-  minute = minute.padStart(2, '0');
-
-  return `${hour}:${minute}${meridian.toLowerCase()}`;
+    if (timeStr === 'Open 24 hours') {
+      return ['12:00am', '11:59pm'];
+    }
+  
+    if (timeStr === '12:00am' || timeStr === '11:59pm') {
+      return timeStr;
+    }
+  
+    // Match the parts of the time string
+    const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
+    if (!match) {
+      return 'invalid time'; // handle invalid time format
+    }
+  
+    let [_, hour, minute, meridian] = match;
+    hour = parseInt(hour);
+  
+    // Convert to 12-hour format
+    if (meridian.toLowerCase() === 'pm' && hour !== 12) {
+      hour += 12;
+    } else if (meridian.toLowerCase() === 'am' && hour === 12) {
+      hour = 0;
+    }
+  
+    // Format hour and minute with leading zeros
+    hour = hour.toString().padStart(2, '0');
+    minute = minute.padStart(2, '0');
+  
+    return `${hour}:${minute}${meridian.toLowerCase()}`;
 }
