@@ -8,6 +8,8 @@ module.exports = (req, res) => {
         // Your logic goes here
         try {
             const data = req.body.data; // Assuming text is sent in the body of a POST request wrapped in a data field.
+            console.log('Data:', data);
+            
             const days = data.split(', '); // Split the text into individual days
 
             const schedule = days.map((day) => {
