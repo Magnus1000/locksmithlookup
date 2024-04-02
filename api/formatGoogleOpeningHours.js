@@ -20,7 +20,7 @@ module.exports = (req, res) => {
 
       console.log('Data:', data);
 
-      const days = data.split(', ');
+      const days = data.split(',');
 
       const schedule = days.map((day) => {
         const [dayOfWeek, hours] = day.replace(/\s/g, ' ').replace(/–/g, '-').split(': ');
