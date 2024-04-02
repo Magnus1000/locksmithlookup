@@ -41,18 +41,32 @@ module.exports = (req, res) => {
 };
 
 function convertTimeFormat(timeStr) {
-  const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)?/i);
+  // Ensure the string is trimmed and in uppercase for consistent matching
+  timeStr = timeStr.trim().toUpperCase();
+
+  // Attempt to match the time format, including handling cases without AM/PM
+  const match = timeStr.match(/(\d+):(\d+)(\s?(AM|PM))?/);
+
+  // Check if the time string was matched successfully
   if (!match) {
+    console.error('Invalid time format:', timeStr);
     return 'invalid time'; // Or handle this case differently as needed
   }
 
-  let [_, hour, minute, meridian] = match;
-  hour = parseInt(hour);
+  let [_, hour, minute, , meridian] = match;
+  hour = parseInt(hour, 10);
 
-  // Convert to 12-hour format if needed and format time
-  hour = hour % 12 || 12; // Convert 0 to 12 for 12 AM
+  // Convert to 12-hour format if meridian is present; default to AM otherwise
+  if (!meridian) {
+    meridian = hour < 12 ? 'am' : 'pm';
+  } else {
+    meridian = meridian.toLowerCase();
+  }
+
+  // Convert hour in 24-hour time to 12-hour format
+  hour = hour % 12 || 12;
   minute = minute.padStart(2, '0');
-  meridian = meridian ? meridian.toLowerCase() : 'am'; // Default to AM if not specified
 
   return `${hour}:${minute}${meridian}`;
 }
+
