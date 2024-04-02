@@ -18,26 +18,17 @@ module.exports = (req, res) => {
 
       const schedule = days.map((day) => {
         const [dayOfWeek, hours] = day.split(': ');
-        // Handle the Closed and Open 24 hours cases directly
+        // Convert the day of week to lowercase
+        const day_of_week = dayOfWeek.trim().toLowerCase();
+
+        // Handle the "Closed" and "Open 24 hours" cases directly
         if (hours.includes('Closed')) {
-          return {
-            day_of_week: dayOfWeek.trim().toLowerCase(),
-            time_start: 'Closed',
-            time_end: 'Closed'
-          };
+          return { day_of_week, time_start: 'unavailable', time_end: 'unavailable' };
         } else if (hours.includes('Open 24 hours')) {
-          return {
-            day_of_week: dayOfWeek.trim().toLowerCase(),
-            time_start: '12:00am',
-            time_end: '11:59pm'
-          };
+          return { day_of_week, time_start: '12:00am', time_end: '11:59pm' };
         } else {
           const [start, end] = hours.split(' - ');
-          return {
-            day_of_week: dayOfWeek.trim().toLowerCase(),
-            time_start: convertTimeFormat(start),
-            time_end: convertTimeFormat(end)
-          };
+          return { day_of_week, time_start: convertTimeFormat(start), time_end: convertTimeFormat(end) };
         }
       });
 
@@ -50,7 +41,7 @@ module.exports = (req, res) => {
 };
 
 function convertTimeFormat(timeStr) {
-  const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
+  const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)?/i);
   if (!match) {
     return 'invalid time'; // Or handle this case differently as needed
   }
@@ -58,10 +49,10 @@ function convertTimeFormat(timeStr) {
   let [_, hour, minute, meridian] = match;
   hour = parseInt(hour);
 
-  // No need to convert to 24-hour format, just format it correctly.
-  hour = hour.toString().padStart(2, '0');
+  // Convert to 12-hour format if needed and format time
+  hour = hour % 12 || 12; // Convert 0 to 12 for 12 AM
   minute = minute.padStart(2, '0');
+  meridian = meridian ? meridian.toLowerCase() : 'am'; // Default to AM if not specified
 
-  return `${hour}:${minute}${meridian.toLowerCase()}`;
+  return `${hour}:${minute}${meridian}`;
 }
-
