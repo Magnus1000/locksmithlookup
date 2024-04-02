@@ -6,27 +6,27 @@ const corsHandler = cors({ origin: '*' });
 module.exports = (req, res) => {
   corsHandler(req, res, async () => {
     try {
-        let data;
-        try {
-            // Try to parse the data as JSON
-            data = JSON.parse(req.body.data);
-        } catch (error) {
-            // If parsing fails, treat the data as a string
-            data = req.body.data;
-        }
-        console.log('Data:', data);
+      let data;
+      try {
+        // Try to parse the data as JSON
+        data = JSON.parse(req.body.data);
+      } catch (error) {
+        // If parsing fails, treat the data as a string
+        data = req.body.data;
+      }
 
-      const days = data.split(', '); // Split the text into individual days
+      // Clean the data by removing extra spaces, line breaks, and special characters
+      data = data.replace(/[\n\r\t]+/g, '').replace(/\s+/g, ' ').trim();
+
+      console.log('Data:', data);
+
+      const days = data.split(', ');
 
       const schedule = days.map((day) => {
         const [dayOfWeek, hours] = day.split(': ');
-        if (!hours) {
-            console.error(`Invalid format for day: ${day}`);
-            return;
-        }
         let [start, end] = hours === 'Open 24 hours'
-            ? ['12:00am', '11:59pm']
-            : hours.split(' – ');
+          ? ['12:00am', '11:59pm']
+          : hours.split(' – ');
 
         start = convertTimeFormat(start);
         end = convertTimeFormat(end);
@@ -46,35 +46,31 @@ module.exports = (req, res) => {
   });
 };
 
-// Helper function to convert time format
 function convertTimeFormat(timeStr) {
-    if (timeStr === 'Open 24 hours') {
-      return ['12:00am', '11:59pm'];
-    }
-  
-    if (timeStr === '12:00am' || timeStr === '11:59pm') {
-      return timeStr;
-    }
-  
-    // Match the parts of the time string
-    const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
-    if (!match) {
-      return 'invalid time'; // handle invalid time format
-    }
-  
-    let [_, hour, minute, meridian] = match;
-    hour = parseInt(hour);
-  
-    // Convert to 12-hour format
-    if (meridian.toLowerCase() === 'pm' && hour !== 12) {
-      hour += 12;
-    } else if (meridian.toLowerCase() === 'am' && hour === 12) {
-      hour = 0;
-    }
-  
-    // Format hour and minute with leading zeros
-    hour = hour.toString().padStart(2, '0');
-    minute = minute.padStart(2, '0');
-  
-    return `${hour}:${minute}${meridian.toLowerCase()}`;
+  if (timeStr === 'Open 24 hours') {
+    return ['12:00am', '11:59pm'];
+  }
+
+  if (timeStr === '12:00am' || timeStr === '11:59pm') {
+    return timeStr;
+  }
+
+  const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
+  if (!match) {
+    return 'invalid time';
+  }
+
+  let [_, hour, minute, meridian] = match;
+  hour = parseInt(hour);
+
+  if (meridian.toLowerCase() === 'pm' && hour !== 12) {
+    hour += 12;
+  } else if (meridian.toLowerCase() === 'am' && hour === 12) {
+    hour = 0;
+  }
+
+  hour = hour.toString().padStart(2, '0');
+  minute = minute.padStart(2, '0');
+
+  return `${hour}:${minute}${meridian.toLowerCase()}`;
 }
