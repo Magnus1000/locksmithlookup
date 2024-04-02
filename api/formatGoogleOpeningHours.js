@@ -6,36 +6,39 @@ const corsHandler = cors({ origin: '*' });
 module.exports = (req, res) => {
   corsHandler(req, res, async () => {
     try {
-      let data;
-      try {
-        // Try to parse the data as JSON
-        data = JSON.parse(req.body.data);
-      } catch (error) {
-        // If parsing fails, treat the data as a string
-        data = req.body.data;
-      }
+      // Data parsing might not be needed if it's guaranteed to be JSON
+      let data = req.body.data;
 
       // Clean the data by removing extra spaces, line breaks, and special characters
-      data = data.replace(/[\n\r\t]+/g, '').replace(/\s+/g, ' ').trim();
+      data = data.replace(/[\n\r\t]+/g, '').replace(/\s{2,}/g, ' ').trim();
 
       console.log('Data:', data);
 
-      const days = data.split(', ');
+      const days = data.split(',');
 
       const schedule = days.map((day) => {
-        const [dayOfWeek, hours] = day.replace(/\s/g, ' ').replace(/–/g, '-').split(': ');
-        let [start, end] = hours === 'Open 24 hours'
-            ? ['12:00am', '11:59pm']
-            : hours.split(' - ');
-
-        start = convertTimeFormat(start);
-        end = convertTimeFormat(end);
-
-        return {
-          day_of_week: dayOfWeek.trim().toLowerCase(),
-          time_start: start,
-          time_end: end,
-        };
+        const [dayOfWeek, hours] = day.split(': ');
+        // Handle the Closed and Open 24 hours cases directly
+        if (hours.includes('Closed')) {
+          return {
+            day_of_week: dayOfWeek.trim().toLowerCase(),
+            time_start: 'Closed',
+            time_end: 'Closed'
+          };
+        } else if (hours.includes('Open 24 hours')) {
+          return {
+            day_of_week: dayOfWeek.trim().toLowerCase(),
+            time_start: '12:00am',
+            time_end: '11:59pm'
+          };
+        } else {
+          const [start, end] = hours.split(' - ');
+          return {
+            day_of_week: dayOfWeek.trim().toLowerCase(),
+            time_start: convertTimeFormat(start),
+            time_end: convertTimeFormat(end)
+          };
+        }
       });
 
       res.status(200).json({ schedule });
@@ -47,16 +50,6 @@ module.exports = (req, res) => {
 };
 
 function convertTimeFormat(timeStr) {
-  // Check if the input string indicates closure or a 24-hour open schedule first
-  if (timeStr === 'Open 24 hours') {
-    return ['12:00am', '11:59pm'];
-  }
-
-  if (timeStr === 'Closed') {
-    return 'Closed'; // or any other appropriate representation for closed times
-  }
-
-  // Now handle regular time strings
   const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
   if (!match) {
     return 'invalid time'; // Or handle this case differently as needed
@@ -65,14 +58,10 @@ function convertTimeFormat(timeStr) {
   let [_, hour, minute, meridian] = match;
   hour = parseInt(hour);
 
-  if (meridian.toLowerCase() === 'pm' && hour !== 12) {
-    hour += 12;
-  } else if (meridian.toLowerCase() === 'am' && hour === 12) {
-    hour = 0;
-  }
-
+  // No need to convert to 24-hour format, just format it correctly.
   hour = hour.toString().padStart(2, '0');
   minute = minute.padStart(2, '0');
 
-  return `${hour}:${minute}`;
+  return `${hour}:${minute}${meridian.toLowerCase()}`;
 }
+
