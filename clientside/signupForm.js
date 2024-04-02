@@ -265,7 +265,7 @@ const FormComponent = () => {
               <div className="suggested-locksmith-title">
                 {placename && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {placename}</p>)}
               </div>
-              {locksmiths.slice(0, 5).map((locksmith, index) => (
+              {locksmiths.map((locksmith, index) => (
                 <div
                   key={index}
                   className={`locksmith-item ${selectedLocksmith === locksmith ? 'selected' : ''}`}
