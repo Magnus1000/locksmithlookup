@@ -4,52 +4,62 @@ const cors = require('cors');
 const corsHandler = cors({ origin: '*' });
 
 module.exports = (req, res) => {
-    corsHandler(req, res, async () => {
-        // Your logic goes here
-        try {
-            const data = req.body.data; // Assuming text is sent in the body of a POST request wrapped in a data field.
-            console.log('Data:', data);
-            
-            const days = data.split(', '); // Split the text into individual days
+  corsHandler(req, res, async () => {
+    try {
+      const data = req.body.data; // Assuming text is sent in the body of a POST request wrapped in a data field.
+      console.log('Data:', data);
 
-            const schedule = days.map((day) => {
-                const [dayOfWeek, hours] = day.split(': '); // Split the day from the hours
-                let [start, end] = hours.includes('Closed') ? ['Closed', 'Closed'] : hours.split(' – ');
+      const days = data.split(', '); // Split the text into individual days
 
-                // Convert times to a standard format
-                start = convertTimeFormat(start);
-                end = convertTimeFormat(end);
+      const schedule = days.map((day) => {
+        const [dayOfWeek, hours] = day.split(': ');
+        let [start, end] = hours === 'Open 24 hours'
+          ? ['12:00am', '11:59pm']
+          : hours.split(' – ');
 
-                return {
-                    day_of_week: dayOfWeek.trim(),
-                    time_start: start,
-                    time_end: end,
-                };
-            });
+        start = convertTimeFormat(start);
+        end = convertTimeFormat(end);
 
-            res.status(200).json({ schedule });
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Error processing request');
-        }
-    });
+        return {
+          day_of_week: dayOfWeek.trim().toLowerCase(),
+          time_start: start,
+          time_end: end,
+        };
+      });
+
+      res.status(200).json({ schedule });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Error processing request');
+    }
+  });
 };
 
-// Helper function to convert time format from '9:00 AM' to '9:00am'.
+// Helper function to convert time format
 function convertTimeFormat(timeStr) {
-    if (timeStr === 'Closed') {
-        return 'unavailable';
-    }
-    // Match the parts of the time string
-    const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
-    if (!match) {
-        return 'invalid time'; // handle invalid time format
-    }
-    let [_, hour, minute, meridian] = match;
+  if (timeStr === '12:00am' || timeStr === '11:59pm') {
+    return timeStr;
+  }
 
-    // Convert hour to 12-hour format and lowercase the meridian
-    hour = ('0' + hour).slice(-2); // Add leading 0 if needed
-    meridian = meridian.toLowerCase();
+  // Match the parts of the time string
+  const match = timeStr.match(/(\d+):(\d+)\s?(AM|PM)/i);
+  if (!match) {
+    return 'invalid time'; // handle invalid time format
+  }
 
-    return `${hour}:${minute}${meridian}`;
+  let [_, hour, minute, meridian] = match;
+  hour = parseInt(hour);
+
+  // Convert to 12-hour format
+  if (meridian.toLowerCase() === 'pm' && hour !== 12) {
+    hour += 12;
+  } else if (meridian.toLowerCase() === 'am' && hour === 12) {
+    hour = 0;
+  }
+
+  // Format hour and minute with leading zeros
+  hour = hour.toString().padStart(2, '0');
+  minute = minute.padStart(2, '0');
+
+  return `${hour}:${minute}${meridian.toLowerCase()}`;
 }
