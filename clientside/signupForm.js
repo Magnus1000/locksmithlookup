@@ -225,7 +225,7 @@ const FormComponent = () => {
     <>
       <div className="locksmith-map-wrapper" ref={mapRef}>
       </div>
-      <div className="locksmith-form-wrapper">
+      <div className={`locksmith-form-wrapper ${locksmiths && locksmiths.length > 0 ? 'expanded' : ''}`}>
         <div className="locksmith-form-div">
           <div className="locksmith-form-header">
             <p className="locksmith-form-header-text">Find the <span className="emphasis-text">nearest available</span> locksmith</p>
