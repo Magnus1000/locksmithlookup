@@ -40,15 +40,19 @@ const FormComponent = () => {
   }
 
   React.useEffect(() => {
+    if (uuid) {
+      createUserEvent(uuid, 'page_view', 'page_view', window.location.href);
+    }
+  }, [uuid]);
+
+  React.useEffect(() => {
     let existingUuid = localStorage.getItem('uuid');
     if (existingUuid) {
       setUuid(existingUuid);
-      createUserEvent('page_view', 'page_view', window.location.href);
     } else {
       let newUuid = generateUUID(); // Call the function here
       localStorage.setItem('uuid', newUuid);
       setUuid(newUuid);
-      createUserEvent('page_view', 'page_view', window.location.href);
     }
   }, []);
 
@@ -104,7 +108,7 @@ const FormComponent = () => {
     setSelectedLocksmith(locksmith); // Update the selected locksmith state
   };
   
-  async function createUserEvent(event_content, event_type, event_page) {
+  async function createUserEvent(uuid, event_content, event_type, event_page) {
     try {
       const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/createAirtableEvent', {
         method: 'POST',
