@@ -11,6 +11,7 @@ const FormComponent = () => {
   const [selectedButton, setSelectedButton] = React.useState(null); 
   const [fetchingLocksmiths, setFetchingLocksmiths] = React.useState(false);
   const [noResults, setNoResults] = React.useState(false);
+  const [uuid, setUuid] = React.useState('');
   const mapRef = React.useRef(null);
   const mapInstanceRef = React.useRef(null); 
 
@@ -27,6 +28,29 @@ const FormComponent = () => {
 
     fetchSuggestions(); // Call the function
   }, [inputValue]); // Close the useEffect hook
+
+  function generateUUID() {
+    // Generate a UUID (Universally Unique Identifier)
+    // Implementation of RFC4122 version 4
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
+  React.useEffect(() => {
+    let existingUuid = localStorage.getItem('uuid');
+    if (existingUuid) {
+      setUuid(existingUuid);
+      createUserEvent('page_view', 'page_view', window.location.href);
+    } else {
+      let newUuid = generateUUID(); // Call the function here
+      localStorage.setItem('uuid', newUuid);
+      setUuid(newUuid);
+      createUserEvent('page_view', 'page_view', window.location.href);
+    }
+  }, []);
 
   React.useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFnbnVzMTk5MyIsImEiOiJjbHR4M2hmMGUwMjB6MnZwYndpcXUyNmRqIn0.sXN7mCC32kCvlwObxGMsnQ';
@@ -78,7 +102,33 @@ const FormComponent = () => {
   // Function to handle selecting a locksmith
   const handleLocksmithSelect = (locksmith) => {
     setSelectedLocksmith(locksmith); // Update the selected locksmith state
-  };  
+  };
+  
+  async function createUserEvent(event_content, event_type, event_page) {
+    try {
+      const response = await fetch('https://locksmithlookup-magnus1000team.vercel.app/api/createAirtableEvent', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          uuid,
+          event_content,
+          event_type,
+          event_page,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data.message);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   const handleLocationClick = () => {
     setLocksmiths(null); // Clear the locksmiths state
