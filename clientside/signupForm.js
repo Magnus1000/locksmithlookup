@@ -350,15 +350,7 @@ const FormComponent = () => {
                     {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
                   </div>
                   {selectedLocksmith === locksmith && (
-                    <a
-                      className="phone-link-wrapper"
-                      href={`tel:${locksmith.locksmith_phone}`}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        createUserEvent(uuid, locksmith.locksmith_phone, 'clicked_call_locksmith', window.location.href);
-                        window.location.href = `tel:${locksmith.locksmith_phone}`;
-                      }}
-                    >
+                    <a className="phone-link-wrapper" href={`tel:${locksmith.locksmith_phone}`}>
                       <div className="locksmith-item-column-right">
                         <PhoneIcon />
                         <p className="call-now-text">Call Now</p>
