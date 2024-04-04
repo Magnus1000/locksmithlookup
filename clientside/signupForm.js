@@ -155,6 +155,7 @@ const FormComponent = () => {
           setIsFetching(false);
           setShowDualButtons(true);
           setPlacename(placeName); // Set the place name state
+          createUserEvent(uuid, `Latitude: ${latitude}, Longitude: ${longitude}, Placename: ${placeName}`, 'fetch_location', window.location.href);
         },
         (error) => {
           console.error('Error getting user location:', error);
@@ -171,6 +172,7 @@ const FormComponent = () => {
     setFetchingLocksmiths(true);
     setLocksmiths(null); // Clear the locksmiths state
     setNoResults(false);
+    createUserEvent(uuid, serviceType, 'click_locksmith_type', window.location.href);
     try {
       // Get the user's current timezone
       const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
