@@ -7,6 +7,7 @@ const corsHandler = cors();
 module.exports = async (req, res) => {
     try {
         console.log('Inside the serverless function...');
+        console.log('Request body:', req.body);
 
         corsHandler(req, res, async () => {
             const { uuid, event_content, event_type, event_page } = req.body;
