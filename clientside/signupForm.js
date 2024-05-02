@@ -355,7 +355,8 @@ const FormComponent = () => {
                       href={`tel:${locksmith.locksmith_phone}`}
                       onClick={(event) => {
                         event.preventDefault();
-                        createUserEvent(uuid, locksmith.locksmith_phone, 'Call Button Clicked: ' + locksmith.locksmith_phone, window.location.href);
+                        content = `Call Button Clicked: ${locksmith.locksmith_phone}`;
+                        createUserEvent(uuid, locksmith.locksmith_phone, content, window.location.href);
                         window.location.href = `tel:${locksmith.locksmith_phone}`;
                       }}
                     >
