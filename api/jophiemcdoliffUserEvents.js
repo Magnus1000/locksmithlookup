@@ -17,9 +17,9 @@ module.exports = async (req, res) => {
       return;
     }
 
-    const { event, url } = req.body;
+    const { event, url, userId } = req.body;
 
-    if (!event || !url) {
+    if (!event || !url || !userId) {
       res.status(400).json({ error: 'Missing required fields' });
       return;
     }
@@ -28,7 +28,8 @@ module.exports = async (req, res) => {
 
     const data = {
       event,
-      url
+      url,
+      userId
     };
 
     await axios.post(webhookUrl, data);
