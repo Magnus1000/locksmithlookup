@@ -1,41 +1,45 @@
 const axios = require('axios');
 const cors = require('cors');
+const Airtable = require('airtable');
 
 const corsHandler = cors();
 
 module.exports = async (req, res) => {
-  try {
-    await corsHandler(req, res);
+    try {
+        console.log('Inside the serverless function...');
+        console.log('Request body:', req.body);
 
-    if (req.method === 'OPTIONS') {
-      res.status(200).end();
-      return;
+        corsHandler(req, res, async () => {
+            const { uuid, event_content, event_type, event_page } = req.body;
+
+            // Generate event time in ISO format
+            const event_time = new Date().toISOString();
+        
+            // Initialize Airtable with your base ID and API key
+            const base = new Airtable({ apiKey: process.env.AIRTABLE_KEY }).base(process.env.AIRTABLE_BASE_ID);
+        
+            try {
+                // Create a new record in the specified table
+                await base('tblT5d83MJYyOjXzS').create([
+                    {
+                        fields: {
+                            uuid,
+                            event_content,
+                            event_time,
+                            event_type,
+                            event_page
+                        },
+                    },
+                ]);
+        
+                res.status(200).json({ message: 'Record created successfully' });
+            } catch (error) {
+                console.error('Error:', error);
+                res.status(500).json({ error: 'Internal Server Error' });
+            }
+        });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    if (req.method !== 'POST') {
-      res.status(405).json({ error: 'Method Not Allowed' });
-      return;
-    }
-
-    const { event, url } = req.body;
-
-    if (!event || !url) {
-      res.status(400).json({ error: 'Missing required fields' });
-      return;
-    }
-
-    const webhookUrl = 'https://hook.us1.make.com/cdvufir2lor6s2budxrrtt3rd1bfb6vm';
-
-    const data = {
-      event,
-      url
-    };
-
-    await axios.post(webhookUrl, data);
-
-    res.status(200).json({ message: 'Event sent successfully' });
-  } catch (error) {
-    console.error('Error sending event:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
 };
