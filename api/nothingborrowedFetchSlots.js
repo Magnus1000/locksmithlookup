@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
       try {
         const records = await table.select({
           filterByFormula: filterByFormula,
-          sort: [{ field: 'date_time', direction: 'desc' }],
+          sort: [{ field: 'date_time', direction: 'asc' }],
         }).all();
 
         const slots = records.map(record => ({
