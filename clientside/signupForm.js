@@ -326,48 +326,50 @@ const FormComponent = () => {
             </div>
           )}
           {locksmiths && locksmiths.length > 0 && (
-            <div className="suggested-locksmith-wrapper">
-              <div className="suggested-locksmith-title">
-                {placename && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {placename}</p>)}
-              </div>
-              {locksmiths.map((locksmith, index) => (
-                <div
-                  key={index}
-                  className={`locksmith-item ${selectedLocksmith === locksmith ? 'selected' : ''}`}
-                  onClick={() => handleLocksmithSelect(locksmith)} // Handle click to select a locksmith
-                >
-                  <div className="locksmith-item-column-left">
-                    <p className="locksmith-title"> {locksmith.locksmith_name} </p>
-                    <div className="distance-available-wrapper">
-                      <p className="locksmith-distance"> {formatDistance(locksmith.distance)}</p>
-                      <div className="locksmith-dot"></div>
-                      <p className="locksmith-available">Online</p>
-                    </div>
-                    <div className="distance-verified-wrapper">
-                      < VerifiedIcon />
-                      <p className="locksmith-verified-text">Verified</p>
-                    </div>
-                    {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
-                  </div>
-                  {selectedLocksmith === locksmith && (
-                    <a
-                      className="phone-link-wrapper"
-                      href={`tel:${locksmith.locksmith_phone}`}
-                      onClick={(event) => {
-                        event.preventDefault();
-                        let locksmith_name = Array.isArray(locksmith.locksmith_name) ? locksmith.locksmith_name[0] : locksmith.locksmith_name;
-                        createUserEvent(uuid, locksmith_name, 'clicked_call', window.location.href);
-                        window.location.href = `tel:${locksmith.locksmith_phone}`;
-                      }}
-                    >
-                      <div className="locksmith-item-column-right">
-                        <PhoneIcon />
-                        <p className="call-now-text">Call Now</p>
-                      </div>
-                    </a>
-                  )}
+            <div className="suggested-locksmith-scroll-wrapper">
+              <div className="suggested-locksmith-wrapper">
+                <div className="suggested-locksmith-title">
+                  {placename && (<p className="suggested-locksmith-title-text">{locksmiths.length} locksmiths found near {placename}</p>)}
                 </div>
-              ))}
+                {locksmiths.map((locksmith, index) => (
+                  <div
+                    key={index}
+                    className={`locksmith-item ${selectedLocksmith === locksmith ? 'selected' : ''}`}
+                    onClick={() => handleLocksmithSelect(locksmith)} // Handle click to select a locksmith
+                  >
+                    <div className="locksmith-item-column-left">
+                      <p className="locksmith-title"> {locksmith.locksmith_name} </p>
+                      <div className="distance-available-wrapper">
+                        <p className="locksmith-distance"> {formatDistance(locksmith.distance)}</p>
+                        <div className="locksmith-dot"></div>
+                        <p className="locksmith-available">Online</p>
+                      </div>
+                      <div className="distance-verified-wrapper">
+                        < VerifiedIcon />
+                        <p className="locksmith-verified-text">Verified</p>
+                      </div>
+                      {index === 0 && <p className="locksmith-tag"><LocationIcon2 />Closest</p>}
+                    </div>
+                    {selectedLocksmith === locksmith && (
+                      <a
+                        className="phone-link-wrapper"
+                        href={`tel:${locksmith.locksmith_phone}`}
+                        onClick={(event) => {
+                          event.preventDefault();
+                          let locksmith_name = Array.isArray(locksmith.locksmith_name) ? locksmith.locksmith_name[0] : locksmith.locksmith_name;
+                          createUserEvent(uuid, locksmith_name, 'clicked_call', window.location.href);
+                          window.location.href = `tel:${locksmith.locksmith_phone}`;
+                        }}
+                      >
+                        <div className="locksmith-item-column-right">
+                          <PhoneIcon />
+                          <p className="call-now-text">Call Now</p>
+                        </div>
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
